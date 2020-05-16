@@ -1,4 +1,4 @@
-# bash_search
+# bash_notes
 
 BASH note-taking system directly in the terminal. Collection of collected and edited scripts I have been actively every day for the past couple of years.
 

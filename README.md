@@ -6,12 +6,10 @@ BASH note-taking system directly in the terminal. Collection of collected and ed
 
 https://terminalizer.com/view/ef4b2b193819
 
-Installation of dependencies:
+Installation:
 ```bash
 bash setup.sh
 ```
-
-Installation is relatively fast on macOS, and relatively slow if using linuxbrew on another UNIX system.
 
 #### 1. bash_notes.sh:
 Bash note-taking system with easy search and editing in place, directly from the terminal using vim.

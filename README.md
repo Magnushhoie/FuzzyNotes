@@ -26,3 +26,5 @@ Commands:
 ### 4. optional files
 - Suggested vim configuration files and plugins. Installer will ask whether to install first.
 
+See https://github.com/Magnushhoie/bash_search for added functionality.
+

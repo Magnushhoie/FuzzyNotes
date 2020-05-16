@@ -19,6 +19,7 @@ Commands:
 - ref keywords: Search for keywords in references.txt
 - refv keywords: Search references.txt and open at line in Vim. 
 - refv filename.txt: Create new note file
+- refv filename keywords: Search filename.txt for keywords
 
 #### 2. setup.sh:
 - Sets up references directory and adds script to .bash_profile

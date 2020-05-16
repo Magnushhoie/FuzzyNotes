@@ -20,10 +20,8 @@ Commands:
 - refv keywords: Search references.txt and open at line in Vim. 
 - refv filename.txt: Create new note file
 
-### 3. setup.sh:
+### 2. setup.sh:
 - Sets up references directory and adds script to .bash_profile
-
-### 4. optional files
 - Suggested vim configuration files and plugins. Installer will ask whether to install first.
 
 See https://github.com/Magnushhoie/bash_search for added functionality.

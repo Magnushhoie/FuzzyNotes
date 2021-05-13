@@ -25,13 +25,13 @@ Usage:
 - ref: Opens references.txt in less
 - ref keywords: Search for keywords in references.txt
 - ref filename keywords: Search for keywords in filename.txt
-- ref --open: Opens references.txt using system default text editor (e.g. Atom/TextEdit... etc)
 
 #### 2. refe.sh:
 Opens/edits references.txt or other .txt files in note folder at matching keywords
 
 Usage:
 - refe: Opens references.txt in Vim
+- refe --open: Opens references.txt using system default text editor (e.g. Atom/Sublime/TextEdit... etc)
 - refe keywords: Search references.txt and open at line in Vim.
 - refe --new filename.txt: Create new note file
 - refe filename keywords: Search filename.txt for keywords

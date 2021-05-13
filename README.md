@@ -1,4 +1,5 @@
 # bash_notes
+![Logo](img/bash_notes.png)
 
 Personal bash note-taking system using the terminal. Multi-line searches and edits note files using grep, less and Vim.
 

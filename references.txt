@@ -1,25 +1,20 @@
 ###
-# This is your references.txt file in ~/_References/references.txt. You probably entered here using ref (search) or refv (search + edit). To exit press q or Escape and write :q or :wq ... 
-Use refv to write any notes you want here in Vim, in any format you want. Press i to write. If you don´t know how to use vim, check out __vim shortcuts just below. Feel free to delete all text here, it will not break anything. You can create a new reference files using refv any_filename.txt, and search is using ref filename keywords. To see an overview of your files, write ref_list. 
+# This is your references.txt file. To exit press q or Escape and write :q <enter> ...
+
+Use refe to write any notes you want here in vim, in any format you want.
+(You may find a vim tutorial below)
+
+Feel free to delete any/all text here, it will not break anything.
 ###
 
 __help
-ref = search references.txt file, open in file viewer less. q to exit.
-refv = search references.txt (or other) file and open in text editor Vim. Escape and write :q to exit.
-f = fuzzy finder or Find. E.g. f_pdf = f_files = find files. Ctrl + c to exit.
-Example use:
-ref keywords
-refv keywords
-refv newfile.txt
-ref newfile.txt keywords
-f_search keywords
-f_files
-ctrl + r
-ctrl + t
-ref_help
-f_help
+ref # searches references.txt file, open in file viewer less. q to exit.
+ref --open # Open references.txt file in system default editor (e.g. TextEdit)
+refe # searches references.txt (or other) file and open in text editor Vim. Escape and write :q to exit.
+ref --help # Help menu
+refe --help # Help menu
 
-__refv (vim) commands
+__vim (refe) commands
 Press Escape first then write (text should appear at the bottom status bar of the screen. Remember to press enter at the end):
 :w # write file (save)
 :q # quit file (exit)
@@ -27,37 +22,25 @@ Press Escape first then write (text should appear at the bottom status bar of th
 :wq # Write and quit
 :wq! # Force write and quit
 
-__vim shortcuts write, edit and search. Try to press escape first then press:
+__vim tutorials and cheatsheets
+# Vim tutorial: https://www.openvim.com/
+# Vim cheatsheet https://vimsheet.com/
+
+__vim shortcuts write, edit and search
+# Try to press escape first then press:
 i # Insert mode. Now you can write text
 dd # delete (yank) line. To paste, use p or P
 V # Visual mode. Select lines. To delete use dd ... to copy use y
 / # Search. E.g. /keywords ... Use n for next and Shift + N for previous.
 
-__fzf fuzzy finder exit current view
-Ctrl + c
-Arrow keys to select, enter to execute line and open file
-
-__bash_search commands
-ref_help
-or, in terminal, write f_ or ref then without using enter, press tab twice. This will show all valid options
-
-ref # Search references.txt file (this file)
-refv # Search and edit references files. i to write. Escape + :wq to write file and exit
-refv newfile.txt # Create new file called newfile.txt
-f_search # Fuzzy (fzf) search. Search all lines in all files in current folders (infinite depth). Can search your entire computer in a few minutes.
-f_files # Fuzzy filename search. Show context of all files in current directory
-
-__fzf search previous bash terminal commands
-ctrl + r
-
-__vim __less __bash __terminal __tmux
+__terminal
 Select and copy text: ctrl + r
 Use again to return to normal terminal interaction
 Alternatives:
 Select text and use middle mouse button to paste (mouse wheel click)
 Select text -> Ctrl + insert (copy)i -> shift + insert (paste)
 
-__mac show emoticons smileys
+__mac show emoticons/smileys panel
 Ctrl + command + space
 
 __mac open folder from terminal

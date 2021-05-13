@@ -1,6 +1,8 @@
 # bash_notes
 
-BASH note-taking system directly in the terminal. Collection of collected and edited scripts I have been actively every day for the past couple of years.
+Personal bash note-taking system with easy search and editing in place, directly from the terminal using vim.
+Uses a combination of grep and vim to multi-line search keywords in references.txt or any file in ~/_bash_notes folder.
+Used daily since 2019.
 
 ### Example of use:
 
@@ -11,19 +13,20 @@ Installation:
 bash setup.sh
 ```
 
-#### 1. bash_notes.sh:
-Bash note-taking system with easy search and editing in place, directly from the terminal using vim.
-Uses a combination of grep and vim to search references.txt or any file in ~/_References folder.
+#### 1. ref.sh:
+Multi-line search for keywords in references.txt or other files in note folder
 
-Commands:
-- ref keywords: Search for keywords in references.txt
-- refv keywords: Search references.txt and open at line in Vim. 
-- refv filename.txt: Create new note file
-- refv filename keywords: Search filename.txt for keywords
+Usage:
+- ref keywords # Search for keywords in references.txt
+- ref filename keywords # Search for keywords in filename.txt
 
-#### 2. setup.sh:
-- Sets up references directory and adds script to .bash_profile
-- Suggested vim configuration files and plugins. Installer will ask whether to install first.
+#### 2. refe.sh:
+Opens/edits references.txt or other files in note folder at matching keywords
 
-See https://github.com/Magnushhoie/bash_search for added functionality.
+Usage:
+- refe keywords: Search references.txt and open at line in Vim.
+- refe --new filename.txt: Create new note file
+- refe filename keywords: Search filename.txt for keywords
 
+#### 3. setup.sh:
+- Sets up bash_notes directory and adds scripts as aliases to .bash_profile

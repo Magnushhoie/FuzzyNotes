@@ -32,8 +32,9 @@ bash setup.sh
 
 ## Usage
 
-Multi-line searches and edits personal note files using grep, less and Vim.
+Multi-line searches and edits personal note files using grep, less and Vim.\
 Daily driver for managing code snippets since 2019.
+See [references.txt](references.txt) for example.
 
 ```python
 # ref.sh: Multi-line search for keywords in references.txt or other .txt files in note folder, opens in less

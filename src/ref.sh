@@ -6,7 +6,6 @@
 function main() {
     script_init "$@"
     parse_params "$@"
-    #ref "$@"
     ref "$@"
 }
 
@@ -19,7 +18,7 @@ function script_init() {
     # Read in notes_folder and primary_note_file. By default ~/_bash_notes/ and ~/_bash_notes/references.txt
     source $main_dir/config.txt
 
-    # Read in search scripts.
+    # Read in helper scripts.
     source $script_dir/functions.sh
 }
 
@@ -43,8 +42,8 @@ Usage:
 
 Example usage:
 ref 
-ref keyword1 keyword2
-ref newfile keyword1
+ref <keywords>
+ref newfile <keywords>
 
 EOF
 }

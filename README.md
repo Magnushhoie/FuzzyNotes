@@ -15,7 +15,7 @@
   <h3 align="center">bash_notes</h3>
 
   <p align="center">
-    Personal BASH note-taking system using Vim, grep and less. 
+    Personal BASH notes and code-snippet system using Vim, grep and less. 
     <br />
   </p>
 </p>

@@ -10,6 +10,8 @@ https://terminalizer.com/view/ef4b2b193819
 
 Installation:
 ```bash
+git clone https://github.com/Magnushhoie/bash_notes/
+cd bash_notes
 bash setup.sh
 ```
 

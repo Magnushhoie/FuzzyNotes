@@ -1,7 +1,7 @@
 # bash_notes
 
-Personal bash note-taking system with easy search and editing in place, directly from the terminal using vim.
-Uses a combination of grep and vim to multi-line search keywords in references.txt or any file in ~/_bash_notes folder.
+Personal bash note-taking system using the terminal. Multi-line searches and edits note files using grep and vim.
+
 Daily driver for managing code snippets since 2019.
 
 # Installation:

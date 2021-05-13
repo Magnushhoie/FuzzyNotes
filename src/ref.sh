@@ -3,20 +3,21 @@
 # https://github.com/Magnushhoie/bash_notes
 
 # DESC: Main control flow
-# ARGS: $@ (optional): Arguments provided to the script
 function main() {
     script_init "$@"
     parse_params "$@"
-    refe "$@"
+    #ref "$@"
+    ref "$@"
 }
 
 function script_init() {
     readonly script_path="${BASH_SOURCE[0]}"
     readonly script_dir="$(realpath $(dirname "$script_path"))"
+    readonly main_dir=$(dirname $script_dir)
     readonly script_params="$*"
 
     # Read in notes_folder and primary_note_file. By default ~/_bash_notes/ and ~/_bash_notes/references.txt
-    source $script_dir/config.txt
+    source $main_dir/config.txt
 
     # Read in search scripts.
     source $script_dir/functions.sh
@@ -26,54 +27,44 @@ function script_init() {
 function script_usage() {
     cat << EOF
 
-refe.sh
-Opens/edits [references.txt] in $notes_folder at line matching keywords, using $EDITOR or editor set in config.txt file.
+ref.sh
+Searches for and displays keywords across multiple lines in [references.txt] file in $notes_folder using grep and less.
+Note: First argument may be available note file (prioritized) OR first keyword
 
 Usage:
     ref [NOTE_FILE] [KEYWORDS]
     Note: NOTE_FILE should be specified without .txt extension
      -h|--help                  Displays this help
      -l|--list                  Displays searchable files in notes folder
-     -n|--new                   Explicitly create new file (.txt extension required)
      -k|--keywords              Explicitly define keywords (unavailable)
-     --open                     Open notefile reference file with default system editor instead of $EDITOR
+     -a|--all                   Search across all files notes folder (requires fzf) (unavailable)
+     --open                     Open notefile reference file with default system editor instead of [vim]
      --config                   Open configuration file
 
 Example usage:
-refe 
-refe keyword1 keyword2
-refe --new newfile.txt
-refe newfile keyword1
+ref 
+ref keyword1 keyword2
+ref newfile keyword1
 
 EOF
 }
 
-function refe() # Search and edit references.txt in vim. Can create new files, e.g. refv datascience.txt
-# DESC: Edit script
-# Search and edit references.txt in vim. Can create new files, e.g. refe datascience.txt
+# DESC: Search script
+function ref()
 {
-# Opens up vim at first mention of keyword(s)
-# Notefile is references.txt, unless another file found from first argument
-     filename=$(get_notefile)
+    filename=$primary_note_file
 
      # Check for alternative filename as first argument
      # If so, shift arguments so second+ becomes keyword
      alternative_filename=$(get_notefile $1)
-     if [ $filename != $alternative_filename ];
+
+     if [ $filename != "$alternative_filename" ];
          then filename=$alternative_filename
          shift
      fi
 
-    # Run vim on keywords
-    if [ $EDITOR == "vim" ];
-        then 
-        if [ -z $1 ];
-            then vim "$filename"
-            else vim +":set hlsearch" +/$1.*$2.*$3.*$4.*$5 $filename
-        fi
-    else
-        $EDITOR "$filename"
-    fi
+     echo $filename
+     search_file $filename ${@:-""}
 }
 
 # Run script

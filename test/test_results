@@ -1,0 +1,12 @@
+1. PASS: Correct install folder.
+2. PASS: Install complete.
+3. PASS: ref search keywords
+4. PASS: ref --list
+5. PASS: ref --help
+6. PASS: ref --open
+7. PASS: ref --config
+8. PASS: refe no keywords
+9. PASS: refe search keywords
+10. PASS: refe new file expected error message
+11. PASS: refe new file creation
+12. PASS: refe alternative file

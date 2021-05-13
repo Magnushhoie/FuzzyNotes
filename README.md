@@ -6,7 +6,7 @@ Daily driver for managing code snippets since 2019. See [references.txt](referen
 
 ## Installation
 
-Sets up ~/_bash_notes directory and adds ref and refe as aliases to ~/.bash_profile. Edit config.txt to change default notes directory and editor.
+Sets up ~/_bash_notes directory and adds ref and refe as aliases to ~/.bash_profile. Edit [config.txt](config.txt) to change default notes directory and editor.
 
 ```bash
 git clone https://github.com/Magnushhoie/bash_notes/

@@ -42,15 +42,15 @@ Usage:
 
 Example usage:
 refe 
-refe keyword1 keyword2
+refe <keywords>
 refe --new newfile.txt
-refe newfile keyword1
+refe newfile <keywords>
 
 EOF
 }
 
 # DESC: Edit script
-function refe() # Search and edit references.txt in vim. Can create new files, e.g. refe --new datascience.txt
+function refe() # Search and edit references.txt in vim
 {
 # Opens up EDTIOR (vim) at first mention of keyword(s)
 # Notefile is references.txt, unless another file found from first argument
@@ -72,7 +72,7 @@ function refe() # Search and edit references.txt in vim. Can create new files, e
         if ! [ -z $1 ];
             then vim +":set hlsearch" +/$1.*$2.*$3.*$4.*$5.*$6 $filename
             # Else open vim without search
-            else vim "$filename"
+        else vim "$filename"
         fi
     else
         # Open with alternative editor if not vim

@@ -11,17 +11,24 @@ cd bash_notes
 bash setup.sh
 ```
 
+Testing:
+```bash
+bash test/test.sh
+```
+
 #### 1. ref.sh:
-Multi-line search for keywords in references.txt or other files in note folder
+Multi-line search for keywords in references.txt or other .txt files in note folder
 
 Usage:
+- ref: Opens references.txt in less
 - ref keywords: Search for keywords in references.txt
 - ref filename keywords: Search for keywords in filename.txt
 
 #### 2. refe.sh:
-Opens/edits references.txt or other files in note folder at matching keywords
+Opens/edits references.txt or other .txt files in note folder at matching keywords
 
 Usage:
+- refe: Opens references.txt in Vim
 - refe keywords: Search references.txt and open at line in Vim.
 - refe --new filename.txt: Create new note file
 - refe filename keywords: Search filename.txt for keywords

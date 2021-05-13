@@ -4,10 +4,6 @@ Personal bash note-taking system with easy search and editing in place, directly
 Uses a combination of grep and vim to multi-line search keywords in references.txt or any file in ~/_bash_notes folder.
 Used daily since 2019.
 
-### Example of use:
-
-https://terminalizer.com/view/ef4b2b193819
-
 Installation:
 ```bash
 git clone https://github.com/Magnushhoie/bash_notes/

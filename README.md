@@ -4,17 +4,19 @@ Personal bash note-taking system with easy search and editing in place, directly
 Uses a combination of grep and vim to multi-line search keywords in references.txt or any file in ~/_bash_notes folder.
 Used daily since 2019.
 
-Installation:
+# Installation:
 ```bash
 git clone https://github.com/Magnushhoie/bash_notes/
 cd bash_notes
 bash setup.sh
 ```
 
-Testing:
+# Testing:
 ```bash
 bash test/test.sh
 ```
+
+# Usage:
 
 #### 1. ref.sh:
 Multi-line search for keywords in references.txt or other .txt files in note folder

@@ -17,19 +17,20 @@ bash setup.sh
 ## Usage
 
 ```python
-# ref.sh: Multi-line search for keywords in references.txt or other .txt files in ~/_bash_notes/
+# ref.sh: Multi-line search for keywords in references.txt or other .txt files in note folder
 ref # Open references.txt in less
 ref <keywords> # Multi-line search for keywords, open at matches
 ref notefile2 <keywords> # Search for keywords in notefile2.txt
-ref --list # List available note files in ~/_bash_notes
+ref --list # List available note files in note folder
 
 # refe.sh: Edit/open references.txt or other .txt file in note folder
 refe # Open references.txt in Vim
 refe --open # Open using system default text editor (i.e. Atom, Sublime, TextEdit etc)
 refe <keywords> # Search for keywords on line, open in Vim
-refe --new notefile2.txt # Create notefile2.txt in ~/_bash_notes/
+refe --new notefile2.txt # Create notefile2.txt in note folder
 refe notefile2 <keywords> # Search notefile2.txt
-refe --list
+refe --list # List available note files in note folder
+refe --config # Edit config.txt file. Requires re-running setup.sh
 ```
 
 ## Testing

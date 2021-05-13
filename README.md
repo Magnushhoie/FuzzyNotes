@@ -17,8 +17,8 @@ bash setup.sh
 Multi-line search for keywords in references.txt or other files in note folder
 
 Usage:
-- ref keywords # Search for keywords in references.txt
-- ref filename keywords # Search for keywords in filename.txt
+- ref keywords: Search for keywords in references.txt
+- ref filename keywords: Search for keywords in filename.txt
 
 #### 2. refe.sh:
 Opens/edits references.txt or other files in note folder at matching keywords

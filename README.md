@@ -1,6 +1,6 @@
 # bash_notes
 
-Personal bash note-taking system using the terminal. Multi-line searches and edits note files using grep and vim.
+Personal bash note-taking system using the terminal. Multi-line searches and edits note files using grep, less and vim.
 
 Daily driver for managing code snippets since 2019. See [references.txt](references.txt) for example note file.
 

@@ -4,37 +4,46 @@ Personal bash note-taking system using the terminal. Multi-line searches and edi
 
 Daily driver for managing code snippets since 2019. See [references.txt](references.txt) for example note file.
 
-# Installation:
+## Installation
+
+Sets up ~/_bash_notes directory and adds ref and refe as aliases to ~/.bash_profile
+
 ```bash
 git clone https://github.com/Magnushhoie/bash_notes/
 cd bash_notes
 bash setup.sh
 ```
 
-# Testing:
+## Usage
+
+```python
+# ref.sh: Multi-line search for keywords in references.txt or other .txt files in note folder
+
+ref
+ref <keywords>
+ref notefile2 <keywords>
+ref --list # List available note files in note folder
+
+# refe.sh: Edit/open references.txt or other .txt file in note folder
+
+refe
+refe --open # Open using system default text editor (i.e. Atom, Sublime, TextEdit etc)
+refe <keywords>
+refe --new notefile2.txt
+refe notefile2 <keywords>
+refe --list
+```
+
+## Testing
+
 ```bash
 bash test/test.sh
 ```
 
-# Usage:
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-#### 1. ref.sh:
-Multi-line search for keywords in references.txt or other .txt files in note folder
+Please make sure to update tests as appropriate.
 
-Usage:
-- ref: Opens references.txt in less
-- ref keywords: Search for keywords in references.txt
-- ref filename keywords: Search for keywords in filename.txt
-
-#### 2. refe.sh:
-Opens/edits references.txt or other .txt files in note folder at matching keywords
-
-Usage:
-- refe: Opens references.txt in Vim
-- refe --open: Opens references.txt using system default text editor (e.g. Atom/Sublime/TextEdit... etc)
-- refe keywords: Search references.txt and open at line in Vim.
-- refe --new filename.txt: Create new note file
-- refe filename keywords: Search filename.txt for keywords
-
-#### 3. setup.sh:
-- Sets up bash_notes directory and adds scripts as aliases to .bash_profile
+## License
+[MIT](https://choosealicense.com/licenses/mit/)

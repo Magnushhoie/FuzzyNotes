@@ -18,14 +18,12 @@ bash setup.sh
 
 ```python
 # ref.sh: Multi-line search for keywords in references.txt or other .txt files in note folder
-
 ref
 ref <keywords>
 ref notefile2 <keywords>
 ref --list # List available note files in note folder
 
 # refe.sh: Edit/open references.txt or other .txt file in note folder
-
 refe
 refe --open # Open using system default text editor (i.e. Atom, Sublime, TextEdit etc)
 refe <keywords>

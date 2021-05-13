@@ -53,7 +53,7 @@ ls -lht $notes_folder/*.txt
 echo -e "\nExample usage: ref [filename (excluding .txt)] [keywords]"
 }
 
-create_new_file() # Opens requested note file in default editor
+create_new_file() # Opens requested note file using editor
 {
     filename=$notes_folder/$1
     if ! [ "${filename: -4}" == ".txt" ];
@@ -64,23 +64,22 @@ create_new_file() # Opens requested note file in default editor
     fi
 }
 
-open_default() # Opens requested note file in default editor
+open_default() # Opens requested note file in system default editor
 {
     filename=$(get_notefile "$1")
     echo $filename
     open -t $filename
 }
 
-edit_config() # Opens configuration file in default editor
+edit_config() # Opens configuration file in system default editor
 {
     open -t $main_dir/config.txt
 }
 
-get_notefile() # Helper function for ref functions
+get_notefile() # Helper function for ref/refe functions
 {
 # Searches note folder for notefile. Default is references.txt
 # Alternative name given if first argument matches that basename excluding file extension
-# New filename given if first argument ends in .txt
 # List of available files given if first argument is "list"
 
     # Modify these three to change default file or folder
@@ -115,9 +114,9 @@ filename=$1
   GREP_COLOR='03;36' grep -i --color=always -C 10 "$5" |
   GREP_COLOR='03;34' grep -i --color=always -C 10 "$6" |
   GREP_COLOR='01;34' grep -i --color=always -C 10 "$7" |
-  # Order lines to get rid of -- matches
+  # Order lines to help with removal of empty -- lines
   sort -n |
-  # Ensure all line-number lines are separated by -
+  # Ensure all line-number lines are separated by "-"
   sed -E -e 's/:|-/-/' |
   # Keep only unique lines
   uniq |

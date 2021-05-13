@@ -1,6 +1,6 @@
 # bash_notes
 
-Personal bash note-taking system using the terminal. Multi-line searches and edits note files using grep, less and vim.
+Personal bash note-taking system using the terminal. Multi-line searches and edits note files using grep, less and Vim.
 
 Daily driver for managing code snippets since 2019. See [references.txt](references.txt) for example note file.
 
@@ -25,6 +25,7 @@ Usage:
 - ref: Opens references.txt in less
 - ref keywords: Search for keywords in references.txt
 - ref filename keywords: Search for keywords in filename.txt
+- ref --open: Opens references.txt using system default text editor (e.g. Atom/TextEdit... etc)
 
 #### 2. refe.sh:
 Opens/edits references.txt or other .txt files in note folder at matching keywords

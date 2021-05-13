@@ -1,5 +1,5 @@
-1. PASS: Correct install folder.
-2. PASS: Install complete.
+1. PASS: Correct test install folder
+2. PASS: Install complete
 3. PASS: ref search keywords
 4. PASS: ref --list
 5. PASS: ref --help

@@ -15,10 +15,7 @@
   <h3 align="center">bash_notes</h3>
 
   <p align="center">
-    Personal bash note-taking system using the terminal. 
-    <br />
-    Multi-line searches and edits personal note files using grep, less and Vim.
-    Daily driver for managing code snippets since 2019.
+    Personal BASH note-taking system using Vim, grep and less. 
     <br />
   </p>
 </p>
@@ -35,6 +32,9 @@ bash setup.sh
 
 ## Usage
 
+Multi-line searches and edits personal note files using grep, less and Vim.
+Daily driver for managing code snippets since 2019.
+
 ```python
 # ref.sh: Multi-line search for keywords in references.txt or other .txt files in note folder, opens in less
 ref
@@ -42,7 +42,7 @@ ref <keywords>
 ref notefile2 <keywords> # Search notefile2.txt
 ref --list # List available note files in note folder
 
-# refe.sh: Edit/open references.txt or other .txt file in note folder, opens in Vim
+# refe.sh: Edit/open references.txt or other .txt file in note folder, with Vim or alternative editor
 refe
 refe <keywords>
 refe notefile2 <keywords> # Search notefile2.txt

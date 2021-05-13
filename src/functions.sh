@@ -8,7 +8,7 @@ source $main_dir/config.txt
 # Check that the default note file exists
 if ! [[ -f $primary_note_file ]]
 then
-    echo "$primary_note_file does not exist. Please run $script_dir/setup.sh"
+    echo "$primary_note_file does not exist. Please run $main_dir/setup.sh"
 fi
 
 

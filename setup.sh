@@ -10,8 +10,8 @@ readonly script_dir="$(realpath $(dirname "$script_path"))"
 source $script_dir/config.txt
 
 # Make scripts executable
-chmod 755 $script_dir/ref.sh
-chmod 755 $script_dir/refe.sh
+chmod 755 $script_dir/src/ref.sh
+chmod 755 $script_dir/src/refe.sh
 
 echo -e "Setting up notes folder in $notes_folder"
 mkdir -p "$notes_folder"
@@ -22,17 +22,21 @@ if ! [ -f "$primary_note_file" ]; then
     cp $script_dir/references.txt $primary_note_file
 fi
 
-echo -e
-read -p "Automatically add aliases ref and refe to ~/.bash_profile? y/n " -n 1 -r
-if [[ $REPLY =~ ^[Yy]$ ]]
+# If not sourced, ask whether to add aliases to bash_profile
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
     then
-    echo -e "\nAdding aliases to .bash_profile ..."
+    echo -e
+    read -p "Automatically add aliases ref and refe to ~/.bash_profile? y/n " -n 1 -r
+    if [[ $REPLY =~ ^[Yy]$ ]]
+        then
+        echo -e "\nAdding aliases to .bash_profile ..."
 
-    LINE1=$(echo -e alias ref=$script_dir/ref.sh)
-    LINE2=$(echo -e alias refe=$script_dir/refe.sh)
-    FILE=$(echo -e $HOME/.bash_profile)
-    grep -qF -- "$LINE1" "$FILE" || echo -e "$LINE1" >> "$FILE"
-    grep -qF -- "$LINE2" "$FILE" || echo -e "$LINE2" >> "$FILE"
+        LINE1=$(echo -e alias ref=$script_dir/src/ref.sh)
+        LINE2=$(echo -e alias refe=$script_dir/src/refe.sh)
+        FILE=$(echo -e $HOME/.bash_profile)
+        grep -qF -- "$LINE1" "$FILE" || echo -e "$LINE1" >> "$FILE"
+        grep -qF -- "$LINE2" "$FILE" || echo -e "$LINE2" >> "$FILE"
+    fi
 fi
 
 echo -e "\nDone!"

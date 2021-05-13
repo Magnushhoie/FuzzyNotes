@@ -1,12 +1,9 @@
 #!/bin/bash
-# bash_notes helper functions
+# bash_notes helper functions, called from ref.sh or refe.sh
 # https://github.com/Magnushhoie/bash_notes
 
-#readonly script_path="${BASH_SOURCE[0]}"
-#readonly script_dir="$(dirname "$script_path")"
-
-# Read in notes_folder and primary_note_file. By default ~/_bash_notes/ and ~/_bash_notes/references.txt
-source $script_dir/config.txt
+# Read in notes_folder and primary_note_file. By default ~/_bash_notes/ and references.txt
+source $main_dir/config.txt
 
 # Check that the default note file exists
 if ! [[ -f $primary_note_file ]]
@@ -32,7 +29,7 @@ function parse_params() {
                 list_files
                 exit 0
                 ;;
-            -n | --new)
+            -n | --new)
                 create_new_file $@
                 exit 0
                 ;;
@@ -76,7 +73,7 @@ open_default() # Opens requested note file in default editor
 
 edit_config() # Opens configuration file in default editor
 {
-    open -t $script_dir/config.txt
+    open -t $main_dir/config.txt
 }
 
 get_notefile() # Helper function for ref functions

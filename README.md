@@ -41,13 +41,14 @@ See [references.txt](references.txt) for example.
 ref
 ref <keywords>
 ref notefile2 <keywords> # Search notefile2.txt
+ref --all <keywords> # Search all .txt files in note folder
 ref --list # List available note files in note folder
 
 # refe.sh: Edit/open references.txt or other .txt file in note folder, with Vim or alternative editor
 refe
 refe <keywords>
 refe notefile2 <keywords> # Search notefile2.txt
-refe --open # Open using system default text editor (i.e. Atom, Sublime, TextEdit etc)
+refe --open # Open using system default text editor (e.g. Atom, Sublime, TextEdit etc)
 refe --new notefile2.txt # Create notefile2.txt in note folder
 ```
 

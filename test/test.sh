@@ -2,11 +2,13 @@
 # bash_notes test
 # https://github.com/Magnushhoie/bash_notes
 
+#set -e
 shopt -s expand_aliases
+
 
 # Set directory variables
 script_path="${BASH_SOURCE[0]}"
-script_dir="$(realpath $(dirname "$script_path"))"
+script_dir="$(cd "$(dirname "$script_path")" && pwd -P)"
 tmp_dir=$script_dir/tmp
 main_dir=$(dirname $script_dir)
 
@@ -16,7 +18,8 @@ test_logfile=$tmp_dir/test.log
 
 # Cleanup and reset tmp directory
 if ! [ -z "${tmp_dir}" ] && [ -d "$tmp_dir" ]
-    then rm -r $tmp_dir/*
+    then echo "Deleting files in" "${tmp_dir}"
+    rm -r $tmp_dir/*
 fi
 
 # Delete+Create new log files
@@ -39,6 +42,7 @@ cp $script_dir/test_config.txt $tmp_dir/config.txt
 # Run install script
 source $tmp_dir/setup.sh > $test_logfile 2>&1
 cp $main_dir/references.txt $notes_folder/second_file.txt
+
 
 # Check install folder
 V=$(grep 'tmp/_bash_notes' $test_logfile | wc -l | awk '{print $1}')

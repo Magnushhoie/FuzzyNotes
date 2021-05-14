@@ -10,8 +10,12 @@ function main() {
 }
 
 function script_init() {
+    function realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+    }
     readonly script_path="${BASH_SOURCE[0]}"
-    readonly script_dir="$(realpath $(dirname "$script_path"))"
+    readonly script_dir="$(cd "$(dirname "$script_path")" && pwd -P)"
+    #readonly script_dir="$(realpath $(dirname "$script_path"))"
     readonly main_dir=$(dirname $script_dir)
     readonly script_params="$*"
 

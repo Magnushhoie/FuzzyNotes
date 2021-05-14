@@ -2,8 +2,11 @@
 # Sets up bash_notes scripts as aliases and bash_notes folder
 # https://github.com/Magnushhoie/bash_notes
 
+# Emulate BASH if using zsh
+set -e
+
 readonly script_path="${BASH_SOURCE[0]}"
-readonly script_dir="$(realpath $(dirname "$script_path"))"
+readonly script_dir="$(cd "$(dirname "$script_path")" && pwd -P)"
 
 # To change the default notes folder, edit config.txt
 # Reads in notes_folder and primary_note_file
@@ -26,17 +29,23 @@ fi
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
     then
     echo -e
-    read -p "Automatically add aliases ref and refe to ~/.bash_profile? y/n " -n 1 -r
+    read -p "Automatically add aliases ref and refe to ~/.bash_profile and ~/.zshrc? y/n " -n 1 -r
     echo -e
     if [[ $REPLY =~ ^[Yy]$ ]]
         then
         echo -e "\nAdding aliases to .bash_profile ..."
+        touch $HOME/.bash_profile
+        touch $HOME/.zshrc
 
         LINE1=$(echo -e alias ref=$script_dir/src/ref.sh)
         LINE2=$(echo -e alias refe=$script_dir/src/refe.sh)
-        FILE=$(echo -e $HOME/.bash_profile)
-        grep -qF -- "$LINE1" "$FILE" || echo -e "$LINE1" >> "$FILE"
-        grep -qF -- "$LINE2" "$FILE" || echo -e "$LINE2" >> "$FILE"
+        BASH_FILE=$(echo -e $HOME/.bash_profile)
+        ZSH_FILE=$(echo -e $HOME/.zshrc)
+        grep -qF -- "$LINE1" "$BASH_FILE" || echo -e "$LINE1" >> "$BASH_FILE"
+        grep -qF -- "$LINE2" "$BASH_FILE" || echo -e "$LINE2" >> "$BASH_FILE"
+
+        grep -qF -- "$LINE1" "$ZSH_FILE" || echo -e "$LINE1" >> "$ZSH_FILE"
+        grep -qF -- "$LINE2" "$ZSH_FILE" || echo -e "$LINE2" >> "$ZSH_FILE"
     fi
 
     # Pick main editor

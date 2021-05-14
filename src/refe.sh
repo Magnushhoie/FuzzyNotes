@@ -2,6 +2,9 @@
 # bash_notes function for editing reference file
 # https://github.com/Magnushhoie/bash_notes
 
+# Emulate BASH if using zsh
+if [ -n "$ZSH_VERSION" ]; then emulate -L ksh; fi
+
 # DESC: Main control flow
 function main() {
     script_init "$@"
@@ -12,7 +15,7 @@ function main() {
 # DESC: Initialization parameters
 function script_init() {
     readonly script_path="${BASH_SOURCE[0]}"
-    readonly script_dir="$(realpath $(dirname "$script_path"))"
+    readonly script_dir="$(cd "$(dirname "$script_path")" && pwd -P)"
     readonly main_dir=$(dirname $script_dir)
     readonly script_params="$*"
 

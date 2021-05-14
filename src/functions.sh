@@ -70,7 +70,7 @@ function ref()
      fi
 
      echo $filename
-     search_file $filename ${@:-""}
+     search_file $filename ${@:-"\s"}
 }
 
 # DESC: Edit script

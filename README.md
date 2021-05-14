@@ -22,7 +22,7 @@
 
 ## Installation
 
-Sets up ~/_bash_notes directory and adds ref and refe as aliases to ~/.bash_profile. Edit [config.txt](config.txt) to change default notes directory and editor.
+Sets up notes directory and adds aliases to ~/.bash_profile.
 
 ```bash
 git clone https://github.com/Magnushhoie/bash_notes/

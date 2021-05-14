@@ -36,8 +36,8 @@ Usage:
      -h|--help                  Displays this help
      -l|--list                  Displays searchable files in notes folder
      -k|--keywords              Explicitly define keywords (unavailable)
-     -n|--new                   Explicitly create new file (.txt extension required)
-     --open                     Open notefile reference file with default system editor instead of $EDITOR
+     -n|--new                   Create new file in notes folder (.txt extension required)
+     --open                     Open file with default system editor
      --config                   Open configuration file
 
 Example usage:

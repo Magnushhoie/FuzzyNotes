@@ -38,7 +38,7 @@ Usage:
      -k|--keywords              Explicitly define keywords (unavailable)
      -a|--all                   Search across all files in notes folder
      -g|--g                     Get filenames and line-numbers for lines matching keywords across all files
-     --open                     Open notefile reference file with default system editor instead of [vim]
+     --open                     Open file with default system editor
      --config                   Open configuration file
 
 Example usage:

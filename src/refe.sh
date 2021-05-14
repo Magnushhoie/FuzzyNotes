@@ -35,8 +35,8 @@ Usage:
     Note: NOTE_FILE should be specified without .txt extension
      -h|--help                  Displays this help
      -l|--list                  Displays searchable files in notes folder
-     -n|--new                   Explicitly create new file (.txt extension required)
      -k|--keywords              Explicitly define keywords (unavailable)
+     -n|--new                   Explicitly create new file (.txt extension required)
      --open                     Open notefile reference file with default system editor instead of $EDITOR
      --config                   Open configuration file
 
@@ -47,37 +47,6 @@ refe --new newfile.txt
 refe newfile <keywords>
 
 EOF
-}
-
-# DESC: Edit script
-function refe() # Search and edit references.txt in vim
-{
-# Opens up EDTIOR (vim) at first mention of keyword(s)
-# Notefile is references.txt, unless another file found from first argument
-     filename=$(get_notefile)
-
-     # Check for alternative filename as first argument
-     # If so, shift arguments so second+ becomes keyword
-     alternative_filename=$(get_notefile $1)
-     if [ $filename != $alternative_filename ];
-         then filename=$alternative_filename
-         shift
-     fi
-
-     echo $filename
-
-    if [ $EDITOR == "vim" ];
-        then 
-        # If keywords are not empty, try to search
-        if ! [ -z $1 ];
-            then vim +":set hlsearch" +/$1.*$2.*$3.*$4.*$5.*$6 $filename
-            # Else open vim without search
-        else vim "$filename"
-        fi
-    else
-        # Open with alternative editor if not vim
-        $EDITOR "$filename"
-    fi
 }
 
 # Run script

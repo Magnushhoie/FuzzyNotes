@@ -36,7 +36,8 @@ Usage:
      -h|--help                  Displays this help
      -l|--list                  Displays searchable files in notes folder
      -k|--keywords              Explicitly define keywords (unavailable)
-     -a|--all                   Search across all files notes folder (requires fzf) (unavailable)
+     -a|--all                   Search across all files in notes folder
+     -g|--g                     Get filenames and line-numbers for lines matching keywords across all files
      --open                     Open notefile reference file with default system editor instead of [vim]
      --config                   Open configuration file
 
@@ -48,23 +49,7 @@ ref newfile <keywords>
 EOF
 }
 
-# DESC: Search script
-function ref()
-{
-    filename=$primary_note_file
 
-     # Check for alternative filename as first argument
-     # If so, shift arguments so second+ becomes keyword
-     alternative_filename=$(get_notefile $1)
-
-     if [ $filename != "$alternative_filename" ];
-         then filename=$alternative_filename
-         shift
-     fi
-
-     echo $filename
-     search_file $filename ${@:-""}
-}
 
 # Run script
 if ! (return 0 2> /dev/null); then

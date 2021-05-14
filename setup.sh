@@ -22,11 +22,12 @@ if ! [ -f "$primary_note_file" ]; then
     cp $script_dir/references.txt $primary_note_file
 fi
 
-# If not sourced, ask whether to add aliases to bash_profile
+# If not sourced, ask whether to add aliases to bash_profile and set default editor
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
     then
     echo -e
     read -p "Automatically add aliases ref and refe to ~/.bash_profile? y/n " -n 1 -r
+    echo -e
     if [[ $REPLY =~ ^[Yy]$ ]]
         then
         echo -e "\nAdding aliases to .bash_profile ..."
@@ -37,6 +38,30 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
         grep -qF -- "$LINE1" "$FILE" || echo -e "$LINE1" >> "$FILE"
         grep -qF -- "$LINE2" "$FILE" || echo -e "$LINE2" >> "$FILE"
     fi
+
+    # Pick main editor
+
+    PS3='Please pick main text editor to use:'
+    options=("system default for .txt files" "vim")
+    select opt in "${options[@]}"
+    do
+        case $opt in
+            "system default for .txt files")
+                NEW_EDITOR=open
+                echo -e "\nYou chose system default"
+                break
+                ;;
+            "vim")
+                NEW_EDITOR=vim
+                echo -e "\nYou chose vim"
+                break
+                ;;
+            *) echo "invalid option $REPLY";;
+        esac
+    done
+    # Replace editor line in config.txt
+    sed -iE "s/EDITOR=.*/EDITOR=$NEW_EDITOR/" $script_dir/config.txt
+    echo -e "Note: You can change your editor with ref --config or editing config.txt"
 fi
 
 echo -e "\nDone!"

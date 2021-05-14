@@ -4,6 +4,7 @@ notes_folder=$HOME/_bash_notes
 # Default note file used by ref and refe if no existing filename is provided
 primary_note_file=$notes_folder/references.txt
 
-# Default text editor. Alternatives include nano, emacs and open (opens with default text editor on Mac OSX)
+# Default text editor.
+# Alternatives include vim, emacs, atom, sublime and open (opens with default text editor)
 # Note: Editor open at searched line currently only supported with vim
 EDITOR=vim

@@ -1,5 +1,6 @@
 # Default folder for notes
 notes_folder=$HOME/_bash_notes
+#
 
 # Default note file used by ref and refe if no existing filename is provided
 primary_note_file=$notes_folder/references.txt

@@ -41,14 +41,25 @@ Usage:
      -l|--list                  Displays searchable files in notes folder
      -k|--keywords              Explicitly define keywords (unavailable)
      -a|--all                   Search across all files in notes folder
-     -g|--g                     Get filenames and line-numbers for lines matching keywords across all files
+     -g|--get                   Get filenames and line-numbers for lines matching keywords across all files
      --open                     Open file with default system editor
      --config                   Open configuration file
 
 Example usage:
+# Open references.txt:
 ref 
-ref <keywords>
-ref newfile <keywords>
+
+# Multi-line search references.txt for keywords "bash" "loop"
+ref bash loop
+
+# Multi-line search file newfile.txt for keyword "python"
+ref newfile python
+
+# List available files in notes folder:
+ref --list
+
+# Multi-line search all files in note folder for "python"
+ref --all python
 
 EOF
 }

@@ -44,10 +44,17 @@ Usage:
      --config                   Open configuration file
 
 Example usage:
-refe 
-refe <keywords>
-refe --new newfile.txt
-refe newfile <keywords>
+# Open references.txt in editor:
+refe
+
+# Open references.txt at first line with "bash loop":
+refe bash loop
+
+# Create new file newfile.txt in notes folder:
+refe newfile python
+
+# Open newfile.txt at first line with "python"
+refe newfile python
 
 EOF
 }

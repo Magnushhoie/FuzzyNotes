@@ -32,7 +32,7 @@ bash setup.sh
 
 ## Usage
 
-Multi-line searches and edits personal note files using grep, less and Vim.\
+Multi-line searches and edits personal note files using grep, less and specified text editor.\
 Daily driver for managing code snippets since 2019.
 See [references.txt](references.txt) for example.
 

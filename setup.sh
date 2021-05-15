@@ -33,7 +33,7 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
     echo -e
     if [[ $REPLY =~ ^[Yy]$ ]]
         then
-        echo -e "\nAdding aliases to .bash_profile ..."
+        echo -e "\nAdding aliases to .bash_profile and ~/.zshrc ..."
         touch $HOME/.bash_profile
         touch $HOME/.zshrc
 

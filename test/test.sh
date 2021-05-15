@@ -140,26 +140,26 @@ else
 fi
 
 # refe create new file require .txt
-V=$(refe --new new_file | grep "must end with .txt" | wc | awk '{print $1}')
-if [ "$V" -eq "1" ]; then
-    echo "10. PASS: refe new file expected error message" >> $test_results
-else
-    echo "10. FAIL: refe new file expected error message" >> $test_results
-fi
+#V=$(refe --new new_file | grep "must end with .txt" | wc | awk '{print $1}')
+#if [ "$V" -eq "1" ]; then
+#    echo "10. PASS: refe new file expected error message" >> $test_results
+#else
+#    echo "10. FAIL: refe new file expected error message" >> $test_results
+#fi
 
 # refe create new file
 V=$(refe --new new_file.txt | grep "new_file.txt" | wc -l | awk '{print $1}')
 if [ "$V" -eq "2" ]; then
-    echo "11. PASS: refe new file creation" >> $test_results
+    echo "10. PASS: refe new file creation" >> $test_results
 else
-    echo "11. FAIL: refe new file creation" >> $test_results
+    echo "10. FAIL: refe new file creation" >> $test_results
 fi
 
 V=$(refe second_file | grep "second_file.txt" | wc -l | awk '{print $1}')
 if [ "$V" -eq "2" ]; then
-    echo "12. PASS: refe alternative file" >> $test_results
+    echo "11. PASS: refe alternative file" >> $test_results
 else
-    echo "12. FAIL: refe alternative file" >> $test_results
+    echo "11. FAIL: refe alternative file" >> $test_results
 fi
 
 # Display test results

@@ -35,7 +35,7 @@ Opens/edits [references.txt] in $notes_folder at line matching keywords, using $
 
 Usage:
     ref [NOTE_FILE] [KEYWORDS]
-    Note: NOTE_FILE should be specified without .txt extension
+    Note: NOTE_FILE should be specified without extension
      -h|--help                  Displays this help
      -l|--list                  Displays searchable files in notes folder
      -k|--keywords              Explicitly define keywords (unavailable)

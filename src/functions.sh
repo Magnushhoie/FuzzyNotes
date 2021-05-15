@@ -14,7 +14,6 @@ then
     echo "$primary_note_file does not exist. Please run $main_dir/setup.sh"
 fi
 
-
 # Initialization functions
 
 # DESC: Parameter parser
@@ -110,31 +109,27 @@ function refe() # Search and edit references.txt in vim
 search_all() # Searches across all files in note directory.
 {
     tmpfile=$(mktemp /tmp/abc-script.XXXXXX)
-    cat $notes_folder/*.txt > $tmpfile
+    cat $notes_folder/*.{txt,md} > $tmpfile
     search_file $tmpfile ${@:-""}
 }
 
 get_file_line() # Finds filename and linenumber for given line search
 {
-    grep -in --color=always "$(echo $@)" $notes_folder/*.txt | less -R
+    grep -in --color=always "$(echo $@)" $notes_folder/*.{txt,md} | less -R
 }
 
 list_files() # List available files in note directory
 {
     echo -e "Available files in $notes_folder"
-    ls -lht $notes_folder/*.txt
-    echo -e "\nExample usage: ref [filename (excluding .txt)] [keywords]"
+    ls -lht $notes_folder/*.*
+    echo -e "\nExample usage: ref [filename (excluding extension)] [keywords]"
 }
 
 create_new_file() # Opens requested note file using editor
 {
     filename=$notes_folder/$1
-    if ! [ "${filename: -4}" == ".txt" ];
-        then echo "New file" $filename "must end with .txt"
-    else
-        echo $filename
-        $EDITOR $filename
-    fi
+    echo $filename
+    $EDITOR $filename
 }
 
 open_default() # Opens requested note file in system default editor
@@ -158,8 +153,10 @@ get_notefile() # Helper function for ref/refe functions
     # Modify these three to change default file or folder
     firstword=${1:-"references"}
 
-    # Search for .txt files in reference folder
-    files=($notes_folder/*.txt)
+    # Search for files in reference folder
+    files=($notes_folder/*.*)
+    #files=$(ls *.{txt,md} 2>/dev/null)
+    #files=$(ls -p $notes_folder/* | grep -v /)
 
     # Look for alternative notefiles in folder if matches first argument
     for file in ${files[*]}; do

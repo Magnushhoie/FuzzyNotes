@@ -7,6 +7,5 @@
 7. PASS: ref --config
 8. PASS: refe no keywords
 9. PASS: refe search keywords
-10. PASS: refe new file expected error message
-11. PASS: refe new file creation
-12. PASS: refe alternative file
+10. PASS: refe new file creation
+11. PASS: refe alternative file

@@ -32,7 +32,7 @@ bash setup.sh
 
 ## Usage
 View keyword search results across note files with __ref__ and open files at matches with __refe__ from the terminal.
-Program based on combination of grep, less and vim. Used daily managing code snippets since 2019.
+Program based on combination of grep, less and vim. Used daily for managing code snippets since 2019.
 See [references.txt](references.txt) for example note file.
 
 ```text

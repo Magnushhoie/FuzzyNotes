@@ -57,7 +57,7 @@ ref -a python list
 
 ```text
 refe.sh: Open note file at searched line with Vim or alternative editor
-usage:  [notefile] keywords
+usage: [notefile] keywords
 
 Example usage:
 Open main note file in editor:

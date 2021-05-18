@@ -2,7 +2,6 @@
 # Sets up bash_notes scripts as aliases and bash_notes folder
 # https://github.com/Magnushhoie/bash_notes
 
-# Emulate BASH if using zsh
 set -e
 
 readonly script_path="${BASH_SOURCE[0]}"

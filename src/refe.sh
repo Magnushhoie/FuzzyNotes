@@ -2,9 +2,6 @@
 # bash_notes function for editing reference file
 # https://github.com/Magnushhoie/bash_notes
 
-# Emulate BASH if using zsh
-if [ -n "$ZSH_VERSION" ]; then emulate -L ksh; fi
-
 # DESC: Main control flow
 function main() {
     script_init "$@"
@@ -29,33 +26,29 @@ function script_init() {
 # DESC: Usage help
 function script_usage() {
     cat << EOF
+usage: $script_name [notefile] keywords
+  notefile: File basename in note folder if existing. Default is references.txt
+  keywords: Search terms, space-separated
 
-refe.sh
-Opens/edits [references.txt] in $notes_folder at line matching keywords, using $EDITOR or editor set in config.txt file.
-
-Usage:
-    ref [NOTE_FILE] [KEYWORDS]
-    Note: NOTE_FILE should be specified without extension
-     -h|--help                  Displays this help
+Optional arguments:
      -l|--list                  Displays searchable files in notes folder
-     -k|--keywords              Explicitly define keywords (unavailable)
-     -n|--new                   Create new file in notes folder (.txt extension required)
+     -n|--new                   Create new file in notes folder
+     -h|--help                  Displays this help
      --open                     Open file with default system editor
      --config                   Open configuration file
 
 Example usage:
-# Open references.txt in editor:
+Open main note file in editor:
 refe
 
-# Open references.txt at first line with "bash loop":
+Open main note file at first line with "bash loop"
 refe bash loop
 
-# Create new file newfile.txt in notes folder:
-refe newfile python
+Create newfile.txt in notes folder
+refe -n newfile.txt
 
-# Open newfile.txt at first line with "python"
+Open newfile.txt at first line with "python"
 refe newfile python
-
 EOF
 }
 

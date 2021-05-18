@@ -15,23 +15,19 @@ ref --help # Help menu
 refe --help # Help menu
 
 __vim (refe) commands
-Press Escape first then write (text should appear at the bottom status bar of the screen. Remember to press enter at the end):
-:w # write file (save)
-:q # quit file (exit)
-:q! # force quit
-:wq # Write and quit
-:wq! # Force write and quit
+To write, press i to enter insert mode. Press Escape to exit insert mode.
+i       # Enter insert mode
+
+To exit / save, press Escape and write: (text should appear at the bottom of the bar of the screen. Remember to press enter at the end)
+:w      # write file (save)
+:q      # quit file (exit)
+:q!     # force quit
+:wq     # Write and quit
+:wq!    # Force write and quit
 
 __vim tutorials and cheatsheets
 # Vim tutorial: https://www.openvim.com/
 # Vim cheatsheet https://vimsheet.com/
-
-__vim shortcuts write, edit and search
-# Try to press escape first then press:
-i # Insert mode. Now you can write text
-dd # delete (yank) line. To paste, use p or P
-V # Visual mode. Select lines. To delete use dd ... to copy use y
-/ # Search. E.g. /keywords ... Use n for next and Shift + N for previous.
 
 __terminal
 Select and copy text: ctrl + r

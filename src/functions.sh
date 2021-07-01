@@ -43,9 +43,6 @@ function parse_params() {
                 create_new_file "$@"
                 exit 0
                 ;;
-            -f | --folder)
-                search_folder "$@"
-                ;;
             --open)
                 open_default "$@"
                 exit 0
@@ -74,7 +71,6 @@ function ref()
          shift
      fi
 
-     echo "NEWNAME:"
      echo $filename
      search_file $filename ${@:-"\s"}
 }
@@ -97,7 +93,7 @@ function refe() # Search and edit references.txt in vim
      echo $filename
 
     if [ $EDITOR == "vim" ];
-        then 
+        then
         # If keywords are not empty, try to search
         if ! [ -z $1 ];
             then vim +":set hlsearch" +/$1.*$2.*$3.*$4.*$5.*$6 $filename
@@ -136,13 +132,6 @@ create_new_file() # Opens requested note file using editor
     $EDITOR $filename
 }
 
-search_folder()
-{
-    notes_folder=$(realpath "$1" | sed 's/\.$//' | sed 's/\/$//')
-    #notes_folder="$1"
-    #echo $notes_folder
-}
-
 open_default() # Opens requested note file in system default editor
 {
     filename=$(get_notefile "$1")
@@ -171,11 +160,7 @@ get_notefile() # Helper function for ref/refe functions
 
     # Look for alternative notefiles in folder if matches first argument
     for file in ${files[*]}; do
-        
-        echo $file
-        
         file_shorthand=$(basename "${file%%.*}")
-        echo $file_shorthand
         if [ "$file_shorthand" = $firstword ];
             then notefile=$file
         fi;
@@ -207,6 +192,6 @@ filename=$1
   uniq |
   # Remove line numbers
   cut -d'-' -f2- |
-  # Display in less with colors, case-insensitive search
-  less -Ri
+  # Display in less with colors
+  less -R
 }

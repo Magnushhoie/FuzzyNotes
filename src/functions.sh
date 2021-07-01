@@ -193,5 +193,5 @@ filename=$1
   # Remove line numbers
   cut -d'-' -f2- |
   # Display in less with colors
-  less -R
+  less -Ri
 }

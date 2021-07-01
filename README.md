@@ -36,40 +36,40 @@ Program based on combination of grep, less and vim. Used daily for managing code
 See [references.txt](references.txt) for example note file.
 
 ```text
-ref.sh: View matches for searched keywords in note files
-usage: ref.sh [notefile] keywords
+# ref.sh: View matches for searched keywords in note files
+# usage: ref.sh [notefile] keywords
 
-Example usage:
-View main note file:
+# Example usage:
+# View main note file:
 ref 
 
-Search main note file for keywords "bash" "loop"
+# Search main note file for keywords "bash" "loop"
 ref bash loop
 
-Search file newfile.txt in note folder for keywords "python"
+# Search file newfile.txt in note folder for keywords "python"
 ref newfile python
 
-Search across all files in note folder for keywords "python" "list"
+# Search across all files in note folder for keywords "python" "list"
 ref -a python list
 ```
 
 <br>
 
 ```text
-refe.sh: Open note file at searched line with Vim or alternative editor
-usage: [notefile] keywords
+# refe.sh: Open note file at searched line with Vim or alternative editor
+# usage: [notefile] keywords
 
-Example usage:
-Open main note file in editor:
+# Example usage:
+# Open main note file in editor:
 refe
 
-Open main note file at first line with "bash loop"
+# Open main note file at first line with "bash loop"
 refe bash loop
 
-Create newfile.txt in notes folder
+# Create newfile.txt in notes folder
 refe -n newfile.txt
 
-Open newfile.txt at first line with "python"
+# Open newfile.txt at first line with "python"
 refe newfile python
 ```
 

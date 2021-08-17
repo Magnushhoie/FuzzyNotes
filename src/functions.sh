@@ -125,7 +125,7 @@ get_file_line() # Finds filename and linenumber for given line search
 list_files() # List available files in note directory
 {
     echo -e "Available files in $notes_folder"
-    ls -lht $notes_folder/*.*
+    ls -lht $notes_folder/*.* | less -R
     echo -e "\nExample usage: ref [filename (excluding extension)] [keywords]"
 }
 

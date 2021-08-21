@@ -54,10 +54,16 @@ ref
 # Search main note file (references.txt) for keywords "bash" "loop"
 ref bash loop
 
-# Search file notes2.txt in note folder for keywords "python"
+# Search file notes2.txt in note folder for keyword "python"
 ref notes2 python
 
+# See list of all note files
+ref --list
+ref -l
+
+# ref -all:
 # Search across all files in note folder for keywords "python" "list"
+ref --all python list
 ref -a python list
 ```
 
@@ -71,6 +77,7 @@ refe [notefile] keywords
 refe
 
 # Create new note file, notes2.txt in notes folder
+refe --new notes2.txt
 refe -n notes2.txt
 
 # Edit main note file (references.txt) at first line with "bash loop"

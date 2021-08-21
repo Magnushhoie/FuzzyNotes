@@ -15,7 +15,7 @@
   <h3 align="center">bash_notes</h3>
 
   <p align="center">
-    Quickly search for notes and code-snippets in your terminal
+    Quickly search and edit your notes and code-snippets in your terminal
     <br />
   </p>
 </p>

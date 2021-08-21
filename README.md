@@ -37,7 +37,7 @@ See [references.txt](references.txt) for example note file.
 #### ref - Multi-line search for keywords across all note files
 
 ```text
-# usage:
+# Usage:
 ref.sh [notefile] keywords
 
 # View main note file (references.txt):
@@ -58,7 +58,7 @@ ref -a python list
 #### refe - Edit note files at searched line
 
 ```text
-# usage:
+# Usage:
 refe [notefile] keywords
 
 # Open main note file (references.txt) in vim / editor of choice:

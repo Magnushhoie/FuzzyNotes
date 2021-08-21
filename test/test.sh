@@ -9,8 +9,9 @@ shopt -s expand_aliases
 # Set directory variables
 script_path="${BASH_SOURCE[0]}"
 script_dir="$(cd "$(dirname "$script_path")" && pwd -P)"
-tmp_dir=$script_dir/tmp
 main_dir=$(dirname $script_dir)
+tmp_dir=$script_dir/tmp
+mkdir -p $tmp_dir
 
 # Set log files
 test_results=$script_dir/test_results
@@ -19,17 +20,16 @@ test_logfile=$tmp_dir/test.log
 # Cleanup and reset tmp directory
 if ! [ -z "${tmp_dir}" ] && [ -d "$tmp_dir" ]
     then echo "Deleting files in" "${tmp_dir}"
-    rm -r $tmp_dir/*
+    rm -r $tmp_dir/*  2> /dev/null
 fi
 
 # Delete+Create new log files
-rm -f $test_results
-rm -f $test_logfile
+rm -f $test_results 2> /dev/null
+rm -f $test_logfile 2> /dev/null
 touch $test_results
 touch $test_logfile
 
 # Copy project files to tmp directory
-mkdir -p $tmp_dir
 cp -r $main_dir/src $tmp_dir
 cp $main_dir/setup.sh $tmp_dir/
 cp $main_dir/references.txt $tmp_dir/

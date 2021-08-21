@@ -16,12 +16,11 @@ chmod 755 $script_dir/src/ref.sh
 chmod 755 $script_dir/src/refe.sh
 
 echo -e "Setting up notes folder in $notes_folder"
-mkdir -p "$notes_folder"
 
-echo -e "Checking if $primary_note_file exists"
-if ! [ -f "$primary_note_file" ]; then
-    echo -e "File does not already exist. Copying from $script_dir/references.txt ..."
-    cp $script_dir/references.txt $primary_note_file
+echo -e "Checking if $notes_folder exists"
+if ! [ -d "$notes_folder" ]; then
+    echo -e "Notes folder does not already exist ... Copying from $script_dir/_bash_ref ..."
+    cp -r $script_dir/_bash_ref $notes_folder
 fi
 
 # If not sourced, ask whether to add aliases to bash_profile and set default editor
@@ -48,7 +47,6 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
     fi
 
     # Pick main editor
-
     PS3='Please pick main text editor to use:'
     options=("system default for .txt files" "vim")
     select opt in "${options[@]}"

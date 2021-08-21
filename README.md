@@ -31,12 +31,16 @@ bash setup.sh
 ```
 
 ## Usage
-- From your terminal, add any notes you want to references.txt using **refe**
-- Search for any keywords you want using **ref \<keywords\>**
+- From your terminal, add any notes you want to references.txt using just "**refe**"
+- Search for any keywords you want using "**ref \<keywords\>**"
 - Search results can be searched again using hotkey **/**
 
 Used daily for writing and searching notes and code snippets since 2019. Uses BASH, [grep](https://github.com/Magnushhoie/bash_notes/blob/master/src/functions.sh#L176) and vim / text editor of choice.
 See [references.txt](references.txt) for example note file.
+
+## Documentation
+
+Use "**ref --help**" for all arguments.
 
 #### ref - Multi-line search for keywords across all note files
 
@@ -57,9 +61,7 @@ ref notes2 python
 ref -a python list
 ```
 
-<br>
-
-#### refe - Edit note files at searched line
+#### refe - Edit note file at searched line
 
 ```text
 # Usage:

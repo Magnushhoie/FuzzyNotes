@@ -51,7 +51,7 @@ ref.sh [notefile] keywords
 # View main note file (references.txt):
 ref 
 
-# Search main note (references.txt) file for keywords "bash" "loop"
+# Search main note file (references.txt) for keywords "bash" "loop"
 ref bash loop
 
 # Search file notes2.txt in note folder for keywords "python"

@@ -39,6 +39,7 @@ bash setup.sh
 - Search results can be searched again using hotkey **/**
 
 Used daily for writing and searching notes and code snippets since 2019. Uses BASH, [grep](https://github.com/Magnushhoie/bash_ref/blob/master/src/functions.sh#L176) and vim / text editor of choice.
+
 See [references.txt](references.txt) for example note file.
 
 ## Documentation
@@ -48,7 +49,7 @@ Use "**ref --help**" for all arguments.
 #### ref - Multi-line search for keywords across all note files
 
 ```text
-# Usage:
+# Usage (first argument [notefile] optional):
 ref.sh [notefile] keywords
 
 # View main note file (references.txt):

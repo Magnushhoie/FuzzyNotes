@@ -31,7 +31,7 @@ bash setup.sh
 ```
 
 ## Usage
-Used daily for writing and searching notes and code snippets since 2019. Uses BASH, grep and vim / text editor of choice.
+Used daily for writing and searching notes and code snippets since 2019. Uses BASH, [grep](https://github.com/Magnushhoie/bash_notes/blob/master/src/functions.sh#L176) and vim / text editor of choice.
 See [references.txt](references.txt) for example note file.
 
 #### ref - Multi-line search for keywords across all note files

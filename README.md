@@ -22,7 +22,7 @@
 
 ## Installation
 
-Sets up notes directory and adds aliases to ~/.bash_profile.
+Sets up notes directory and adds aliases to ~/.bash_profile or ~/.zshrc.
 
 ```bash
 git clone https://github.com/Magnushhoie/bash_notes/
@@ -31,6 +31,10 @@ bash setup.sh
 ```
 
 ## Usage
+- From your terminal, add any notes you want to references.txt using **refe**
+- Search for any keywords you want using **ref \<keywords\>**
+- Search results can be searched again using hotkey **/**
+
 Used daily for writing and searching notes and code snippets since 2019. Uses BASH, [grep](https://github.com/Magnushhoie/bash_notes/blob/master/src/functions.sh#L176) and vim / text editor of choice.
 See [references.txt](references.txt) for example note file.
 
@@ -61,17 +65,17 @@ ref -a python list
 # Usage:
 refe [notefile] keywords
 
-# Open main note file (references.txt) in vim / editor of choice:
+# Edit main note file (references.txt) in vim / editor of choice:
 refe
-
-# Open main note file (references.txt) at first line with "bash loop"
-refe bash loop
 
 # Create new note file, notes2.txt in notes folder
 refe -n notes2.txt
 
-# Open notes2.txt at first line with "python"
-refe newfile python
+# Edit main note file (references.txt) at first line with "bash loop"
+refe bash loop
+
+# Edit notes2.txt at first line with "python"
+refe notes2 python
 ```
 
 ## Testing

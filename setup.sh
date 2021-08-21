@@ -1,6 +1,6 @@
 #!/bin/bash
-# Sets up bash_notes scripts as aliases and bash_notes folder
-# https://github.com/Magnushhoie/bash_notes
+# Sets up bash_ref scripts as aliases and bash_ref folder
+# https://github.com/Magnushhoie/bash_ref
 
 set -e
 

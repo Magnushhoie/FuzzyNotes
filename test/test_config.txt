@@ -1,7 +1,7 @@
 SRC="$(realpath $(dirname "${BASH_SOURCE[0]}"))"
 
 # Default folder for notes
-notes_folder=$SRC/_bash_notes
+notes_folder=$SRC/_bash_ref
 
 # Default note file used by ref and refe if no existing filename is provided
 primary_note_file=$notes_folder/references.txt

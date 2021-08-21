@@ -1,6 +1,6 @@
 #!/bin/bash
-# bash_notes test
-# https://github.com/Magnushhoie/bash_notes
+# bash_ref test
+# https://github.com/Magnushhoie/bash_ref
 
 #set -e
 shopt -s expand_aliases
@@ -45,7 +45,7 @@ cp $main_dir/references.txt $notes_folder/second_file.txt
 
 
 # Check install folder
-V=$(grep 'tmp/_bash_notes' $test_logfile | wc -l | awk '{print $1}')
+V=$(grep 'tmp/_bash_ref' $test_logfile | wc -l | awk '{print $1}')
 if [[ $V == '2' ]]; then 
     echo "1. PASS: Correct test install folder" >> $test_results
 else 

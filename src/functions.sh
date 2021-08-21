@@ -1,11 +1,11 @@
 #!/bin/bash
-# bash_notes helper functions, called from ref.sh or refe.sh
-# https://github.com/Magnushhoie/bash_notes
+# bash_ref helper functions, called from ref.sh or refe.sh
+# https://github.com/Magnushhoie/bash_ref
 
 # Emulate BASH if using zsh
 #if [ -n "$ZSH_VERSION" ]; then emulate -L ksh; fi
 
-# Read in notes_folder and primary_note_file. By default ~/_bash_notes/ and references.txt
+# Read in notes_folder and primary_note_file. By default ~/_bash_ref/ and references.txt
 source $main_dir/config.txt
 
 # Check that the default note file exists

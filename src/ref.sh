@@ -1,6 +1,6 @@
 #!/bin/bash
-# bash_notes function for editing reference file
-# https://github.com/Magnushhoie/bash_notes
+# bash_ref function for editing reference file
+# https://github.com/Magnushhoie/bash_ref
 
 # DESC: Main control flow
 function main() {
@@ -19,7 +19,8 @@ function script_init() {
     readonly main_dir=$(dirname $script_dir)
     readonly script_params="$*"
 
-    # Read in notes_folder and primary_note_file. By default ~/_bash_notes/ and ~/_bash_notes/references.txt
+    # Read in notes_folder and primary_note_file. By default ~/_bash_ref/ and
+    # ~/_bash_ref/references.txt
     source $main_dir/config.txt
 
     # Read in helper scripts.

@@ -31,23 +31,23 @@ bash setup.sh
 ```
 
 ## Usage
-View keyword search results across note files with __ref__ and open files at matches with __refe__ from the terminal.
-Program based on combination of grep, less and vim. Used daily for managing code snippets since 2019.
+Used daily for writing and searching notes and code snippets since 2019. Uses BASH, grep and vim / text editor of choice.
 See [references.txt](references.txt) for example note file.
 
-```text
-# ref.sh: View matches for searched keywords in note files
-# usage: ref.sh [notefile] keywords
+#### ref - Multi-line search for keywords across all note files
 
-# Example usage:
-# View main note file:
+```text
+# usage:
+ref.sh [notefile] keywords
+
+# View main note file (references.txt):
 ref 
 
-# Search main note file for keywords "bash" "loop"
+# Search main note (references.txt) file for keywords "bash" "loop"
 ref bash loop
 
-# Search file newfile.txt in note folder for keywords "python"
-ref newfile python
+# Search file notes2.txt in note folder for keywords "python"
+ref notes2 python
 
 # Search across all files in note folder for keywords "python" "list"
 ref -a python list
@@ -55,21 +55,22 @@ ref -a python list
 
 <br>
 
-```text
-# refe.sh: Open note file at searched line with Vim or alternative editor
-# usage: [notefile] keywords
+#### refe - Edit note files at searched line
 
-# Example usage:
-# Open main note file in editor:
+```text
+# usage:
+refe [notefile] keywords
+
+# Open main note file (references.txt) in vim / editor of choice:
 refe
 
-# Open main note file at first line with "bash loop"
+# Open main note file (references.txt) at first line with "bash loop"
 refe bash loop
 
-# Create newfile.txt in notes folder
-refe -n newfile.txt
+# Create new note file, notes2.txt in notes folder
+refe -n notes2.txt
 
-# Open newfile.txt at first line with "python"
+# Open notes2.txt at first line with "python"
 refe newfile python
 ```
 

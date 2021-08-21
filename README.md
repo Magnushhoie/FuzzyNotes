@@ -8,11 +8,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/Magnushhoie/bash_notes">
-    <img src="img/bash_notes.png" alt="Logo">
+  <a href="https://github.com/Magnushhoie/bash_ref">
+    <img src="img/bash_ref.png" alt="Logo" width="350">
   </a>
 
-  <h3 align="center">bash_notes</h3>
+  <h3 align="center">bash_ref</h3>
 
   <p align="center">
     Quickly search and edit your notes and code-snippets in your terminal
@@ -25,8 +25,8 @@
 Sets up notes directory and adds aliases to ~/.bash_profile or ~/.zshrc.
 
 ```bash
-git clone https://github.com/Magnushhoie/bash_notes/
-cd bash_notes
+git clone https://github.com/Magnushhoie/bash_ref/
+cd bash_ref
 bash setup.sh
 ```
 
@@ -35,7 +35,7 @@ bash setup.sh
 - Search for any keywords you want using "**ref \<keywords\>**"
 - Search results can be searched again using hotkey **/**
 
-Used daily for writing and searching notes and code snippets since 2019. Uses BASH, [grep](https://github.com/Magnushhoie/bash_notes/blob/master/src/functions.sh#L176) and vim / text editor of choice.
+Used daily for writing and searching notes and code snippets since 2019. Uses BASH, [grep](https://github.com/Magnushhoie/bash_ref/blob/master/src/functions.sh#L176) and vim / text editor of choice.
 See [references.txt](references.txt) for example note file.
 
 ## Documentation
@@ -108,13 +108,13 @@ Please make sure to update tests as appropriate.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/Magnushhoie/bash_notes.svg?style=for-the-badge
-[contributors-url]: https://github.com/Magnushhoie/bash_notes/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Magnushhoie/bash_notes.svg?style=for-the-badge
-[forks-url]: https://github.com/Magnushhoie/bash_notes/network/members
-[stars-shield]: https://img.shields.io/github/stars/Magnushhoie/bash_notes.svg?style=for-the-badge
-[stars-url]: https://github.com/Magnushhoie/bash_notes/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Magnushhoie/bash_notes.svg?style=for-the-badge
-[issues-url]: https://github.com/Magnushhoie/bash_notes/issues
+[contributors-shield]: https://img.shields.io/github/contributors/Magnushhoie/bash_ref.svg?style=for-the-badge
+[contributors-url]: https://github.com/Magnushhoie/bash_ref/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Magnushhoie/bash_ref.svg?style=for-the-badge
+[forks-url]: https://github.com/Magnushhoie/bash_ref/network/members
+[stars-shield]: https://img.shields.io/github/stars/Magnushhoie/bash_ref.svg?style=for-the-badge
+[stars-url]: https://github.com/Magnushhoie/bash_ref/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Magnushhoie/bash_ref.svg?style=for-the-badge
+[issues-url]: https://github.com/Magnushhoie/bash_ref/issues
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/Magnushhoie/bash_notes/blob/master/LICENSE.txt
+[license-url]: https://github.com/Magnushhoie/bash_ref/blob/master/LICENSE.txt

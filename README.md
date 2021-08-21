@@ -15,7 +15,7 @@
   <h3 align="center">bash_ref</h3>
 
   <p align="center">
-    Quickly search and edit notes and code-snippets <a href="https://asciinema.org/a/431547">in your terminal</a>
+    Quickly search and edit notes + code-snippets <a href="https://asciinema.org/a/431547">in your terminal</a>
     
   
   </p>

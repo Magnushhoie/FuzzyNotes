@@ -33,7 +33,7 @@ bash setup.sh
 
 ## Usage
 
-**[Learn bash_ref in 60 seconds on asciinema](https://asciinema.org/a/431547)**
+**[See bash_ref in 60 seconds on asciinema](https://asciinema.org/a/431547)**
 - From your terminal, add any notes you want to references.txt using just "**refe**"
 - Search for any keywords you want using "**ref \<keywords\>**"
 - Search results can be searched again using hotkey **/**

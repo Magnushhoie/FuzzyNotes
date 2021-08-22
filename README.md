@@ -35,12 +35,13 @@ bash setup.sh
 
 **[See bash_ref in 60 seconds on asciinema](https://asciinema.org/a/431547)**
 - From your terminal, add any notes you want to references.txt using just "**refe**"
-- Search for any keywords you want using "**ref \<keywords\>**"
+- Multi-line search for any keywords you want using "**ref \<keywords\>**"
 - Search results can be searched again using hotkey **/**
+- Use **ref -a** to search across all notefiles
 
 Used daily for writing and searching notes and code snippets since 2019. Uses BASH, [grep](https://github.com/Magnushhoie/bash_ref/blob/master/src/functions.sh#L176) and vim / text editor of choice.
 
-See [references.txt](references.txt) for example note file.
+See [references.txt](_bash_ref/references.txt) for example note file.
 
 ## Documentation
 

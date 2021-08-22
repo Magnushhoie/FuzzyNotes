@@ -50,7 +50,7 @@ Use "**ref --help**" for all arguments.
 
 ```text
 # Usage (first argument [notefile] optional):
-ref.sh [notefile] keywords
+ref [notefile] keywords
 
 # View main note file (references.txt):
 ref 

@@ -1,18 +1,30 @@
-###
-# This is your references.txt file. To exit press q or Escape and write :q <enter> ...
+## references.txt (main note file)
+Press q to exit after using ref (less)
+Press / to search for keywords (less)
+Press escape, then type :q! and press enter to exit using refe (vim)
+Press escape, then i to enter insert mode to write using refe (vim)
 
-Use refe to write any notes you want here in vim, in any format you want.
-(You may find a vim tutorial below)
+__ref - multi-line search for keywords across all note files
+# Usage (notefile is optional):
+ref [notefile] keywords
 
-Feel free to delete any/all text here, it will not break anything.
-###
+# Example use:
+ref copy text terminal    # Search main notefile (references.txt) for "copy text terminal"
+ref bash for loop         # Search notefile bash.sh for keywords "for loop"
+ref python list           # Search file python.py in note folder for keyword "list"
+ref --list                # List all note files in ~/_bash_ref/
+ref --all                 # Search across all note files
+ref --help                # Display help
 
-__help
-ref # searches references.txt file, open in file viewer less. q to exit.
-ref --open # Open references.txt file in system default editor (e.g. TextEdit)
-refe # searches references.txt (or other) file and open in text editor Vim. Escape and write :q to exit.
-ref --help # Help menu
-refe --help # Help menu
+__refe - Edit note file at searched line
+# Usage (notefile is optional):
+refe [notefile] keywords
+
+refe                      # Edit main notefile (references.txt)
+refe mac                  # Open main notefile on first line with keyword "mac"
+refe --new personal.txt   # Create new file personal.txt in ~/_bash_ref/
+refe personal birthday    # Open file personal.txt on first line with keyword "birthday"
+refe --help               # Display help
 
 __vim (refe) commands
 To write, press i to enter insert mode. Press Escape to exit insert mode.
@@ -29,8 +41,8 @@ __vim tutorials and cheatsheets
 # Vim tutorial: https://www.openvim.com/
 # Vim cheatsheet https://vimsheet.com/
 
-__terminal
-Select and copy text: ctrl + r
+__terminal select and copy text
+Select and copy text: Ctrl + r
 Use again to return to normal terminal interaction
 Alternatives:
 Select text and use middle mouse button to paste (mouse wheel click)
@@ -63,28 +75,57 @@ Apple + option + =-\
 __mac delete key
 Ctrl + D
 
+__mac sound not playing from internal speaker in clamshell mode
+Settings -> Sound -> Change audio output to internal speaker
+
 __excel macOS change excel comma to dot regional setting, decimal separator
 System apple button -> system preferences
 Language and region -> advanced
 Under general -> change number separator decimal to .
 
-__bash find and kill process
-pgrep chrome
-#Check id
-kill -9 ID
-pkill -f chrome
+__mac overheating external monitor
+# Discussed extensively in a few threads:
+# https://news.ycombinator.com/item?id=22265235
+# https://forums.macrumors.com/threads/16-is-hot-noisy-with-an-external-monitor.2211747/
 
-__python bash
-# run python code from bash
-python -c "print("Hello world!")"
+# Seems to be hardware issue with usage of 2 GPUs.
+# Fixes:
+- Use USB-C instead of HDMI to external monitor (enforces more efficient GPU
+  processing)
+- Power macbook pro on right side instead of left side (further away from
+  CPU/GPU -> less throttling due to heat)
+- Enforce HiDPI mode (requires clamshell mode)
+    - https://github.com/xzhih/one-key-hidpi
 
-__python
-# Get unique from list
-set(list_x)
+__server install software without root access
+# Alternatives:
+- Anaconda: https://www.anaconda.com/products/individual
+- Brew / linuxbrew: https://brew.sh/
+- Pip: https://github.com/pypa/get-pip
 
-__python
-# Add new folder to python path for importing modules, and show python paths
-import sys
-print(sys.path)
-sys.path.insert(0, "/home/admin")
-sys.path.insert(0, "/home/admin/scripts")
+__vim keybindings in Chrome
+Download Vimium Chrome extension
+https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en
+
+__firefox show downloads
+Apple + J or arrow down button to right of address bar
+
+__chrome dark mode
+Dark Reader is extremely slow due to processing all pages in the background - up to 25 s!
+# https://www.debugbear.com/blog/chrome-extension-performance-2021
+Fastest alternative is Stylus + Global dark style
+
+# Install stylus
+https://chrome.google.com/webstore/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne
+
+# Download global dark mode
+https://userstyles.org/styles/31267/global-dark-style-changes-everything-to-dark
+
+# Shortcut in extensions -> Stylus -> Deactivate all styles
+Set as e.g. Ctrl + B to toggle dark mode
+
+# Fix flashing white while loading pages:
+Set Instant Inject mode in Stylus settings (click icon -> options)
+
+__regex online testing website
+https://regexr.com/

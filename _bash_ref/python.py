@@ -1,8 +1,13 @@
 ## Python commands ##
 
-__python bash
+__python run from bash
 # run python code from bash
 python -c "print("Hello world!")"
+
+__python for loop
+numbers = [1,2,3,4,5]
+for n in numbers:
+    print(n*2)
 
 __python get unique elements from list
 set(list_x)
@@ -22,15 +27,14 @@ package.__version__
 sns.__version__
 python --version
 
-__python for loop
-numbers = [1,2,3,4,5]
-for n in numbers:
-    print(n*2)
-
 __python list comprehension
 # Short version of a for loop
 numbers = [1,2,3,4,5]
 [print(n*2) for n in numbers]
+
+__python safer evaluation
+import ast
+ast.literal_eval(vals)
 
 __python import from path
 # Add new folder to python path for importing modules, and show python paths
@@ -39,7 +43,14 @@ sys.path.insert(0, "/home/admin")
 sys.path.insert(0, "/home/admin/scripts")
 print(sys.path)
 
-import scriptfile
+__python get time, time duration
+from datetime import date
+today = date.today()
+
+from datetime import datetime
+start = datetime.now()
+end = datetime.now()
+duration = str(end - start)
 
 __python debug
 import pdb
@@ -88,6 +99,7 @@ for file_name in images:
 imageio.mimsave('figures/animated_from_images.gif', image_list, fps = 1)
 
 __python import file using argparse
+# Make script take input arguments
 from argparse import ArgumentParser
 import os
 

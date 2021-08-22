@@ -50,46 +50,40 @@ Use "**ref --help**" for all arguments.
 #### ref - Multi-line search for keywords across all note files
 
 ```text
-# Usage (first argument [notefile] optional):
+# Usage (notefile is optional):
 ref [notefile] keywords
 
 # View main note file (references.txt):
 ref 
 
-# Search main note file (references.txt) for keywords "bash" "loop"
-ref bash loop
+# Search main note file (references.txt) for keyword "terminal"
+ref terminal
 
-# Search file notes2.txt in note folder for keyword "python"
-ref notes2 python
+# Search file bash.sh in note folder for keyword "for loop"
+ref bash for loop
 
 # See list of all note files
 ref --list
-ref -l
 
 # ref -all:
 # Search across all files in note folder for keywords "python" "list"
 ref --all python list
-ref -a python list
 ```
 
 #### refe - Edit note file at searched line
 
 ```text
-# Usage:
+# Usage (notefile is optional):
 refe [notefile] keywords
 
 # Edit main note file (references.txt) in vim / editor of choice:
 refe
 
-# Create new note file, notes2.txt in notes folder
-refe --new notes2.txt
-refe -n notes2.txt
+# Edit file bash.sh at first line with "for loop"
+refe bash for loop
 
-# Edit main note file (references.txt) at first line with "bash loop"
-refe bash loop
-
-# Edit notes2.txt at first line with "python"
-refe notes2 python
+# Create new note file, personal.txt in notes folder
+refe --new personal.txt
 ```
 
 ## Testing

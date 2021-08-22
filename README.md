@@ -65,7 +65,6 @@ ref bash for loop
 # See list of all note files
 ref --list
 
-# ref -all:
 # Search across all files in note folder for keywords "python" "list"
 ref --all python list
 ```

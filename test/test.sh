@@ -66,7 +66,7 @@ alias refe=$tmp_dir/src/refe.sh
 #
 
 # ref search with keywords
-V=$(ref This is your references.txt file | wc | awk '{print $1}')
+V=$(ref "main note file" | wc | awk '{print $1}')
 if [ "$V" -gt "10" ]; then
     echo "3. PASS: ref search keywords" >> $test_results
 else

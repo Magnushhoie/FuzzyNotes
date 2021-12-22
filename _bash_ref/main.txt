@@ -1,32 +1,10 @@
-## references.txt (main note file)
+## main.txt (main note file)
 Press q to exit after using ref (less)
 Press / to search for keywords (less)
 Press escape, then type :q! and press enter to exit using refe (vim)
 Press escape, then i to enter insert mode to write using refe (vim)
 
-__ref - multi-line search for keywords across all note files
-# Usage (notefile is optional):
-ref [notefile] keywords
-
-# Example use:
-ref copy text terminal    # Search main notefile (references.txt) for "copy text terminal"
-ref bash for loop         # Search notefile bash.sh for keywords "for loop"
-ref python list           # Search file python.py in note folder for keyword "list"
-ref --list                # List all note files in ~/_bash_ref/
-ref --all                 # Search across all note files
-ref --help                # Display help
-
-__refe - Edit note file at searched line
-# Usage (notefile is optional):
-refe [notefile] keywords
-
-refe                      # Edit main notefile (references.txt)
-refe mac                  # Open main notefile on first line with keyword "mac"
-refe --new personal.txt   # Create new file personal.txt in ~/_bash_ref/
-refe personal birthday    # Open file personal.txt on first line with keyword "birthday"
-refe --help               # Display help
-
-__vim (refe) commands
+__vim commands (refe)
 To write, press i to enter insert mode. Press Escape to exit insert mode.
 i       # Enter insert mode
 

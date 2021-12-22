@@ -9,18 +9,16 @@ function main() {
     ref "$@"
 }
 
+# DESC: Initialization parameters
 function script_init() {
-    function realpath() {
-    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
-    }
-    readonly script_path="${BASH_SOURCE[0]}"
-    readonly script_name="$(basename "$0")"
-    readonly script_dir="$(cd "$(dirname "$script_path")" && pwd -P)"
-    readonly main_dir=$(dirname $script_dir)
-    readonly script_params="$*"
+    script_path="${BASH_SOURCE[0]}"
+    script_name="$(basename "$0")"
+    script_dir="$(cd "$(dirname "$script_path")" && pwd -P)"
+    main_dir=$(dirname $script_dir)
+    script_params="$*"
 
     # Read in notes_folder and primary_note_file. By default ~/_bash_ref/ and
-    # ~/_bash_ref/references.txt
+    # ~/_bash_ref/main.txt
     source $main_dir/config.txt
 
     # Read in helper scripts.
@@ -31,33 +29,28 @@ function script_init() {
 function script_usage() {
     cat << EOF
 usage: $script_name [notefile] keywords
-  notefile: File basename in note folder if existing. Default is references.txt
+  notefile: File basename in note folder if existing. Default is main.txt
   keywords: Search terms, space-separated
 
 Optional arguments:
-  -l|--list                  Displays searchable files in notes folder
-  -a|--all                   Search across all files in notes folder
+  -o|--open                  Open file with default system editor
+  -l|--list                  Display and open files in notes folder
   -g|--get                   Get filenames and line-numbers for lines matching keywords across all files
   -h|--help                  Displays this help
-  --open                     Open file with default system editor
   --config                   Open configuration file
+  --tutorial                 Start ref tutorial
 
 Example usage:
-View main note file:
-ref 
+Interactively search and view files for lines starting with __ or #:
+ref
 
-Search main note file for keywords "bash" "loop"
+Search [main.txt] for keywords "bash" "loop"
 ref bash loop
 
-Search file newfile.txt in note folder for keywords "python"
-ref newfile python
-
-Search across all files in note folder for keywords "python" "list"
-ref -a python list
+Search [python.py] in note folder for "list" "comprehension"
+ref python list comprehension
 EOF
 }
-
-
 
 # Run script
 if ! (return 0 2> /dev/null); then

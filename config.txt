@@ -2,7 +2,7 @@
 notes_folder=$HOME/_bash_ref
 
 # Default note file used by ref and refe if no existing filename is provided
-primary_note_file=$notes_folder/references.txt
+primary_note_file=$notes_folder/main.txt
 
 # Default text editor.
 # Alternatives include vim, emacs, atom, sublime and open (opens with default text editor)

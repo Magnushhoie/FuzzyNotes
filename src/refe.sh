@@ -11,16 +11,17 @@ function main() {
 
 # DESC: Initialization parameters
 function script_init() {
-    readonly script_path="${BASH_SOURCE[0]}"
-    readonly script_dir="$(cd "$(dirname "$script_path")" && pwd -P)"
-    readonly main_dir=$(dirname $script_dir)
-    readonly script_params="$*"
+    script_path="${BASH_SOURCE[0]}"
+    script_name="$(basename "$0")"
+    script_dir="$(cd "$(dirname "$script_path")" && pwd -P)"
+    main_dir=$(dirname $script_dir)
+    script_params="$*"
 
     # Read in notes_folder and primary_note_file. By default ~/_bash_ref/ and
-    # ~/_bash_ref/references.txt
+    # ~/_bash_ref/main.txt
     source $main_dir/config.txt
 
-    # Read in search scripts.
+    # Read in helper scripts.
     source $script_dir/functions.sh
 }
 
@@ -28,21 +29,22 @@ function script_init() {
 function script_usage() {
     cat << EOF
 usage: $script_name [notefile] keywords
-  notefile: File basename in note folder if existing. Default is references.txt
+  notefile: File basename in note folder if existing. Default is main.txt
   keywords: Search terms, space-separated
 
 Optional arguments:
+     -o|--open                  Open file with default system editor
      -l|--list                  Displays searchable files in notes folder
-     -n|--new                   Create new file in notes folder
+     -n|--new                   Create [filename] in notes folder
      -h|--help                  Displays this help
-     --open                     Open file with default system editor
      --config                   Open configuration file
+     --tutorial                 Start ref tutorial
 
 Example usage:
-Open main note file in editor:
-refe
+Interactively search and edit files at lines starting with __ or #:
+refe -f
 
-Open main note file at first line with "bash loop"
+Open and edit [main.txt] at first line with "bash loop"
 refe bash loop
 
 Create newfile.txt in notes folder

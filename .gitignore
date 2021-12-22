@@ -1,8 +1,8 @@
 # Extra
-config*
-bak/
-old/
-tmp/
+*config*
+*bak*
+*old*
+*tmp*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

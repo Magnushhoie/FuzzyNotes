@@ -2,10 +2,17 @@
 # Sets up bash_ref scripts as aliases and bash_ref folder
 # https://github.com/Magnushhoie/bash_ref
 
-set -e
+# set -e
 
-readonly script_path="${BASH_SOURCE[0]}"
-readonly script_dir="$(cd "$(dirname "$script_path")" && pwd -P)"
+# Check requirements
+if [[  $(command -v fzf) ]]; then
+    echo -e "ERROR: bash_ref requires fzf to run\nhttps://github.com/junegunn/fzf"
+    echo -e "\nPlease install with:\nbrew install fzf"
+    #exit 0
+fi
+
+script_path="${BASH_SOURCE[0]}"
+script_dir="$(cd "$(dirname "$script_path")" && pwd -P)"
 
 # To change the default notes folder, edit config.txt
 # Reads in notes_folder and primary_note_file
@@ -24,13 +31,11 @@ if ! [ -d "$notes_folder" ]; then
 fi
 
 # If not sourced, ask whether to add aliases to bash_profile and set default editor
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
-    then
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     echo -e
     read -p "Automatically add aliases ref and refe to ~/.bash_profile and ~/.zshrc? y/n " -n 1 -r
     echo -e
-    if [[ $REPLY =~ ^[Yy]$ ]]
-        then
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo -e "\nAdding aliases to .bash_profile and ~/.zshrc ..."
         touch $HOME/.bash_profile
         touch $HOME/.zshrc
@@ -72,4 +77,10 @@ fi
 
 echo -e "\nDone!"
 echo -e "Please open a new terminal window or run source ~/.bash_profile"
-echo -e "To get started try ref (search) or refe (search and edit in Vim)"
+
+echo -e
+read -p "Run tutorial? y/n" -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    bash $script_dir/src/tutorial.sh
+fi
+echo "Tutorial can always be run with ref --tutorial"

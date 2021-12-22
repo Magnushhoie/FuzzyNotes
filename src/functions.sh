@@ -5,7 +5,7 @@
 # Emulate BASH if using zsh
 #if [ -n "$ZSH_VERSION" ]; then emulate -L ksh; fi
 
-# Read in notes_folder and primary_note_file. By default ~/_bash_ref/ and references.txt
+# Read in notes_folder and primary_note_file. By default ~/_bash_ref/ and main.txt
 source $main_dir/config.txt
 
 # Check that the default note file exists
@@ -31,6 +31,10 @@ function parse_params() {
                 search_all "$@"
                 exit 0
                 ;;
+            -f | --fzf)
+                fzf_search "open" "$@"
+                exit 0
+                ;;
             -g | --get-file-line)
                 get_file_line "$@"
                 exit 0
@@ -43,10 +47,14 @@ function parse_params() {
                 create_new_file "$@"
                 exit 0
                 ;;
-            --open)
+            -o | --open)
                 open_default "$@"
                 exit 0
-                ;;
+                ;;           
+            --tutorial)
+                tutorial "$@"
+                exit 0
+                ;;     
             --config)
                 edit_config
                 exit 0
@@ -60,36 +68,38 @@ function parse_params() {
 # DESC: Search script
 function ref()
 {
-    filename=$primary_note_file
+    filename=$(get_notefile $@)
+    echo $filename
 
-     # Check for alternative filename as first argument
-     # If so, shift arguments so second+ becomes keyword
-     alternative_filename=$(get_notefile $1)
+    # If no arguments other than filename, use interactive fzf_search instead
+    if [ -z $1 ]; then
+        fzf_search "view"
+        exit 0
+    fi
 
-     if [ $filename != "$alternative_filename" ];
-         then filename=$alternative_filename
-         shift
+     # If first argument is not the primary notefile, shift shift arguments once so search-terms come first
+     if [ "$filename" != $primary_note_file ]; then
+        shift
+        search_file $filename ${@:-"\s"}
+        else
+        search_all "$@"
      fi
 
-     echo $filename
-     search_file $filename ${@:-"\s"}
 }
 
 # DESC: Edit script
-function refe() # Search and edit references.txt in vim
+function refe() # Search and edit main.txt in vim
 {
 # Opens up EDTIOR (vim) at first mention of keyword(s)
-# Notefile is references.txt, unless another file found from first argument
-     filename=$(get_notefile)
+# Notefile is main.txt, unless another file found from first argument
+    filename=$(get_notefile $@)
 
      # Check for alternative filename as first argument
      # If so, shift arguments so second+ becomes keyword
-     alternative_filename=$(get_notefile $1)
-     if [ $filename != $alternative_filename ];
-         then filename=$alternative_filename
+     if [ $filename != $primary_note_file ]; then
          shift
      fi
-
+     
      echo $filename
 
     if [ $EDITOR == "vim" ];
@@ -106,11 +116,48 @@ function refe() # Search and edit references.txt in vim
     fi
 }
 
+function fzf_search ()
+{
+action=$1
+file=$2
+string2arg_file="$script_dir"/string2arg.sh
+
+# Search for lines starting with "__" or "#", show filepaths for results
+# Only show filepath relative to notes_folder, using ; as sed de-limiter
+# Preview matching lines in file using fzf with custom string2arg function and bat
+local search_match
+export search_match=$(
+            grep --color=always -rHn -e "^__" -e "^#" "$notes_folder" \
+            | sed "s;$notes_folder/;;" \
+            | fzf -e --preview="source $string2arg_file; string2arg $notes_folder/{}")
+
+if [[ $search_match =~ [a-zA-Z0-9] ]]; then
+    echo $search_match
+    # Extract filename from search_match
+    vfile=$(cut -d":" -f1 <<< $search_match)
+    # Append path of notes_folder to get full path
+    vfile="$notes_folder"/"$vfile"
+    # Get line-number for match
+    linematch=$(cut -d":" -f2 <<< $search_match)
+
+    if [[ $action = "view" ]]; then
+        # Open file in less at matching line-number
+        less +$linematch $vfile
+        exit 0
+    else
+        # Open file in vim at matching line-number
+        vim +$linematch $vfile
+    fi
+
+fi
+}
+
 search_all() # Searches across all files in note directory.
 {
-    tmpfile=$(mktemp /tmp/abc-script.XXXXXX)
+    tmpfile=$(mktemp /tmp/bash_ref_all.XXXXXX)
     cat $notes_folder/*.* > $tmpfile
     search_file $tmpfile ${@:-""}
+    exit 0
 }
 
 get_file_line() # Finds filename and linenumber for given line search
@@ -121,22 +168,42 @@ get_file_line() # Finds filename and linenumber for given line search
 list_files() # List available files in note directory
 {
     echo -e "Available files in $notes_folder"
-    ls -lht $notes_folder/*.* | less -R
-    echo -e "\nExample usage: ref [filename (excluding extension)] [keywords]"
+    cd $notes_folder; ls -tr *.* | fzf | xargs -I {} open $notes_folder/{}
+    #echo -e "\nExample usage: ref [filename (excluding extension)] [keywords]"
 }
 
 create_new_file() # Opens requested note file using editor
 {
     filename=$notes_folder/$1
+    touch $filename
     echo $filename
-    $EDITOR $filename
+    open $filename
 }
 
 open_default() # Opens requested note file in system default editor
 {
-    filename=$(get_notefile "$1")
-    echo $filename
-    open -t $filename
+    # Sanity check that not trying to open more than 10 files
+    if [ $# -gt 10 ]; then
+        echo "$@"
+        echo "Trying to open more than 10 files. Are you sure?"
+        exit 0
+    fi
+
+    # Still open default file if input arguments are empty
+    if [[ -z "$@" ]]; then
+        filename=$(get_notefile $pattern)
+        echo $filename
+        open -t $filename
+        exit 0
+    fi
+
+    # Loop over multiple possible input files
+    for pattern in "$@"; do
+        filename=$(get_notefile $pattern)
+        echo "$pattern -> $filename"
+        open -t $filename
+    done
+    exit 0
 }
 
 edit_config() # Opens configuration file in system default editor
@@ -144,9 +211,15 @@ edit_config() # Opens configuration file in system default editor
     open -t $main_dir/config.txt
 }
 
+tutorial() # Opens configuration file in system default editor
+{
+    chmod 755 $script_dir/tutorial.sh
+    $script_dir/tutorial.sh
+}
+
 get_notefile() # Helper function for ref/refe functions
 {
-# Searches note folder for notefile. Default is references.txt
+# Searches note folder for notefile. Default is main.txt
 # Alternative name given if first argument matches that basename excluding file extension
 # List of available files given if first argument is "list"
 
@@ -155,8 +228,6 @@ get_notefile() # Helper function for ref/refe functions
 
     # Search for files in reference folder
     files=($notes_folder/*.*)
-    #files=$(ls *.{txt,md} 2>/dev/null)
-    #files=$(ls -p $notes_folder/* | grep -v /)
 
     # Look for alternative notefiles in folder if matches first argument
     for file in ${files[*]}; do

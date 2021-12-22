@@ -1,17 +1,19 @@
 ## main.txt (main note file)
-Press q to exit after using ref (less)
-Press / to search for keywords (less)
-Press escape, then type :q! and press enter to exit using refe (vim)
-Press escape, then i to enter insert mode to write using refe (vim)
+
+__ref help
+# https://github.com/Magnushhoie/bash_ref
+ref --help
+ref --tutorial
 
 __vim commands (refe)
 To write, press i to enter insert mode. Press Escape to exit insert mode.
 i       # Enter insert mode
+u       # Undo changes (press Escape first)
 
 To exit / save, press Escape and write: (text should appear at the bottom of the bar of the screen. Remember to press enter at the end)
-:w      # write file (save)
 :q      # quit file (exit)
 :q!     # force quit
+:w      # write file (save)
 :wq     # Write and quit
 :wq!    # Force write and quit
 

@@ -15,9 +15,8 @@
   <h3 align="center">bash_ref</h3>
 
   <p align="center">
-    Quickly search and edit notes + code-snippets <a href="https://asciinema.org/a/431547">in your terminal</a>
-    
-  
+    Blazingly fast search and editing of note files
+  <a href="https://asciinema.org/a/431547">in your terminal</a>
   </p>
 </p>
 
@@ -34,12 +33,12 @@ bash setup.sh
 ## Usage
 
 **[See bash_ref in 60 seconds on asciinema](https://asciinema.org/a/431547)**
-- From your terminal, add any notes you want to main.txt using just "**refe**"
-- Multi-line search for any keywords you want using "**ref \<keywords\>**"
-- Search results can be searched again using hotkey **/**
-- Use **ref -a** to search across all notefiles
+- ref: Interactively search note files using FZF
+- ref -l: List and open note files in default $EDITOR
+- refe -f: Interactively search and edit note files using FZF
+- refe [file] [pattern]: Multi-line search file, edit at match
 
-Used daily for writing and searching notes and code snippets since 2019. Uses BASH, [grep](https://github.com/Magnushhoie/bash_ref/blob/master/src/functions.sh#L176) and vim / text editor of choice.
+Used daily for writing and searching notes and code snippets since 2019. Uses fzf, grep and vim.
 
 See [main.txt](_bash_ref/main.txt) for example note file.
 
@@ -47,42 +46,58 @@ See [main.txt](_bash_ref/main.txt) for example note file.
 
 Use "**ref --help**" for all arguments.
 
-#### ref - Multi-line search for keywords across all note files
+#### ref - Interactive search and view
 
 ```text
-# Usage (notefile is optional):
-ref [notefile] keywords
+ref --help
+usage: ref.sh [notefile] keywords
+  notefile: File basename in note folder if existing. Default is main.txt
+  keywords: Search terms, space-separated
 
-# View main note file (main.txt):
-ref 
+Optional arguments:
+  -o|--open                  Open file with default system editor
+  -l|--list                  Display and open files in notes folder
+  -g|--get                   Get filenames and line-numbers for lines matching keywords across all files
+  -h|--help                  Displays this help
+  --config                   Open configuration file
+  --tutorial                 Start ref tutorial
 
-# Search main note file (main.txt) for keyword "terminal"
-ref terminal
+Example usage:
+Interactively search and view files for lines starting with __ or #:
+ref
 
-# Search file bash.sh in note folder for keyword "for loop"
-ref bash for loop
+Search [main.txt] for keywords "bash" "loop"
+ref bash loop
 
-# See list of all note files
-ref --list
-
-# Search across all files in note folder for keywords "python" "list"
-ref --all python list
+Search [python.py] in note folder for "list" "comprehension"
+ref python list comprehension
 ```
 
-#### refe - Edit note file at searched line
+#### refe - Interactive search and edit
 
 ```text
-# Usage (notefile is optional):
-refe [notefile] keywords
+refe --help
+usage: refe.sh [notefile] keywords
+  notefile: File basename in note folder if existing. Default is main.txt
+  keywords: Search terms, space-separated
 
-# Edit main note file (main.txt) in vim / editor of choice:
-refe
+Optional arguments:
+     -o|--open                  Open file with default system editor
+     -l|--list                  Displays searchable files in notes folder
+     -n|--new                   Create [filename] in notes folder
+     -h|--help                  Displays this help
+     --config                   Open configuration file
+     --tutorial                 Start ref tutorial
 
-# Edit file bash.sh at first line with "for loop"
-refe bash for loop
+Example usage:
+Interactively search and edit files at lines starting with __ or #:
+refe -f
 
-# Create new note file, personal.txt in notes folder
-refe --new personal.txt
+Open and edit [main.txt] at first line with "bash loop"
+refe bash loop
+
+Create newfile.txt in notes folder
+refe -n newfile.txt
 ```
 
 ## Testing
@@ -92,7 +107,7 @@ bash test/test.sh
 ```
 
 ## Compatibility
-Compatible with zsh. Tested on MacOS Mojave and Ubuntu 21.04. 
+Compatible with zsh. Tested on MacOS Mojave/Big Sur and Ubuntu 21.04. 
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
@@ -101,8 +116,6 @@ Please make sure to update tests as appropriate.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
-
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

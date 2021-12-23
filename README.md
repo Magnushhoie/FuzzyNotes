@@ -15,11 +15,18 @@
   <h3 align="center">bash_ref</h3>
 
   <p align="center">
-    Blazingly fast search and edit of note files
+    Blazingly fast search and edit of text files
   <a href="https://asciinema.org/a/458105">in your terminal</a>
   </p>
 </p>
 
+A shell script for interactive and multi-line search, for rapid look-up and editing text files in a notes folder. Used daily for writing and searching notes and code snippets since 2019. Built with FZF, grep and vim.
+
+<a href="https://asciinema.org/a/458105">
+<img src="img/image.jpg" alt="Logo" width="700">
+
+**[See bash_ref in 60 seconds on asciinema](https://asciinema.org/a/458105)**
+  
 ## Installation
 
 Sets up notes directory and adds aliases to ~/.bash_profile or ~/.zshrc.
@@ -31,16 +38,12 @@ bash setup.sh
 ```
 
 ## Usage
-
-<img src="img/image.jpg" alt="Logo" width="700">
-
-**[See bash_ref in 60 seconds on asciinema](https://asciinema.org/a/458105)**
 - ref: Interactively search note files using FZF
 - ref -l: List and open note files in default $EDITOR
 - refe -f: Interactively search and edit note files using FZF
 - refe [file] [pattern]: Multi-line search file, edit at match
 
-Used daily for writing and searching notes and code snippets since 2019. Uses fzf, grep and vim.
+
 
 See [main.txt](_bash_ref/main.txt) for example note file.
 

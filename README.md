@@ -16,7 +16,7 @@
 
   <p align="center">
     Blazingly fast search and editing of note files
-  <a href="https://asciinema.org/a/431547">in your terminal</a>
+  <a href="https://asciinema.org/a/458105">in your terminal</a>
   </p>
 </p>
 
@@ -32,7 +32,7 @@ bash setup.sh
 
 ## Usage
 
-**[See bash_ref in 60 seconds on asciinema](https://asciinema.org/a/431547)**
+**[See bash_ref in 60 seconds on asciinema](https://asciinema.org/a/458105)**
 - ref: Interactively search note files using FZF
 - ref -l: List and open note files in default $EDITOR
 - refe -f: Interactively search and edit note files using FZF

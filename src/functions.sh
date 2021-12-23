@@ -6,7 +6,7 @@
 #if [ -n "$ZSH_VERSION" ]; then emulate -L ksh; fi
 
 # Read in notes_folder and primary_note_file. By default ~/_bash_ref/ and main.txt
-source $main_dir/config.txt
+#source $main_dir/config.txt
 
 # Check that the default note file exists
 if ! [[ -f $primary_note_file ]]
@@ -68,14 +68,14 @@ function parse_params() {
 # DESC: Search script
 function ref()
 {
-    filename=$(get_notefile $@)
-    echo $filename
-
-    # If no arguments other than filename, use interactive fzf_search instead
+    # If no arguments, use interactive fzf_search instead
     if [ -z $1 ]; then
         fzf_search "view"
         exit 0
     fi
+
+    filename=$(get_notefile $@)
+    echo $filename
 
      # If first argument is not the primary notefile, shift shift arguments once so search-terms come first
      if [ "$filename" != $primary_note_file ]; then
@@ -90,6 +90,12 @@ function ref()
 # DESC: Edit script
 function refe() # Search and edit main.txt in vim
 {
+    # If no arguments, use interactive fzf_search instead
+    if [ -z $1 ]; then
+        fzf_search "open"
+        exit 0
+    fi
+
 # Opens up EDTIOR (vim) at first mention of keyword(s)
 # Notefile is main.txt, unless another file found from first argument
     filename=$(get_notefile $@)
@@ -105,10 +111,11 @@ function refe() # Search and edit main.txt in vim
     if [ $EDITOR == "vim" ];
         then
         # If keywords are not empty, try to search
-        if ! [ -z $1 ];
-            then vim +":set hlsearch" +/$1.*$2.*$3.*$4.*$5.*$6 $filename
+        if ! [[ -z $1 ]]; then
+            vim +":set hlsearch" +/${1}.*$2.*$3.*$4.*$5.*$6 $filename
+        else 
             # Else open vim without search
-        else vim "$filename"
+            vim +":set nohlsearch"  "$filename"
         fi
     else
         # Open with alternative editor if not vim
@@ -127,7 +134,7 @@ string2arg_file="$script_dir"/string2arg.sh
 # Preview matching lines in file using fzf with custom string2arg function and bat
 local search_match
 export search_match=$(
-            grep --color=always -rHn -e "^__" -e "^#" "$notes_folder" \
+            grep -I --exclude-dir="\.git" --color=always -rHn -e "^__" -e "^#" "$notes_folder" \
             | sed "s;$notes_folder/;;" \
             | fzf -e --preview="source $string2arg_file; string2arg $notes_folder/{}")
 
@@ -162,7 +169,7 @@ search_all() # Searches across all files in note directory.
 
 get_file_line() # Finds filename and linenumber for given line search
 {
-    grep -in --color=always "$(echo $@)" $notes_folder/*.* | less -R
+    grep -in -I --exclude-dir="\.git" --color=always "$(echo $@)" $notes_folder/*.* | less -R
 }
 
 list_files() # List available files in note directory
@@ -224,9 +231,9 @@ get_notefile() # Helper function for ref/refe functions
 # List of available files given if first argument is "list"
 
     # Modify these three to change default file or folder
-    firstword=${1:-"references"}
+    firstword=${1:-"main"}
 
-    # Search for files in reference folder
+    # Search for files in main folder
     files=($notes_folder/*.*)
 
     # Look for alternative notefiles in folder if matches first argument
@@ -248,7 +255,7 @@ search_file() # Main search function using colored grep
 {
 filename=$1
   # Grep with specific color, insensitive search with line-numbers on note file
-  GREP_COLOR='01;31' grep -Ein --color=always -C 20 "${2:-''}" "$filename" |
+  GREP_COLOR='01;31' grep -Ein -I --exclude-dir="\.git" --color=always -C 20 "${2:-''}" "$filename" |
   # Successively different color for each successive search term
   GREP_COLOR='01;35' grep -Ei --color=always -C 10 "$3" |
   GREP_COLOR='01;93' grep -Ei --color=always -C 10 "$4" |

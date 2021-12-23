@@ -5,6 +5,12 @@
 # DESC: Main control flow
 function main() {
     script_init "$@"
+    if [[ $1 = "-p" && -d "$2" ]]; then
+      notes_folder="$2"
+      shift
+      shift
+    fi
+
     parse_params "$@"
     ref "$@"
 }

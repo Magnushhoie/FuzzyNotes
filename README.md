@@ -15,7 +15,7 @@
   <h3 align="center">bash_ref</h3>
 
   <p align="center">
-    Blazingly fast search and editing of note files
+    Blazingly fast search and edit of note files
   <a href="https://asciinema.org/a/458105">in your terminal</a>
   </p>
 </p>
@@ -31,6 +31,8 @@ bash setup.sh
 ```
 
 ## Usage
+
+<img src="img/image.jpg" alt="Logo" width="700">
 
 **[See bash_ref in 60 seconds on asciinema](https://asciinema.org/a/458105)**
 - ref: Interactively search note files using FZF

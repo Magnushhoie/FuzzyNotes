@@ -20,7 +20,7 @@
   </p>
 </p>
 
-A shell script for interactive and multi-line search, for rapid look-up and editing text files in a notes folder. Used daily for writing and searching notes and code snippets since 2019. Built with FZF, grep and vim.
+A shell script for rapidly searching and editing text files in a notes directory, with interactive and multi-line search. Built with FZF, grep and vim.
 
 <a href="https://asciinema.org/a/458105">
 <img src="img/image.jpg" alt="Logo" width="700">

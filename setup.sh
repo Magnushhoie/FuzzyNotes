@@ -16,18 +16,18 @@ script_dir="$(cd "$(dirname "$script_path")" && pwd -P)"
 
 # To change the default notes folder, edit config.txt
 # Reads in notes_folder and primary_note_file
-source $script_dir/config.txt
+source "$script_dir"/config.txt
 
 # Make scripts executable
-chmod 755 $script_dir/src/ref.sh
-chmod 755 $script_dir/src/refe.sh
+chmod 755 "$script_dir"/src/ref.sh
+chmod 755 "$script_dir"/src/refe.sh
 
 echo -e "Setting up notes folder in $notes_folder"
 
 echo -e "Checking if $notes_folder exists"
 if ! [ -d "$notes_folder" ]; then
     echo -e "Notes folder does not already exist ... Copying from $script_dir/_bash_ref ..."
-    cp -r $script_dir/_bash_ref $notes_folder
+    cp -r "$script_dir"/_bash_ref "$notes_folder"
 fi
 
 # If not sourced, ask whether to add aliases to bash_profile and set default editor
@@ -37,13 +37,13 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     echo -e
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo -e "\nAdding aliases to .bash_profile and ~/.zshrc ..."
-        touch $HOME/.bash_profile
-        touch $HOME/.zshrc
+        touch "$HOME"/.bash_profile
+        touch "$HOME"/.zshrc
 
-        LINE1=$(echo -e alias ref=$script_dir/src/ref.sh)
-        LINE2=$(echo -e alias refe=$script_dir/src/refe.sh)
-        BASH_FILE=$(echo -e $HOME/.bash_profile)
-        ZSH_FILE=$(echo -e $HOME/.zshrc)
+        LINE1=$(echo -e alias ref="$script_dir"/src/ref.sh)
+        LINE2=$(echo -e alias refe="$script_dir"/src/refe.sh)
+        BASH_FILE=$(echo -e "$HOME"/.bash_profile)
+        ZSH_FILE=$(echo -e "$HOME"/.zshrc)
         grep -qF -- "$LINE1" "$BASH_FILE" || echo -e "$LINE1" >> "$BASH_FILE"
         grep -qF -- "$LINE2" "$BASH_FILE" || echo -e "$LINE2" >> "$BASH_FILE"
 
@@ -71,7 +71,7 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
         esac
     done
     # Replace editor line in config.txt
-    sed -iE "s/EDITOR=.*/EDITOR=$NEW_EDITOR/" $script_dir/config.txt
+    sed -iE "s/EDITOR=.*/EDITOR=$NEW_EDITOR/" "$script_dir"/config.txt
     echo -e "Note: You can change your editor with ref --config or editing config.txt"
 fi
 
@@ -81,6 +81,6 @@ echo -e "Please open a new terminal window or run source ~/.bash_profile"
 echo -e
 read -p "Run tutorial? y/n" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    bash $script_dir/src/tutorial.sh
+    bash "$script_dir"/src/tutorial.sh
 fi
 echo "Tutorial can always be run with ref --tutorial"

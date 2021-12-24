@@ -127,7 +127,7 @@ string2arg_file="$script_dir"/string2arg.sh
 # Preview matching lines in file using fzf with custom string2arg function and bat
 local search_match
 export search_match=$(
-            grep -I --exclude-dir="\.git" --color=always -rHn -e "^__" -e "^#" "$notes_folder" \
+            grep -I --exclude-dir="\.git" --color=always -rHn -e "^_" -e "^#" -e '^\\' "$notes_folder" \
             | sed "s;$notes_folder/;;" \
             | fzf -e --preview="source $string2arg_file; string2arg $notes_folder/{}")
 

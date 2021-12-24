@@ -74,17 +74,20 @@ function ref()
         exit 0
     fi
 
-    filename=$(get_notefile $@)
-    echo $filename
+    read -r filename filename_found <<<$(get_notefile $@)
 
-     # If first argument is not the primary notefile, shift shift arguments once so search-terms come first
-     if [ "$filename" != $primary_note_file ]; then
-        shift
-        search_file $filename ${@:-"\s"}
+    if [[ $filename_found = "TRUE" ]]; then
+        if [[ $# = 1 ]]; then
+            echo "Opening $filename"
+            less -R $filename
         else
+            echo "Searching $filename"
+            search_file $filename ${@:-"\s"}
+        fi
+    else
+        echo "Searching all files"
         search_all "$@"
-     fi
-
+    fi
 }
 
 # DESC: Edit script
@@ -96,30 +99,20 @@ function refe() # Search and edit main.txt in vim
         exit 0
     fi
 
-# Opens up EDTIOR (vim) at first mention of keyword(s)
-# Notefile is main.txt, unless another file found from first argument
-    filename=$(get_notefile $@)
+    read -r filename filename_found <<<$(get_notefile $@)
 
-     # Check for alternative filename as first argument
-     # If so, shift arguments so second+ becomes keyword
-     if [ $filename != $primary_note_file ]; then
-         shift
-     fi
-     
-     echo $filename
-
-    if [ $EDITOR == "vim" ];
-        then
-        # If keywords are not empty, try to search
-        if ! [[ -z $1 ]]; then
-            vim +":set hlsearch" +/${1}.*$2.*$3.*$4.*$5.*$6 $filename
-        else 
-            # Else open vim without search
+    if [[ $filename_found = "TRUE" ]]; then
+        if [[ $# = 1 ]]; then
+            echo "Editing $filename"
             vim +":set nohlsearch"  "$filename"
+        else
+            echo "Search and editing $filename"
+            vim +":set hlsearch" +/${1}.*$2.*$3.*$4.*$5.*$6 $filename
         fi
     else
-        # Open with alternative editor if not vim
-        $EDITOR "$filename"
+        echo "No file found, starting interactive search"
+        fzf_search "open"
+        exit 0
     fi
 }
 
@@ -139,7 +132,7 @@ export search_match=$(
             | fzf -e --preview="source $string2arg_file; string2arg $notes_folder/{}")
 
 if [[ $search_match =~ [a-zA-Z0-9] ]]; then
-    echo $search_match
+    echo "$notes_folder"/$search_match
     # Extract filename from search_match
     vfile=$(cut -d":" -f1 <<< $search_match)
     # Append path of notes_folder to get full path
@@ -154,6 +147,7 @@ if [[ $search_match =~ [a-zA-Z0-9] ]]; then
     else
         # Open file in vim at matching line-number
         vim +$linematch $vfile
+        exit 0
     fi
 
 fi
@@ -163,8 +157,12 @@ search_all() # Searches across all files in note directory.
 {
     tmpfile=$(mktemp /tmp/bash_ref_all.XXXXXX)
     cat $notes_folder/*.* > $tmpfile
-    search_file $tmpfile ${@:-""}
-    exit 0
+    if ! [[ -s $tmpfile ]]; then
+        search_file $tmpfile ${@:-""}
+    else
+        echo "No search results, starting interactive search"
+        fzf_search
+    fi
 }
 
 get_file_line() # Finds filename and linenumber for given line search
@@ -237,18 +235,22 @@ get_notefile() # Helper function for ref/refe functions
     files=($notes_folder/*.*)
 
     # Look for alternative notefiles in folder if matches first argument
+    notefile_found="FALSE"
     for file in ${files[*]}; do
         file_shorthand=$(basename "${file%%.*}")
-        if [ "$file_shorthand" = $firstword ];
-            then notefile=$file
+        if [ "$file_shorthand" = $firstword ]; then
+            notefile=$file
+            notefile_found="TRUE"
+            shift
+            break
         fi;
         done
 
-    if [ -z "$notefile" ];
-        then notefile=$primary_note_file
+    if [ -z "$notefile" ]; then
+        notefile=$primary_note_file
     fi
 
-    echo $notefile
+    echo $notefile $notefile_found
 }
 
 search_file() # Main search function using colored grep
@@ -272,4 +274,5 @@ filename=$1
   cut -d'-' -f2- |
   # Display in less with colors
   less -Ri
+  exit 0
 }

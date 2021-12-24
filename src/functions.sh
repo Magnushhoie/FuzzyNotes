@@ -9,7 +9,7 @@
 #source $main_dir/config.txt
 
 # Check that the default note file exists
-if ! [[ -f $primary_note_file ]]
+if ! [[ -f "$primary_note_file" ]]
 then
     echo "$primary_note_file does not exist. Please run $main_dir/setup.sh"
 fi
@@ -47,14 +47,14 @@ function parse_params() {
                 create_new_file "$@"
                 exit 0
                 ;;
-            -o | --open)
+            -o | --open)
                 open_default "$@"
                 exit 0
-                ;;           
+                ;;
             --tutorial)
                 tutorial "$@"
                 exit 0
-                ;;     
+                ;;
             --config)
                 edit_config
                 exit 0
@@ -69,20 +69,20 @@ function parse_params() {
 function ref()
 {
     # If no arguments, use interactive fzf_search instead
-    if [ -z $1 ]; then
+    if [ -z "$1" ]; then
         fzf_search "view"
         exit 0
     fi
 
-    read -r filename filename_found <<<$(get_notefile $@)
+    read -r filename filename_found <<<"$(get_notefile "$@")"
 
     if [[ $filename_found = "TRUE" ]]; then
         if [[ $# = 1 ]]; then
             echo "Opening $filename"
-            less -R $filename
+            less -R "$filename"
         else
             echo "Searching $filename"
-            search_file $filename ${@:-"\s"}
+            search_file "$filename" "${@:-"\s"}"
         fi
     else
         echo "Searching all files"
@@ -94,12 +94,12 @@ function ref()
 function refe() # Search and edit main.txt in vim
 {
     # If no arguments, use interactive fzf_search instead
-    if [ -z $1 ]; then
+    if [ -z "$1" ]; then
         fzf_search "open"
         exit 0
     fi
 
-    read -r filename filename_found <<<$(get_notefile $@)
+    read -r filename filename_found <<<"$(get_notefile "$@")"
 
     if [[ $filename_found = "TRUE" ]]; then
         if [[ $# = 1 ]]; then
@@ -107,7 +107,7 @@ function refe() # Search and edit main.txt in vim
             vim +":set nohlsearch"  "$filename"
         else
             echo "Search and editing $filename"
-            vim +":set hlsearch" +/${1}.*$2.*$3.*$4.*$5.*$6 $filename
+            vim +":set hlsearch" +/"${1}".*"$2".*"$3".*"$4".*"$5".*"$6" "$filename"
         fi
     else
         echo "No file found, starting interactive search"
@@ -118,8 +118,8 @@ function refe() # Search and edit main.txt in vim
 
 function fzf_search ()
 {
-action=$1
-file=$2
+action="$1"
+file="$2"
 string2arg_file="$script_dir"/string2arg.sh
 
 # Search for lines starting with "__" or "#", show filepaths for results
@@ -131,22 +131,22 @@ export search_match=$(
             | sed "s;$notes_folder/;;" \
             | fzf -e --preview="source $string2arg_file; string2arg $notes_folder/{}")
 
-if [[ $search_match =~ [a-zA-Z0-9] ]]; then
-    echo "$notes_folder"/$search_match
+if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
+    echo "$notes_folder"/"$search_match"
     # Extract filename from search_match
-    vfile=$(cut -d":" -f1 <<< $search_match)
+    vfile=$(cut -d":" -f1 <<< "$search_match")
     # Append path of notes_folder to get full path
-    vfile="$notes_folder"/"$vfile"
+    vfile="$notes_folder/$vfile"
     # Get line-number for match
-    linematch=$(cut -d":" -f2 <<< $search_match)
+    linematch=$(cut -d":" -f2 <<< "$search_match")
 
     if [[ $action = "view" ]]; then
         # Open file in less at matching line-number
-        less +$linematch $vfile
+        less +"$linematch" "$vfile"
         exit 0
     else
         # Open file in vim at matching line-number
-        vim +$linematch $vfile
+        vim +"$linematch" "$vfile"
         exit 0
     fi
 
@@ -156,9 +156,9 @@ fi
 search_all() # Searches across all files in note directory.
 {
     tmpfile=$(mktemp /tmp/bash_ref_all.XXXXXX)
-    cat $notes_folder/*.* > $tmpfile
+    cat "$notes_folder"/*.* > $tmpfile
     if ! [[ -s $tmpfile ]]; then
-        search_file $tmpfile ${@:-""}
+        search_file $tmpfile "${@:-""}"
     else
         echo "No search results, starting interactive search"
         fzf_search
@@ -167,22 +167,22 @@ search_all() # Searches across all files in note directory.
 
 get_file_line() # Finds filename and linenumber for given line search
 {
-    grep -in -I --exclude-dir="\.git" --color=always "$(echo $@)" $notes_folder/*.* | less -R
+    grep -in -I --exclude-dir="\.git" --color=always "$@" "$notes_folder"/*.* | less -R
 }
 
 list_files() # List available files in note directory
 {
     echo -e "Available files in $notes_folder"
-    cd $notes_folder; ls -tr *.* | fzf | xargs -I {} open $notes_folder/{}
+    cd "$notes_folder" || exit ; ls -tr *.* | fzf | xargs -I {} open "$notes_folder"/{}
     #echo -e "\nExample usage: ref [filename (excluding extension)] [keywords]"
 }
 
 create_new_file() # Opens requested note file using editor
 {
-    filename=$notes_folder/$1
-    touch $filename
-    echo $filename
-    open $filename
+    filename="$notes_folder/$1"
+    touch "$filename"
+    echo "$filename"
+    open "$filename"
 }
 
 open_default() # Opens requested note file in system default editor
@@ -195,31 +195,32 @@ open_default() # Opens requested note file in system default editor
     fi
 
     # Still open default file if input arguments are empty
-    if [[ -z "$@" ]]; then
-        filename=$(get_notefile $pattern)
-        echo $filename
-        open -t $filename
+    if [[ -z "$*" ]]; then
+        read -r filename filename_found <<<"$(get_notefile)"
+        echo "Opening $filename"
+        open -t "$filename"
         exit 0
     fi
 
     # Loop over multiple possible input files
+    echo "Trying to open multiple files from \"$*\""
     for pattern in "$@"; do
-        filename=$(get_notefile $pattern)
+        read -r filename filename_found <<<"$(get_notefile $pattern)"
         echo "$pattern -> $filename"
-        open -t $filename
+        open -t "$filename"
     done
     exit 0
 }
 
 edit_config() # Opens configuration file in system default editor
 {
-    open -t $main_dir/config.txt
+    open -t "$main_dir"/config.txt
 }
 
 tutorial() # Opens configuration file in system default editor
 {
-    chmod 755 $script_dir/tutorial.sh
-    $script_dir/tutorial.sh
+    chmod 755 "$script_dir"/tutorial.sh
+    "$script_dir"/tutorial.sh
 }
 
 get_notefile() # Helper function for ref/refe functions
@@ -232,13 +233,13 @@ get_notefile() # Helper function for ref/refe functions
     firstword=${1:-"main"}
 
     # Search for files in main folder
-    files=($notes_folder/*.*)
+    files=("$notes_folder"/*.*)
 
     # Look for alternative notefiles in folder if matches first argument
     notefile_found="FALSE"
-    for file in ${files[*]}; do
+    for file in "${files[@]}"; do
         file_shorthand=$(basename "${file%%.*}")
-        if [ "$file_shorthand" = $firstword ]; then
+        if [ "$file_shorthand" = "$firstword" ]; then
             notefile=$file
             notefile_found="TRUE"
             shift
@@ -247,15 +248,15 @@ get_notefile() # Helper function for ref/refe functions
         done
 
     if [ -z "$notefile" ]; then
-        notefile=$primary_note_file
+        notefile="$primary_note_file"
     fi
 
-    echo $notefile $notefile_found
+    echo "$notefile $notefile_found"
 }
 
 search_file() # Main search function using colored grep
 {
-filename=$1
+filename="$1"
   # Grep with specific color, insensitive search with line-numbers on note file
   GREP_COLOR='01;31' grep -Ein -I --exclude-dir="\.git" --color=always -C 20 "${2:-''}" "$filename" |
   # Successively different color for each successive search term

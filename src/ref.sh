@@ -5,6 +5,7 @@
 # DESC: Main control flow
 function main() {
     script_init "$@"
+    # Assign new notes_folder with -p [path]
     if [[ $1 = "-p" && -d "$2" ]]; then
       notes_folder="$2"
       shift
@@ -20,15 +21,15 @@ function script_init() {
     script_path="${BASH_SOURCE[0]}"
     script_name="$(basename "$0")"
     script_dir="$(cd "$(dirname "$script_path")" && pwd -P)"
-    main_dir=$(dirname $script_dir)
+    main_dir=$(dirname "$script_dir")
     script_params="$*"
 
     # Read in notes_folder and primary_note_file. By default ~/_bash_ref/ and
     # ~/_bash_ref/main.txt
-    source $main_dir/config.txt
+    source "$main_dir"/config.txt
 
     # Read in helper scripts.
-    source $script_dir/functions.sh
+    source "$script_dir"/functions.sh
 }
 
 # DESC: Usage help

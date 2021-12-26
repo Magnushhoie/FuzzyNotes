@@ -182,28 +182,27 @@ create_new_file() # Opens requested note file using editor
     filename="$notes_folder/$1"
     touch "$filename"
     echo "$filename"
-    open "$filename"
+    open -t "$filename"
 }
 
 open_default() # Opens requested note file in system default editor
 {
+    # Open notes_folder if no filenames provided
+    if [[ -z "$*" ]]; then
+        echo "Opening $notes_folder"
+        open $notes_folder
+        exit 0
+    fi
+
     # Sanity check that not trying to open more than 10 files
-    if [ $# -gt 10 ]; then
+    if [[ $# -gt 10 ]]; then
         echo "$@"
         echo "Trying to open more than 10 files. Are you sure?"
         exit 0
     fi
 
-    # Still open default file if input arguments are empty
-    if [[ -z "$*" ]]; then
-        read -r filename filename_found <<<"$(get_notefile)"
-        echo "Opening $filename"
-        open -t "$filename"
-        exit 0
-    fi
-
     # Loop over multiple possible input files
-    echo "Trying to open multiple files from \"$*\""
+    #echo "Trying to open multiple files from \"$*\""
     for pattern in "$@"; do
         read -r filename filename_found <<<"$(get_notefile $pattern)"
         echo "$pattern -> $filename"

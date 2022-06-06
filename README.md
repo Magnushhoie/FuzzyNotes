@@ -32,6 +32,10 @@ A shell script for rapidly searching and editing text files in a notes directory
 Sets up notes directory and adds aliases to ~/.bash_profile or ~/.zshrc.
 
 ```bash
+# Requirements
+brew install fzf
+  
+# Install
 git clone https://github.com/Magnushhoie/bash_ref/
 cd bash_ref
 bash setup.sh

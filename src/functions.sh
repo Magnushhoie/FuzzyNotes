@@ -31,9 +31,9 @@ function parse_params() {
                 search_all "$@"
                 exit 0
                 ;;
-            -f | --fzf)
+            -f | --full-search)
                 notes_folder=${1:-$notes_folder}
-                fzf_search "open" "$@"
+                full_search "open" "$@"
                 exit 0
                 ;;
             -g | --get-file-line)
@@ -169,6 +169,29 @@ if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
         exit 0
     fi
 
+fi
+}
+
+function full_search ()
+{
+local search_match
+export search_match=$(
+            grep -I --exclude-dir="\.git" --color=always -rHn -e "^\S" "$notes_folder" \
+            | sed "s;$notes_folder/;;" \
+            | fzf -e --preview="source $string2arg_file; string2arg $notes_folder/{}"
+            )
+
+if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
+    echo "$notes_folder"/"$search_match"
+    # Extract filename from search_match
+    vfile=$(cut -d":" -f1 <<< "$search_match")
+    # Append path of notes_folder to get full path
+    vfile="$notes_folder/$vfile"
+    # Get line-number for match
+    linematch=$(cut -d":" -f2 <<< "$search_match")
+
+    less -Riw +"$linematch" "$vfile"
+    exit 0
 fi
 }
 

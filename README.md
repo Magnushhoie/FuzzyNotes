@@ -20,7 +20,7 @@
   </p>
 </p>
 
-bash_ref aims to be your go-to terminal tool for searching and managing code-snippets, notes and references you want to have available with a few keypresses. Heavily uses FZF and vim.
+bash_ref aims to be your go-to terminal tool for searching and managing code-snippets, notes and references you want to have available with a few keypresses. Heavily uses <a href="[https://asciinema.org/a/458105](https://github.com/junegunn/fzf)">FZF</a> and vim.
 
 bash_ref features:
 - Interactive search and view across all text files in folder with FZF

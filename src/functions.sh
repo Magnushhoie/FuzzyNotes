@@ -110,10 +110,10 @@ function refe() # Search and edit main.txt in vim
     if [[ $filename_found = "TRUE" ]]; then
         if [[ $# = 1 ]]; then
             echo "Editing $filename"
-            vim +":set nonu" +":set nohlsearch"  "$filename"
+            vim +":silent! normal g;" +":set nonu" +":set nohlsearch"  "$filename"
         else
             echo "Search and editing $filename"
-            vim +":set nonu" +":set hlsearch" +/"$2".*"$3".*"$4".*"$5".*"$6" "$filename"
+            vim +":silent! normal g;" +":set nonu" +":set hlsearch" +/"$2".*"$3".*"$4".*"$5".*"$6" "$filename"
         fi
     else
         echo "No file found, please enter valid filename (without file extension)"
@@ -161,7 +161,7 @@ if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
         exit 0
     else
         # Open file in vim at matching line-number
-        vim  +":set nonu" +"$linematch" "$vfile"
+        vim +":silent! normal g;" +":set nonu" +"$linematch" "$vfile"
         exit 0
     fi
 
@@ -209,7 +209,8 @@ list_files_open_vim() # List available files in note directory
     export search_match=$(cd "$folder" || exit ; ls -t *.* | fzf --query "${query: }")
 
     if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
-        vim +":set nonu" "$folder"/"$search_match"
+        vim +":silent! normal g;" +":set nonu" "$folder"/"$search_match"
+        echo "$folder"/"$search_match"
     fi
 }
 

@@ -40,7 +40,7 @@ function parse_params() {
                 exit 0
                 ;;
             -l | --list)
-                list_files_open_default
+                list_files_open
                 exit 0
                 ;;
             -n | --new)
@@ -77,8 +77,9 @@ function ref()
     read -r filename filename_found <<<"$(get_notefile "$@")"
 
     if [[ $filename_found = "TRUE" ]]; then
+        shift
         # Read filename and remaining arguments
-        fzf_search "view" "$filename" "${@:2}"
+        fzf_search "view" "$filename" "$@"
         #if [[ $# = 1 ]]; then
         #    echo "Searching $filename"
         #    #less -R "$filename"
@@ -122,9 +123,10 @@ function refe() # Search and edit main.txt in vim
 function fzf_search ()
 {
 string2arg_file="$script_dir"/string2arg.sh
+echo $@
 # Extract arguments
 action="$1"
-file="$2"
+file="${2:-$notes_folder}"
 # Shift to access rest of arguments
 shift
 shift
@@ -137,7 +139,7 @@ local search_match
 
 # Open notes_folder if no filenames provided
 export search_match=$(
-            grep -I --exclude-dir="\.git" --color=always -rHn -e "^_" -e "^#" -e '^\\' "$notes_folder" \
+            grep -I --exclude-dir="\.git" --color=always -rHn -e "^_" -e "^#" -e '^\\' "$file" \
             | sed "s;$notes_folder/;;" \
             | fzf -e --preview="source $string2arg_file; string2arg $notes_folder/{}" --query "${query: }"
             )
@@ -172,13 +174,20 @@ search_all() # Searches across all files in note directory.
         search_file $tmpfile "${@:-""}"
     else
         echo "No search results, starting interactive search"
-        fzf_search "view" "." "$@"
+        fzf_search "view" "$notes_folder" "$@"
     fi
 }
 
 get_file_line() # Finds filename and linenumber for given line search
 {
     grep -in -I --exclude-dir="\.git" --color=always "$@" "$notes_folder"/*.* | less -R
+}
+
+list_files_open() # List available files in note directory
+{
+    echo -e "Available files in $notes_folder"
+    cd "$notes_folder" || exit ; ls -t *.* | fzf | xargs -I {} less -R "$notes_folder"/{}
+    #echo -e "\nExample usage: ref [filename (excluding extension)] [keywords]"
 }
 
 list_files_open_default() # List available files in note directory

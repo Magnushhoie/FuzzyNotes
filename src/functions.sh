@@ -220,7 +220,7 @@ list_files_open() # List available files in note directory
 {
     folder=$notes_folder
     echo -e "Available files in $folder"
-    cd "$folder" || exit ; ls -t *.* | fzf | xargs -I {} less -Riw "$folder"/{}
+    cd "$folder" || exit ; ls -t *.* | fzf -e --preview="bat $notes_folder/{}" | xargs -I {} less -Riw "$folder"/{}
     #echo -e "\nExample usage: ref [filename (excluding extension)] [keywords]"
 }
 
@@ -228,7 +228,7 @@ list_files_open_default() # List available files in note directory
 {
     folder=$notes_folder
     echo -e "Available files in $folder"
-    cd "$folder" || exit ; ls -t *.* | fzf | xargs -I {} open "$folder"/{}
+    cd "$folder" || exit ; ls -t *.* | fzf -e --preview="bat $notes_folder/{}" | xargs -I {} open "$folder"/{}
     #echo -e "\nExample usage: ref [filename (excluding extension)] [keywords]"
 }
 
@@ -237,7 +237,8 @@ list_files_open_vim() # List available files in note directory
     folder=$notes_folder
     echo -e "Available files in $folder"
     query="$@"
-    export search_match=$(cd "$folder" || exit ; ls -t *.* | fzf --query "${query: }")
+    # fzf -e --preview="source $string2arg_file; string2arg $notes_folder/{}" --query "${query: }"
+    export search_match=$(cd "$folder" || exit ; ls -t *.* | fzf -e --preview="bat $notes_folder/{}")
 
     if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
         vim +":silent! normal g;" +":set nonu" "$folder"/"$search_match"

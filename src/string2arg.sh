@@ -9,5 +9,5 @@ string2arg() {
         let min="arg_linenum-$min_offset"
     fi
     let max="arg_linenum+$max_offset"
-    bat --color=always --highlight-line $arg_linenum --style=header,grid,numbers --line-range $min:$max "$arg_filename";
+    bat --color=always --highlight-line "$arg_linenum" --style=header,grid,numbers --line-range "$min":"$max" "$arg_filename";
 }

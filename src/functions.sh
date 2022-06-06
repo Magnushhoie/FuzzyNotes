@@ -32,6 +32,7 @@ function parse_params() {
                 exit 0
                 ;;
             -f | --fzf)
+                notes_folder=${1:-$notes_folder}
                 fzf_search "open" "$@"
                 exit 0
                 ;;
@@ -40,7 +41,8 @@ function parse_params() {
                 exit 0
                 ;;
             -l | --list)
-                list_files_open
+                notes_folder=${1:-$notes_folder}
+                list_files_open "$@"
                 exit 0
                 ;;
             -n | --new)
@@ -115,7 +117,7 @@ function refe() # Search and edit main.txt in vim
         fi
     else
         echo "No file found, please enter valid filename (without file extension)"
-        list_files_open_vim
+        list_files_open_vim "$@"
         exit 0
     fi
 }
@@ -185,25 +187,29 @@ get_file_line() # Finds filename and linenumber for given line search
 
 list_files_open() # List available files in note directory
 {
-    echo -e "Available files in $notes_folder"
-    cd "$notes_folder" || exit ; ls -t *.* | fzf | xargs -I {} less -R "$notes_folder"/{}
+    folder=${1:-$notes_folder}
+    echo -e "Available files in $folder"
+    cd "$folder" || exit ; ls -t *.* | fzf | xargs -I {} less -R "$folder"/{}
     #echo -e "\nExample usage: ref [filename (excluding extension)] [keywords]"
 }
 
 list_files_open_default() # List available files in note directory
 {
-    echo -e "Available files in $notes_folder"
-    cd "$notes_folder" || exit ; ls -t *.* | fzf | xargs -I {} open "$notes_folder"/{}
+    folder=${1:-$notes_folder}
+    echo -e "Available files in $folder"
+    cd "$folder" || exit ; ls -t *.* | fzf | xargs -I {} open "$folder"/{}
     #echo -e "\nExample usage: ref [filename (excluding extension)] [keywords]"
 }
 
 list_files_open_vim() # List available files in note directory
 {
-    echo -e "Available files in $notes_folder"
-    export search_match=$(cd "$notes_folder" || exit ; ls -t *.* | fzf)
+    folder=${1:-$notes_folder}
+    echo -e "Available files in $folder"
+    query="$@"
+    export search_match=$(cd "$folder" || exit ; ls -t *.* | fzf --query "${query: }")
 
     if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
-        vim +":set nonu" "$notes_folder"/"$search_match"
+        vim +":set nonu" "$folder"/"$search_match"
     fi
 }
 

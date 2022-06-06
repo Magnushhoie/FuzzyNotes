@@ -157,7 +157,7 @@ if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
 
     if [[ $action = "view" ]]; then
         # Open file in less at matching line-number
-        less +"$linematch" "$vfile"
+        less -Riw +"$linematch" "$vfile"
         exit 0
     else
         # Open file in vim at matching line-number
@@ -182,14 +182,14 @@ search_all() # Searches across all files in note directory.
 
 get_file_line() # Finds filename and linenumber for given line search
 {
-    grep -in -I --exclude-dir="\.git" --color=always "$@" "$notes_folder"/*.* | less -R
+    grep -in -I --exclude-dir="\.git" --color=always "$@" "$notes_folder"/*.* | less -Riw
 }
 
 list_files_open() # List available files in note directory
 {
     folder=$notes_folder
     echo -e "Available files in $folder"
-    cd "$folder" || exit ; ls -t *.* | fzf | xargs -I {} less -R "$folder"/{}
+    cd "$folder" || exit ; ls -t *.* | fzf | xargs -I {} less -Riw "$folder"/{}
     #echo -e "\nExample usage: ref [filename (excluding extension)] [keywords]"
 }
 
@@ -309,6 +309,6 @@ filename="$1"
   # Remove line numbers
   cut -d'-' -f2- |
   # Display in less with colors
-  less -Ri
+  less -Riw
   exit 0
 }

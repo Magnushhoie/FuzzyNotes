@@ -34,6 +34,7 @@ Sets up notes directory and adds aliases to ~/.bash_profile or ~/.zshrc.
 ```bash
 # Requirements
 brew install fzf
+brew install bat
   
 # Install
 git clone https://github.com/Magnushhoie/bash_ref/

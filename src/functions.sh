@@ -40,7 +40,7 @@ function parse_params() {
                 exit 0
                 ;;
             -l | --list)
-                list_files
+                list_files_open_default
                 exit 0
                 ;;
             -n | --new)
@@ -77,13 +77,16 @@ function ref()
     read -r filename filename_found <<<"$(get_notefile "$@")"
 
     if [[ $filename_found = "TRUE" ]]; then
-        if [[ $# = 1 ]]; then
-            echo "Opening $filename"
-            less -R "$filename"
-        else
-            echo "Searching $filename"
-            search_file "$filename" "${@:-"\s"}"
-        fi
+        # Read filename and remaining arguments
+        fzf_search "view" "$filename" "${@:2}"
+        #if [[ $# = 1 ]]; then
+        #    echo "Searching $filename"
+        #    #less -R "$filename"
+        #    fzf_search "$filename"
+        #else
+        #    echo "Searching $filename"
+        #    search_file "$filename" "${@:-"\s"}"
+        #fi
     else
         echo "Searching all files"
         search_all "$@"
@@ -93,9 +96,9 @@ function ref()
 # DESC: Edit script
 function refe() # Search and edit main.txt in vim
 {
-    # If no arguments, use interactive fzf_search instead
+    # If no arguments, list available files
     if [ -z "$1" ]; then
-        fzf_search "open"
+        list_files_open_vim
         exit 0
     fi
 
@@ -104,32 +107,40 @@ function refe() # Search and edit main.txt in vim
     if [[ $filename_found = "TRUE" ]]; then
         if [[ $# = 1 ]]; then
             echo "Editing $filename"
-            vim +":set nohlsearch"  "$filename"
+            vim +":set nonu" +":set nohlsearch"  "$filename"
         else
             echo "Search and editing $filename"
-            vim +":set hlsearch" +/"${1}".*"$2".*"$3".*"$4".*"$5".*"$6" "$filename"
+            vim +":set nonu" +":set hlsearch" +/"$2".*"$3".*"$4".*"$5".*"$6" "$filename"
         fi
     else
-        echo "No file found, starting interactive search"
-        fzf_search "open"
+        echo "No file found, please enter valid filename (without file extension)"
+        list_files_open_vim
         exit 0
     fi
 }
 
 function fzf_search ()
 {
+string2arg_file="$script_dir"/string2arg.sh
+# Extract arguments
 action="$1"
 file="$2"
-string2arg_file="$script_dir"/string2arg.sh
+# Shift to access rest of arguments
+shift
+shift
+query="$@"
 
 # Search for lines starting with "__" or "#", show filepaths for results
 # Only show filepath relative to notes_folder, using ; as sed de-limiter
 # Preview matching lines in file using fzf with custom string2arg function and bat
 local search_match
+
+# Open notes_folder if no filenames provided
 export search_match=$(
             grep -I --exclude-dir="\.git" --color=always -rHn -e "^_" -e "^#" -e '^\\' "$notes_folder" \
             | sed "s;$notes_folder/;;" \
-            | fzf -e --preview="source $string2arg_file; string2arg $notes_folder/{}")
+            | fzf -e --preview="source $string2arg_file; string2arg $notes_folder/{}" --query "${query: }"
+            )
 
 if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
     echo "$notes_folder"/"$search_match"
@@ -146,7 +157,7 @@ if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
         exit 0
     else
         # Open file in vim at matching line-number
-        vim +"$linematch" "$vfile"
+        vim  +":set nonu" +"$linematch" "$vfile"
         exit 0
     fi
 
@@ -161,7 +172,7 @@ search_all() # Searches across all files in note directory.
         search_file $tmpfile "${@:-""}"
     else
         echo "No search results, starting interactive search"
-        fzf_search
+        fzf_search "view" "." "$@"
     fi
 }
 
@@ -170,11 +181,21 @@ get_file_line() # Finds filename and linenumber for given line search
     grep -in -I --exclude-dir="\.git" --color=always "$@" "$notes_folder"/*.* | less -R
 }
 
-list_files() # List available files in note directory
+list_files_open_default() # List available files in note directory
 {
     echo -e "Available files in $notes_folder"
-    cd "$notes_folder" || exit ; ls -tr *.* | fzf | xargs -I {} open "$notes_folder"/{}
+    cd "$notes_folder" || exit ; ls -t *.* | fzf | xargs -I {} open "$notes_folder"/{}
     #echo -e "\nExample usage: ref [filename (excluding extension)] [keywords]"
+}
+
+list_files_open_vim() # List available files in note directory
+{
+    echo -e "Available files in $notes_folder"
+    export search_match=$(cd "$notes_folder" || exit ; ls -t *.* | fzf)
+
+    if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
+        vim +":set nonu" "$notes_folder"/"$search_match"
+    fi
 }
 
 create_new_file() # Opens requested note file using editor

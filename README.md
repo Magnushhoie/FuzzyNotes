@@ -15,12 +15,18 @@
   <h3 align="center">bash_ref</h3>
 
   <p align="center">
-    Blazingly fast search and edit of text files
-  <a href="https://asciinema.org/a/458105">in your terminal</a>
+    Ultra-fast, <a href="https://asciinema.org/a/458105">terminal based</a> note writing and search app
+  
   </p>
 </p>
 
-A shell script for rapidly searching and editing text files in a notes directory, with interactive and multi-line search. Built with FZF, grep and vim.
+bash_ref aims to be your go-to terminal tool for searching and managing code-snippets, notes and references you want to have available with a few keypresses.
+
+bash_ref features:
+- Interactive search and view across all text files in folder with FZF
+- Edit file at last changed line or at search match
+- Cleverly searches file if first keyword matches filename, otherwise defaults to searching keywords across all files
+- Inline preview of file contents, code highlighting, partial search matches and more
 
 <a href="https://asciinema.org/a/458105">
 <img src="img/image.jpg" alt="Logo" width="700">
@@ -43,12 +49,8 @@ bash setup.sh
 ```
 
 ## Usage
-- ref: Interactively search note files using FZF
-- ref -l: List and open note files in default $EDITOR
-- refe -f: Interactively search and edit note files using FZF
-- refe [file] [pattern]: Multi-line search file, edit at match
-
-
+- ref: Interactively search across all note files
+- refe: List available files and their content, open file in vim
 
 See [main.txt](_bash_ref/main.txt) for example note file.
 
@@ -56,55 +58,49 @@ See [main.txt](_bash_ref/main.txt) for example note file.
 
 Use "**ref --help**" for all arguments.
 
-#### ref - Interactive search and view
+#### ref - "Reference look-up", search and view
 
 ```text
 ref --help
-usage: ref.sh [notefile] keywords
-  notefile: File basename in note folder if existing. Default is main.txt
+usage: ref.sh [file] keywords
+  file: File basename in note folder if existing. Default is main.txt
   keywords: Search terms, space-separated
 
 Optional arguments:
-  -o|--open                  Open file with default system editor
   -l|--list                  Display and open files in notes folder
-  -g|--get                   Get filenames and line-numbers for lines matching keywords across all files
   -h|--help                  Displays this help
-  --config                   Open configuration file
-  --tutorial                 Start ref tutorial
 
 Example usage:
 Interactively search and view files for lines starting with __ or #:
 ref
 
-Search [main.txt] for keywords "bash" "loop"
-ref bash loop
+Search for keywords "for" "loop"
+ref for loop
 
-Search [python.py] in note folder for "list" "comprehension"
+Search python.py in note folder for "list" "comprehension"
 ref python list comprehension
 ```
 
-#### refe - Interactive search and edit
+#### refe - "References edit", search and edit
 
 ```text
 refe --help
-usage: refe.sh [notefile] keywords
-  notefile: File basename in note folder if existing. Default is main.txt
+usage: refe.sh [file] keywords
+  file: File basename in note folder if existing. Default is main.txt
   keywords: Search terms, space-separated
 
 Optional arguments:
      -o|--open                  Open file with default system editor
-     -l|--list                  Displays searchable files in notes folder
      -n|--new                   Create [filename] in notes folder
+     -l|--list                  Displays searchable files in notes folder
      -h|--help                  Displays this help
-     --config                   Open configuration file
-     --tutorial                 Start ref tutorial
 
 Example usage:
-Interactively search and edit files at lines starting with __ or #:
-refe -f
+Preview files in notes folder, then open selected file in vim
+refe
 
-Open and edit [main.txt] at first line with "bash loop"
-refe bash loop
+Open and edit python.py at first line with "for loop"
+refe python for loop
 
 Create newfile.txt in notes folder
 refe -n newfile.txt

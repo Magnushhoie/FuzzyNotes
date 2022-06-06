@@ -76,7 +76,7 @@ function ref()
 {
     # If no arguments, use interactive fzf_search instead
     if [ -z "$1" ]; then
-        fzf_search "view"
+        fzf_search
         exit 0
     fi
 
@@ -85,7 +85,7 @@ function ref()
     if [[ $filename_found = "TRUE" ]]; then
         shift
         # Read filename and remaining arguments
-        fzf_search "view" "$filename" "$@"
+        fzf_search "$filename" "$@"
         #if [[ $# = 1 ]]; then
         #    echo "Searching $filename"
         #    #less -R "$filename"
@@ -129,12 +129,9 @@ function refe() # Search and edit main.txt in vim
 function fzf_search ()
 {
 string2arg_file="$script_dir"/string2arg.sh
-echo $@
 # Extract arguments
-action="$1"
-file="${2:-$notes_folder}"
+file="${1:-$notes_folder}"
 # Shift to access rest of arguments
-shift
 shift
 query="$@"
 
@@ -190,8 +187,15 @@ if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
     # Get line-number for match
     linematch=$(cut -d":" -f2 <<< "$search_match")
 
-    less -Riw +"$linematch" "$vfile"
-    exit 0
+    if [[ $action = "view" ]]; then
+        # Open file in less at matching line-number
+        less -Riw +"$linematch" "$vfile"
+        exit 0
+    else
+        # Open file in vim at matching line-number
+        vim +":silent! normal g;" +":set nonu" +"$linematch" "$vfile"
+        exit 0
+    fi
 fi
 }
 
@@ -203,7 +207,7 @@ search_all() # Searches across all files in note directory.
         search_file $tmpfile "${@:-""}"
     else
         echo "No search results, starting interactive search"
-        fzf_search "view" "$notes_folder" "$@"
+        fzf_search "$notes_folder" "$@"
     fi
 }
 

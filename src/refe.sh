@@ -30,6 +30,9 @@ function script_init() {
 
     # Read in helper scripts.
     source "$script_dir"/functions.sh
+
+    # Set action, viewing or editiing
+    action="edit"
 }
 
 # DESC: Usage help

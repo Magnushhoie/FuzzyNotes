@@ -10,6 +10,10 @@ function main() {
       notes_folder="$2"
       shift
       shift
+    elif [[ $1 = "--path" && -d "$2" ]]; then
+      notes_folder="$2"
+      shift
+      shift
     fi
 
     parse_params "$@"

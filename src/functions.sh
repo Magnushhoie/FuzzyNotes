@@ -27,9 +27,8 @@ function parse_params() {
                 script_usage
                 exit 0
                 ;;
-            -a | --all)
-                search_all "$@"
-                exit 0
+            -p | --path)
+                # Pass, coded in ref.sh and refe.sh
                 ;;
             -f | --full-search)
                 full_search "open" "$@"

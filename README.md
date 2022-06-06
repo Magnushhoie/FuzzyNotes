@@ -15,16 +15,16 @@
   <h3 align="center">bash_ref</h3>
 
   <p align="center">
-    Ultra-fast, <a href="https://asciinema.org/a/458105">terminal based</a> note writing and search app
+    Ultra-fast, <a href="https://asciinema.org/a/458105">terminal based</a> note writing and search app with <a href="https://github.com/junegunn/fzf">FZF</a> and <a href="https://danielmiessler.com/study/vim/">vim</a>
   
   </p>
 </p>
 
-bash_ref aims to be your go-to terminal tool for searching and managing code-snippets, notes and references you want to have available with a few keypresses. Heavily uses <a href="[https://asciinema.org/a/458105](https://github.com/junegunn/fzf)">FZF</a> and vim.
+bash_ref aims to be your go-to terminal tool for searching and managing code-snippets, notes and references you want to have available with a few keypresses.
 
 bash_ref features:
 - Interactive search and view across all text files in folder with FZF
-- Edit file at last changed line or at search match
+- Edit file at last changed line or at search match with vim
 - Cleverly searches file if first keyword matches filename, otherwise defaults to searching keywords across all files
 - Inline preview of file contents, code highlighting, partial search matches and more
 

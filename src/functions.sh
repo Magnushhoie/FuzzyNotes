@@ -53,6 +53,10 @@ function parse_params() {
                 open_default "$@"
                 exit 0
                 ;;
+            -s | --stats)
+                get_stats "$@"
+                exit 0
+                ;;
             --tutorial)
                 tutorial "$@"
                 exit 0
@@ -246,6 +250,26 @@ open_default() # Opens requested note file in system default editor
         open -t "$filename"
     done
     exit 0
+}
+
+count_character() # Helper function to count characters
+{
+    file="$1"
+    char="$2"
+    echo $(grep "^$char" $file | wc -l | awk '{print $1}')
+}
+
+
+get_stats()
+{
+    #ls -ltr "$notes_folder"/*
+    echo "Total lines for files in $notes_folder/"
+    file=$(wc -l "$notes_folder"/*.* | sort -hr | tail -n +2 | fzf -e | awk '{print $2}')
+    echo
+    echo $(ls -lh $file)
+    echo "Total lines - " $(count_character $file '')
+    echo "Searchable lines starting with # -" $(count_character $file '#')
+    echo "Searchable lines starting with _ -" $(count_character $file '_')
 }
 
 edit_config() # Opens configuration file in system default editor

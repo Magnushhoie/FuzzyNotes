@@ -32,7 +32,7 @@ function parse_params() {
                 exit 0
                 ;;
             -f | --full-search)
-                notes_folder=${1:-$notes_folder}
+                notes_folder=${1:-"$notes_folder"}
                 full_search "open" "$@"
                 exit 0
                 ;;
@@ -41,7 +41,7 @@ function parse_params() {
                 exit 0
                 ;;
             -l | --list)
-                notes_folder=${1:-$notes_folder}
+                notes_folder=${1:-"$notes_folder"}
                 list_files_open "$@"
                 exit 0
                 ;;
@@ -144,7 +144,7 @@ local search_match
 export search_match=$(
             grep -I --exclude-dir="\.git" --color=always -rHn -e "^_" -e "^#" -e '^\\' "$file" \
             | sed "s;$notes_folder/;;" \
-            | fzf -e --preview="source $string2arg_file; string2arg $notes_folder/{}" --query "${query: }"
+            | fzf -e --preview="source ""$string2arg_file""; string2arg ""$notes_folder""/{}" --query "${query: }"
             )
 
 if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
@@ -173,9 +173,9 @@ function full_search ()
 {
 local search_match
 export search_match=$(
-            grep -I --exclude-dir="\.git" --color=always -rHn -e "^\S" "$notes_folder" \
-            | sed "s;$notes_folder/;;" \
-            | fzf -e --preview="source $string2arg_file; string2arg $notes_folder/{}"
+            grep -I --exclude-dir="\.git" --color=always -rHn -e "^\S" ""$notes_folder"" \
+            | sed "s;""$notes_folder""/;;" \
+            | fzf -e --preview="source ""$string2arg_file""; string2arg ""$notes_folder""/{}"
             )
 
 if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
@@ -218,7 +218,7 @@ get_file_line() # Finds filename and linenumber for given line search
 
 list_files_open() # List available files in note directory
 {
-    folder=$notes_folder
+    folder="$notes_folder"
     echo -e "Available files in $folder"
     cd "$folder" || exit ; ls -t *.* | fzf | xargs -I {} less -Riw "$folder"/{}
     #echo -e "\nExample usage: ref [filename (excluding extension)] [keywords]"
@@ -226,7 +226,7 @@ list_files_open() # List available files in note directory
 
 list_files_open_default() # List available files in note directory
 {
-    folder=$notes_folder
+    folder="$notes_folder"
     echo -e "Available files in $folder"
     cd "$folder" || exit ; ls -t *.* | fzf | xargs -I {} open "$folder"/{}
     #echo -e "\nExample usage: ref [filename (excluding extension)] [keywords]"
@@ -234,7 +234,7 @@ list_files_open_default() # List available files in note directory
 
 list_files_open_vim() # List available files in note directory
 {
-    folder=$notes_folder
+    folder="$notes_folder"
     echo -e "Available files in $folder"
     query="$@"
     export search_match=$(cd "$folder" || exit ; ls -t *.* | fzf --query "${query: }")
@@ -258,7 +258,7 @@ open_default() # Opens requested note file in system default editor
     # Open notes_folder if no filenames provided
     if [[ -z "$*" ]]; then
         echo "Opening $notes_folder"
-        open $notes_folder
+        open "$notes_folder"
         exit 0
     fi
 

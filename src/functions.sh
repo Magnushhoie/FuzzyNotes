@@ -187,7 +187,7 @@ get_file_line() # Finds filename and linenumber for given line search
 
 list_files_open() # List available files in note directory
 {
-    folder=${1:-$notes_folder}
+    folder=$notes_folder
     echo -e "Available files in $folder"
     cd "$folder" || exit ; ls -t *.* | fzf | xargs -I {} less -R "$folder"/{}
     #echo -e "\nExample usage: ref [filename (excluding extension)] [keywords]"
@@ -195,7 +195,7 @@ list_files_open() # List available files in note directory
 
 list_files_open_default() # List available files in note directory
 {
-    folder=${1:-$notes_folder}
+    folder=$notes_folder
     echo -e "Available files in $folder"
     cd "$folder" || exit ; ls -t *.* | fzf | xargs -I {} open "$folder"/{}
     #echo -e "\nExample usage: ref [filename (excluding extension)] [keywords]"
@@ -203,7 +203,7 @@ list_files_open_default() # List available files in note directory
 
 list_files_open_vim() # List available files in note directory
 {
-    folder=${1:-$notes_folder}
+    folder=$notes_folder
     echo -e "Available files in $folder"
     query="$@"
     export search_match=$(cd "$folder" || exit ; ls -t *.* | fzf --query "${query: }")

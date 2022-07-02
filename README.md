@@ -15,23 +15,29 @@
   <h3 align="center">bash_ref</h3>
 
   <p align="center">
-    Ultra-fast, <a href="https://asciinema.org/a/458105">terminal based</a> note writing and search app with <a href="https://github.com/junegunn/fzf">FZF</a> and <a href="https://danielmiessler.com/study/vim/">vim</a>
+    Ultra-fast, <a href="https://asciinema.org/a/458105">terminal based</a> note writing and search app powered by <a href="https://github.com/junegunn/fzf">FZF</a> and <a href="https://danielmiessler.com/study/vim/">vim.</a> Click to watch tutorial: 
   
   </p>
 </p>
 
-bash_ref aims to be your go-to terminal tool for searching and managing code-snippets, notes and references you want to have available with a few keypresses.
-
-bash_ref features:
-- Interactive search and view across all text files in folder with FZF
-- Edit file at last changed line or at search match with vim
-- Cleverly searches file if first keyword matches filename, otherwise defaults to searching keywords across all files
-- Inline preview of file contents, code highlighting, partial search matches and more
-
+<p align="center">
 <a href="https://asciinema.org/a/458105">
 <img src="img/image.jpg" alt="Logo" width="700">
+</p>
 
-**[See bash_ref in 60 seconds on asciinema](https://asciinema.org/a/458105)**
+
+
+bash_ref aims to be your go-to terminal tool for searching and managing code-snippets, notes and references you want to have available with a few keypresses.
+
+### Features:
+- Interactively search / edit / view text files (powered by FZF)
+- Preview file contents and search match in side-bar
+- Code highlighting, partial search matches
+- Quickly return to last changed location in file
+- First keywords can be filenames or keywords
+- (not implemented) image and markdown support inside the terminal
+
+
   
 ## Installation
 
@@ -49,8 +55,8 @@ bash setup.sh
 ```
 
 ## Usage
-- ref: Interactively search across all note files
-- refe: List available files and their content, open file in vim
+- ref: Interactively search across all note files (default in $HOME/_bash_ref/ directory)
+- refe: List available files and their content, open file in vim on default system editor
 
 See [main.txt](_bash_ref/main.txt) for example note file.
 

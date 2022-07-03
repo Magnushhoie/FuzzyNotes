@@ -1,11 +1,11 @@
 #!/bin/bash
-# bash_ref helper functions, called from ref.sh or refe.sh
-# https://github.com/Magnushhoie/bash_ref
+# FuzzyNotes helper functions, called from fz.sh or fze.sh
+# https://github.com/Magnushhoie/FuzzyNotes
 
 # Emulate BASH if using zsh
 #if [ -n "$ZSH_VERSION" ]; then emulate -L ksh; fi
 
-# Read in notes_folder and primary_note_file. By default ~/_bash_ref/ and main.txt
+# Read in notes_folder and primary_note_file. By default ~/_FuzzyNotes/ and main.txt
 #source $main_dir/config.txt
 
 # Check that the default note file exists
@@ -28,7 +28,7 @@ function parse_params() {
                 exit 0
                 ;;
             -p | --path)
-                # Pass, coded in ref.sh and refe.sh
+                # Pass, coded in fz.sh and fze.sh
                 ;;
             -f | --full-search)
                 full_search "open" "$@"
@@ -69,7 +69,7 @@ function parse_params() {
 # Scripts
 
 # DESC: Search script
-function ref()
+function fz()
 {
     # If no arguments, use interactive fzf_search instead
     if [ -z "$1" ]; then
@@ -98,7 +98,7 @@ function ref()
 }
 
 # DESC: Edit script
-function refe() # Search and edit main.txt in vim
+function fze() # Search and edit main.txt in vim
 {
     # If no arguments, list available files
     if [ -z "$1" ]; then
@@ -198,7 +198,7 @@ fi
 
 search_all() # Searches across all files in note directory.
 {
-    tmpfile=$(mktemp /tmp/bash_ref_all.XXXXXX)
+    tmpfile=$(mktemp /tmp/FuzzyNotes_all.XXXXXX)
     cat "$notes_folder"/*.* > $tmpfile
     if ! [[ -s $tmpfile ]]; then
         search_file $tmpfile "${@:-""}"
@@ -232,7 +232,7 @@ list_files_open() # List available files in note directory
         fi
     fi
 
-    #echo -e "\nExample usage: ref [filename (excluding extension)] [keywords]"
+    #echo -e "\nExample usage: fz [filename (excluding extension)] [keywords]"
 }
 
 list_files_open_vim() # List available files in note directory
@@ -314,14 +314,14 @@ tutorial() # Opens configuration file in system default editor
     "$script_dir"/tutorial.sh
 }
 
-get_notefile() # Helper function for ref/refe functions
+get_notefile() # Helper function for fz/fze functions
 {
-# Searches note folder for notefile. Default is main.txt
+# Searches note folder for notefile. Default is notes.txt
 # Alternative name given if first argument matches that basename excluding file extension
 # List of available files given if first argument is "list"
 
     # Modify these three to change default file or folder
-    firstword=${1:-"main"}
+    firstword=${1:-"notes"}
 
     # Search for files in main folder
     files=("$notes_folder"/*.*)

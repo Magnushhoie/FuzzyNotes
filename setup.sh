@@ -1,12 +1,12 @@
 #!/bin/bash
-# Sets up bash_ref scripts as aliases and bash_ref folder
-# https://github.com/Magnushhoie/bash_ref
+# Sets up FuzzyNotes scripts as aliases and FuzzyNotes folder
+# https://github.com/Magnushhoie/FuzzyNotes
 
 # set -e
 
 # Check requirements
 if [[  $(command -v fzf) ]]; then
-    echo -e "ERROR: bash_ref requires fzf to run\nhttps://github.com/junegunn/fzf"
+    echo -e "ERROR: FuzzyNotes requires fzf to run\nhttps://github.com/junegunn/fzf"
     echo -e "\nPlease install with:\nbrew install fzf"
     #exit 0
 fi
@@ -19,29 +19,29 @@ script_dir="$(cd "$(dirname "$script_path")" && pwd -P)"
 source "$script_dir"/config.txt
 
 # Make scripts executable
-chmod 755 "$script_dir"/src/ref.sh
-chmod 755 "$script_dir"/src/refe.sh
+chmod 755 "$script_dir"/src/fz.sh
+chmod 755 "$script_dir"/src/fze.sh
 
 echo -e "Setting up notes folder in $notes_folder"
 
 echo -e "Checking if $notes_folder exists"
 if ! [ -d "$notes_folder" ]; then
-    echo -e "Notes folder does not already exist ... Copying from $script_dir/_bash_ref ..."
-    cp -r "$script_dir"/_bash_ref "$notes_folder"
+    echo -e "Notes folder does not already exist ... Copying from $script_dir/_FuzzyNotes ..."
+    cp -r "$script_dir"/_FuzzyNotes "$notes_folder"
 fi
 
 # If not sourced, ask whether to add aliases to bash_profile and set default editor
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     echo -e
-    read -p "Automatically add aliases ref and refe to ~/.bash_profile and ~/.zshrc? y/n " -n 1 -r
+    read -p "Automatically add aliases fz and fze to ~/.bash_profile and ~/.zshrc? y/n " -n 1 -r
     echo -e
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo -e "\nAdding aliases to .bash_profile and ~/.zshrc ..."
         touch "$HOME"/.bash_profile
         touch "$HOME"/.zshrc
 
-        LINE1=$(echo -e alias ref="$script_dir"/src/ref.sh)
-        LINE2=$(echo -e alias refe="$script_dir"/src/refe.sh)
+        LINE1=$(echo -e alias fz="$script_dir"/src/fz.sh)
+        LINE2=$(echo -e alias fze="$script_dir"/src/fze.sh)
         BASH_FILE=$(echo -e "$HOME"/.bash_profile)
         ZSH_FILE=$(echo -e "$HOME"/.zshrc)
         grep -qF -- "$LINE1" "$BASH_FILE" || echo -e "$LINE1" >> "$BASH_FILE"
@@ -72,7 +72,7 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     done
     # Replace editor line in config.txt
     sed -iE "s/EDITOR=.*/EDITOR=$NEW_EDITOR/" "$script_dir"/config.txt
-    echo -e "Note: You can change your editor with ref --config or editing config.txt"
+    echo -e "Note: You can change your editor with fz --config or editing config.txt"
 fi
 
 echo -e "\nDone!"
@@ -83,4 +83,4 @@ read -p "Run tutorial? y/n" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     bash "$script_dir"/src/tutorial.sh
 fi
-echo "Tutorial can always be run with ref --tutorial"
+echo "Tutorial can always be run with fz --tutorial"

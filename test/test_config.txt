@@ -1,10 +1,10 @@
 SRC="$(realpath $(dirname "${BASH_SOURCE[0]}"))"
 
 # Default folder for notes
-notes_folder=$SRC/_bash_ref
+notes_folder=$SRC/_FuzzyNotes
 
 # Default note file used by ref and refe if no existing filename is provided
-primary_note_file=$notes_folder/references.txt
+primary_note_file=$notes_folder/notes.txt
 
 # Default text editor. Alternatives are nano, emacs and open (opens with default text editor on Mac OSX)
 # Note: Search currently not supported on editors other than vim

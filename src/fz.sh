@@ -1,6 +1,6 @@
 #!/bin/bash
-# bash_ref function for editing reference file
-# https://github.com/Magnushhoie/bash_ref
+# FuzzyNotes function for editing note files
+# https://github.com/Magnushhoie/FuzzyNotes
 
 # DESC: Main control flow
 function main() {
@@ -17,7 +17,7 @@ function main() {
     fi
 
     parse_params "$@"
-    ref "$@"
+    fz "$@"
 }
 
 # DESC: Initialization parameters
@@ -28,8 +28,8 @@ function script_init() {
     main_dir=$(dirname "$script_dir")
     script_params="$*"
 
-    # Read in notes_folder and primary_note_file. By default ~/_bash_ref/ and
-    # ~/_bash_ref/main.txt
+    # Read in notes_folder and primary_note_file. By default ~/_FuzzyNotes/ and
+    # ~/_FuzzyNotes/main.txt
     source "$main_dir"/config.txt
 
     # Read in helper scripts.
@@ -43,7 +43,7 @@ function script_init() {
 function script_usage() {
     cat << EOF
 usage: $script_name [notefile] keywords
-  notefile: File basename in note folder if existing. Default is main.txt
+  notefile: File basename in note folder if existing. Default is notes.txt
   keywords: Search terms, space-separated
 
 Optional arguments:
@@ -52,17 +52,17 @@ Optional arguments:
   -g|--get                   Get filenames and line-numbers for lines matching keywords across all files
   -h|--help                  Displays this help
   --config                   Open configuration file
-  --tutorial                 Start ref tutorial
+  --tutorial                 Start fz tutorial
 
 Example usage:
 Interactively search and view files for lines starting with __ or #:
-ref
+fz
 
-Search [main.txt] for keywords "bash" "loop"
-ref bash loop
+Search [notes.txt] for keywords "bash" "loop"
+fz bash loop
 
 Search [python.py] in note folder for "list" "comprehension"
-ref python list comprehension
+fz python list comprehension
 EOF
 }
 

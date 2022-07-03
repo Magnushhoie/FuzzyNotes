@@ -1,69 +1,71 @@
-## main.txt (main note file)
+## notes.txt (main note file)
 
-__ref help
-# https://github.com/Magnushhoie/bash_ref
-ref --help
-ref --tutorial
+__fz view file, move/scroll and search__
+q   # quit
+d   # Down
+u   # Up
+G   # Go to end
+g   # Go to start
+/   # Search within file
 
-__vim commands (refe)
-To write, press i to enter insert mode. Press Escape to exit insert mode.
-i       # Enter insert mode
-u       # Undo changes (press Escape first)
+__fze edit file, insert text and save with vim__
+<Escape>  # Exit insert mode
+ZZ        # Quit without saving
+i         # Insert mode, can enter text
+ZQ        # Write and quit
+:q!       # Quit (forcibly)
+:wq       # Write and quit
+Ctrl + r  # Can select text
 
-To exit / save, press Escape and write: (text should appear at the bottom of the bar of the screen. Remember to press enter at the end)
-:q      # quit file (exit)
-:q!     # force quit
-:w      # write file (save)
-:wq     # Write and quit
-:wq!    # Force write and quit
+__fze edit file, move/scroll and search with vim__
+Ctrl + d  # Down
+Ctrl + u  # Up
+G         # Go to end
+g         # Go to start
+/         # Search within file
 
-__vim tutorials and cheatsheets
-# Vim tutorial: https://www.openvim.com/
-# Vim cheatsheet https://vimsheet.com/
-
-__terminal select and copy text
+__terminal select and copy text__
 Select and copy text: Ctrl + r
 Use again to return to normal terminal interaction
-Alternatives:
-Select text and use middle mouse button to paste (mouse wheel click)
-Select text -> Ctrl + insert (copy)i -> shift + insert (paste)
+# Alternative
+Select text -> middle mouse button to paste (mouse wheel click)
 
-__mac show emoticons/smileys panel
+__macOS show emoticons/smileys panel__
 Ctrl + command + space
 
-__mac open folder from terminal
+__macOS open folder from terminal__
 open .
 
-__mac change caps lock to escape
+__macOS change caps lock to escape__
 First, go into the System Preferences, choose Keyboard, then the Keyboard Tab (first tab), and click Modifier Keys:
 https://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x
 
-__mac spotlight open folder file is in
+__macOS spotlight open folder file is in__
 Search -> Select file -> Command + R or Command + Enter
 
-__mac open multiple calculators
+__macOS open multiple calculators__
 open -na calculator
 
-__mac calculator not showing space thousand separator
+__macOS calculator not showing space thousand separator__
 System preferences ->  Language and region -> Advanced
 -> number separators -> groupings -> set space
 
-__mac zoom in
+__macOS zoom in__
 Apple + option + 8
 Apple + option + =-\
 
-__mac delete key
+__macOS delete key__
 Ctrl + D
 
-__mac sound not playing from internal speaker in clamshell mode
+__macOS sound not playing from internal speaker in clamshell mode__
 Settings -> Sound -> Change audio output to internal speaker
 
-__excel macOS change excel comma to dot regional setting, decimal separator
+__excel macOS change excel comma to dot regional setting, decimal separator__
 System apple button -> system preferences
 Language and region -> advanced
 Under general -> change number separator decimal to .
 
-__mac overheating external monitor
+__macOS overheating external monitor__
 # Discussed extensively in a few threads:
 # https://news.ycombinator.com/item?id=22265235
 # https://forums.macrumors.com/threads/16-is-hot-noisy-with-an-external-monitor.2211747/
@@ -77,35 +79,36 @@ __mac overheating external monitor
 - Enforce HiDPI mode (requires clamshell mode)
     - https://github.com/xzhih/one-key-hidpi
 
-__server install software without root access
+__server install software without root or sudo access__
 # Alternatives:
 - Anaconda: https://www.anaconda.com/products/individual
 - Brew / linuxbrew: https://brew.sh/
 - Pip: https://github.com/pypa/get-pip
 
-__vim keybindings in Chrome
-Download Vimium Chrome extension
-https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en
-
-__firefox show downloads
+__firefox show downloads__
 Apple + J or arrow down button to right of address bar
 
-__chrome dark mode
+__chrome dark mode__
 Dark Reader is extremely slow due to processing all pages in the background - up to 25 s!
 # https://www.debugbear.com/blog/chrome-extension-performance-2021
 Fastest alternative is Stylus + Global dark style
-
 # Install stylus
 https://chrome.google.com/webstore/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne
-
 # Download global dark mode
 https://userstyles.org/styles/31267/global-dark-style-changes-everything-to-dark
-
 # Shortcut in extensions -> Stylus -> Deactivate all styles
 Set as e.g. Ctrl + B to toggle dark mode
-
 # Fix flashing white while loading pages:
 Set Instant Inject mode in Stylus settings (click icon -> options)
 
-__regex online testing website
+__regex online testing website__
 https://regexr.com/
+
+__youtube-dl download audio from youtube, download mp3__
+brew install youtube-dl
+youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v=jwD4AEVBL6Q
+
+__ubuntu copy-paste from terminal__
+xterm: Ctrl+Insert (copy) and Shift+Insert (paste)
+If you are using a 3 button mouse, then highlight the text and use the middle mouse button to paste.
+#https://ubuntuforums.org/showthread.php?t=910347

@@ -1,6 +1,6 @@
 #!/bin/bash
-# bash_ref test
-# https://github.com/Magnushhoie/bash_ref
+# FuzzyNotes test
+# https://github.com/Magnushhoie/FuzzyNotes
 
 #set -e
 shopt -s expand_aliases
@@ -30,7 +30,7 @@ touch $test_results
 touch $test_logfile
 
 # Copy project files to tmp directory
-cp -r $main_dir/src $main_dir/_bash_ref $tmp_dir
+cp -r $main_dir/src $main_dir/_FuzzyNotes $tmp_dir
 cp $main_dir/setup.sh $tmp_dir/
 cp $script_dir/test_config.txt $tmp_dir/config.txt
 
@@ -43,7 +43,7 @@ echo "Sourcing $tmp_dir/setup.sh"
 source $tmp_dir/setup.sh > $test_logfile 2>&1
 
 # Check install folder
-V=$(grep 'tmp/_bash_ref' $test_logfile | wc -l | awk '{print $1}')
+V=$(grep 'tmp/_FuzzyNotes' $test_logfile | wc -l | awk '{print $1}')
 if [[ $V == '2' ]]; then
     echo "1. PASS: Correct test install folder" >> $test_results
 else
@@ -59,97 +59,97 @@ else
 fi
 
 # setup aliases manually
-alias ref=$tmp_dir/src/ref.sh
-alias refe=$tmp_dir/src/refe.sh
+alias fz=$tmp_dir/src/fz.sh
+alias fze=$tmp_dir/src/fze.sh
 
 
 #
-# test ref, search script
+# test fze, search script
 #
 
-# ref search with keywords
-V=$(ref "main note file" | wc | awk '{print $1}')
-if [ "$V" -gt "10" ]; then
-    echo "3. PASS: ref search keywords" >> $test_results
-else
-    echo "3. FAIL: ref search keywords" >> $test_results
-fi
+# fz search with keywords
+#V=$(fz "notes" | wc | awk '{print $1}')
+#if [ "$V" -gt "10" ]; then
+#    echo "3. PASS: fz search keywords" >> $test_results
+#else
+#    echo "3. FAIL: fz search keywords" >> $test_results
+#fi
 
-# ref --list
-V=$(ref --list | grep "references" | wc -l | awk '{print $1}')
+# fz --list
+V=$(fz --list | grep "Available" | wc -l | awk '{print $1}')
 if [ "$V" -eq "1" ]; then
-    echo "4. PASS: ref --list" >> $test_results
+    echo "4. PASS: fz --list" >> $test_results
 else
-    echo "4. FAIL: ref --list" >> $test_results
+    echo "4. FAIL: fz --list" >> $test_results
 fi
 
-# ref --help
-V=$(ref --help | grep "Example usage:" | wc -l | awk '{print $1}')
+# fz --help
+V=$(fz --help | grep "Example usage:" | wc -l | awk '{print $1}')
 if [ "$V" -eq "1" ]; then
-    echo "5. PASS: ref --help" >> $test_results
+    echo "5. PASS: fz --help" >> $test_results
 else
-    echo "5. FAIL: ref --help" >> $test_results
+    echo "5. FAIL: fz --help" >> $test_results
 fi
 
-# ref --open
+# fz --open
 open() {
     echo "$@"
 }
 export -f open
-V=$(ref --open | grep "references.txt" | wc -l | awk '{print $1}')
+V=$(fz --open | grep "FuzzyNotes" | wc -l | awk '{print $1}')
 if [ "$V" -gt "0" ]; then
-    echo "6. PASS: ref --open" >> $test_results
+    echo "6. PASS: fz --open" >> $test_results
 else
-    echo "6. FAIL: ref --open" >> $test_results
+    echo "6. FAIL: fz --open" >> $test_results
 fi
 
-# ref --config
-V=$(ref --config | grep "config.txt" | wc -l | awk '{print $1}')
+# fz --config
+V=$(fz --config | grep "config.txt" | wc -l | awk '{print $1}')
 if [ "$V" -gt "0" ]; then
-    echo "7. PASS: ref --config" >> $test_results
+    echo "7. PASS: fz --config" >> $test_results
 else
-    echo "7. FAIL: ref --config" >> $test_results
+    echo "7. FAIL: fz --config" >> $test_results
 fi
 
 
 #
-# test refe, editor search/edit
+# test fze, editor search/edit
 #
 
-# refe without keywords
+# fze without keywords
 vim() {
     echo "$@"
 }
 export -f vim
 
-#V=$(refe | wc | awk '{print $1}')
+#V=$(fze | wc | awk '{print $1}')
 #if [ "$V" -eq "2" ]; then
-#    echo "8. PASS: refe no keywords" >> $test_results
+#    echo "8. PASS: fze no keywords" >> $test_results
 #else
-#    echo "8. FAIL: refe no keywords" >> $test_results
+#    echo "8. FAIL: fze no keywords" >> $test_results
 #fi
 
-# refe with keywords
-V=$(refe references.txt | grep "set hlsearch" | wc | awk '{print $1}')
+# fze with keywords
+V=$(fze notes | grep "notes" | wc | awk '{print $1}')
 if [ "$V" -gt "0" ]; then
-    echo "9. PASS: refe search keywords" >> $test_results
+    echo "9. PASS: fze search keywords" >> $test_results
 else
-    echo "9. FAIL: refe search keywords" >> $test_results
+    echo "9. FAIL: fze search keywords" >> $test_results
 fi
 
-# refe create new file
-V=$(refe --new new_file.txt | grep "new_file.txt" | wc -l | awk '{print $1}')
+# fze create new file
+V=$(fze --new new_file.txt | grep "new_file.txt" | wc -l | awk '{print $1}')
 if [ "$V" -eq "2" ]; then
-    echo "10. PASS: refe new file creation" >> $test_results
+    echo "10. PASS: fze new file creation" >> $test_results
 else
-    echo "10. FAIL: refe new file creation" >> $test_results
+    echo "10. FAIL: fze new file creation" >> $test_results
 fi
 
-V=$(refe python | grep "python.py" | wc -l | awk '{print $1}')
+V=$(fze python | grep "python.py" | wc -l | awk '{print $1}')
 if [ "$V" -eq "2" ]; then
-    echo "11. PASS: refe alternative file" >> $test_results
+    echo "11. PASS: fze alternative file" >> $test_results
 else
-    echo "11. FAIL: refe alternative file" >> $test_results
+    echo "11. FAIL: fze alternative file" >> $test_results
 fi
 
 # Display test results

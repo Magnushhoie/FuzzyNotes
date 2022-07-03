@@ -1,10 +1,10 @@
 1. PASS: Correct test install folder
 2. PASS: Install complete
-3. PASS: ref search keywords
-4. PASS: ref --list
-5. PASS: ref --help
-6. PASS: ref --open
-7. PASS: ref --config
-9. PASS: refe search keywords
-10. PASS: refe new file creation
-11. PASS: refe alternative file
+3. FAIL: fz search keywords
+4. FAIL: fz --list
+5. PASS: fz --help
+6. FAIL: fz --open
+7. PASS: fz --config
+9. FAIL: fze search keywords
+10. PASS: fze new file creation
+11. PASS: fze alternative file

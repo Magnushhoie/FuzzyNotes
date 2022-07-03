@@ -1,6 +1,6 @@
 #!/bin/bash
-# bash_ref function for editing reference file
-# https://github.com/Magnushhoie/bash_ref
+# FuzzyNotes function for editing note files
+# https://github.com/Magnushhoie/FuzzyNotes
 
 # DESC: Main control flow
 function main() {
@@ -17,7 +17,7 @@ function main() {
     fi
 
     parse_params "$@"
-    refe "$@"
+    fze "$@"
 }
 
 # DESC: Initialization parameters
@@ -28,8 +28,8 @@ function script_init() {
     main_dir=$(dirname "$script_dir")
     script_params="$*"
 
-    # Read in notes_folder and primary_note_file. By default ~/_bash_ref/ and
-    # ~/_bash_ref/main.txt
+    # Read in notes_folder and primary_note_file. By default ~/_FuzzyNotes/ and
+    # ~/_FuzzyNotes/main.txt
     source "$main_dir"/config.txt
 
     # Read in helper scripts.
@@ -52,20 +52,20 @@ Optional arguments:
      -n|--new                   Create [filename] in notes folder
      -h|--help                  Displays this help
      --config                   Open configuration file
-     --tutorial                 Start ref tutorial
+     --tutorial                 Start fze tutorial
 
 Example usage:
 Interactively search and edit files at lines starting with __ or #:
-refe -f
+fze -f
 
 Open and edit [main.txt] at first line with "bash loop"
-refe bash loop
+fze bash loop
 
 Create newfile.txt in notes folder
-refe -n newfile.txt
+fze -n newfile.txt
 
 Open newfile.txt at first line with "python"
-refe newfile python
+fze newfile python
 EOF
 }
 

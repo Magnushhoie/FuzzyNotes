@@ -14,7 +14,7 @@
   <h1 align="center">FuzzyNotes</h3>
 
   <p align="center">
-    Ultra-fast, <a href="">terminal based</a> note writing and search app powered by <a href="https://github.com/junegunn/fzf">FZF</a> and <a href="https://danielmiessler.com/study/vim/">vim.</a> Click to watch tutorial:
+    Ultra-fast, <a href="">terminal based</a> note searching and editing app powered by <a href="https://github.com/junegunn/fzf">FZF</a> and <a href="https://danielmiessler.com/study/vim/">vim.</a> Click to watch tutorial:
 
   </p>
 </p>

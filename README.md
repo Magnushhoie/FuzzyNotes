@@ -31,7 +31,7 @@ Ideal for code-snippets, things to remember or write notebooks. Works well with 
 
 
 ### Features:
-- Interactively search / edit / view note files in $HOME/FuzzyNotes (powered by FZF)
+- Interactively search / edit / view note files in ~/FuzzyNotes/ directory (powered by FZF)
 - Instantly preview file contents and search match in side-bar
 - Code highlighting
 - Partial search matches

@@ -66,22 +66,20 @@ Use "**fz --help**" for all arguments.
 
 #### fz - "Fuzzy look-up", search and view
 
-```text
-fz --help
+```bash
 usage: fz [file] keywords
   keywords: Search terms, space-separated
   file: Optional, filename (without extension) in note folder
 
-Optional arguments:
-  -l|--list                  Display and open files in notes folder
-  -h|--help                  Displays this help
-
 Example usage:
-# Interactively search and view files for lines starting with __ or #:
+# Interactively search / preview / open files for selected lines starting with __ or #:
 fz
 
 # Search across all files for "list"
 fz list
+  
+# Search across all lines (not just starting with __ or #)
+fz -f
 
 # Search python.py in note folder for "list" "comprehension"
 fz python list comprehension
@@ -90,28 +88,21 @@ fz python list comprehension
 #### fze - "Fuzzy edit", search and edit
 
 ```bash
-fze --help
 usage: fze [file] keywords
   keywords: Search terms, space-separated
   file: Optional, filename (without extension) in note folder
 
-Optional arguments:
-     -o|--open                  Open file with default system editor
-     -n|--new                   Create [filename] in notes folder
-     -l|--list                  Displays searchable files in notes folder
-     -h|--help                  Displays this help
-
 Example usage:
-# List files in notes folder, select for opening
+# List files in notes folder, select for opening (returns to last edited line)
 fze
 
-# Open and edit python.py at first line with "for loop"
+# Search python.py for lines starting with "for loop", open at selected line in vim
 fze python for loop
   
 # Open notes folder
 fze --open
   
-# Open specific file
+# Open specific file in system editor
 fze --open notes.txt
 
 # Add new_note.txt

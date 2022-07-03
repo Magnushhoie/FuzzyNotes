@@ -55,7 +55,7 @@ bash setup.sh
 ```
 
 ## Usage
-- fz: Interactively search across all note files (default in $HOME/_FuzzyNotes/ directory)
+- fz: Interactively search across all note files (default in /_FuzzyNotes/ directory)
 - fze: List available files and their content, open file in vim on default system editor
 
 See [main.txt](_FuzzyNotes/main.txt) for example note file.

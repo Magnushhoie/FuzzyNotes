@@ -31,7 +31,7 @@ Ideal for code-snippets, things to remember or write notebooks. Works well with 
 
 
 ### Features:
-- Interactively search / edit / view note files in ~/FuzzyNotes/ directory (powered by FZF)
+- Interactively search / edit / view note files in ~/_FuzzyNotes/ directory (powered by FZF)
 - Instantly preview file contents and search match in side-bar
 - Code highlighting
 - Partial search matches
@@ -55,7 +55,7 @@ bash setup.sh
 ```
 
 ## Usage
-- fz: Interactively search across all note files (default in /_FuzzyNotes/ directory)
+- fz: Interactively search across all note files (default in ~/_FuzzyNotes/ directory)
 - fze: List available files and their content, open file in vim on default system editor
 
 See [main.txt](_FuzzyNotes/main.txt) for example note file.
@@ -69,31 +69,31 @@ Use "**fz --help**" for all arguments.
 ```text
 fz --help
 usage: fz [file] keywords
-  file: File basename in note folder if existing. Default is main.txt
   keywords: Search terms, space-separated
+  file: Optional, filename (without extension) in note folder
 
 Optional arguments:
   -l|--list                  Display and open files in notes folder
   -h|--help                  Displays this help
 
 Example usage:
-Interactively search and view files for lines starting with __ or #:
+# Interactively search and view files for lines starting with __ or #:
 fz
 
-Search for keywords "for" "loop"
-fz for loop
+# Search across all files for "list"
+fz list
 
-Search python.py in note folder for "list" "comprehension"
+# Search python.py in note folder for "list" "comprehension"
 fz python list comprehension
 ```
 
 #### fze - "Fuzzy edit", search and edit
 
-```text
+```bash
 fze --help
 usage: fze [file] keywords
-  file: File basename in note folder if existing. Default is main.txt
   keywords: Search terms, space-separated
+  file: Optional, filename (without extension) in note folder
 
 Optional arguments:
      -o|--open                  Open file with default system editor
@@ -102,14 +102,20 @@ Optional arguments:
      -h|--help                  Displays this help
 
 Example usage:
-Preview files in notes folder, then open selected file in vim
+# List files in notes folder, select for opening
 fze
 
-Open and edit python.py at first line with "for loop"
+# Open and edit python.py at first line with "for loop"
 fze python for loop
+  
+# Open notes folder
+fze --open
+  
+# Open specific file
+fze --open notes.txt
 
-Create newfile.txt in notes folder
-fze -n newfile.txt
+# Add new_note.txt
+fze -n new_note.txt
 ```
 
 ## Testing

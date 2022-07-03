@@ -23,10 +23,18 @@
 <img src="img/image.jpg" alt="Logo" width="700">
 </p>
 
-FuzzyNotes solves the problem of losing notes, code or things you want to remember written across multiple files.
-fz interactively fuzzy searches across all your note files - or a specific file - instantly retrieving information wherever its written.
-fze returns you to exactly where you last added text or to any search match, interactively.
-Ideal for code-snippets, things to remember or write notebooks. Works well with Obsidian or any collection of text-only files.
+
+### What is FuzzyNotes?
+
+FuzzyNotes solves the problem of losing notes, code or things you want to remember. Where was it written, which file and is it even there?
+
+**fz** interactively fuzzy searches across all text files in the $HOME/_FuzzyNotes directory. The search terms can be changed with instant results, and results previewed in the sidebar.
+
+**fze** is similar, but opens the file exactly where you last edited it, in Vim.
+
+Typical use-cases are when starting a new project, writing a log-book or noting down code-snippets. FuzzyNotes integrates with any collection of text files, such as with Obsidian or other knowledge management programs.
+
+**The philosophy of FuzzyNotes is accessing all information, with as little effort as possible.**
 
 
 ### Features:

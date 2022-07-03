@@ -8,15 +8,14 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/Magnushhoie/bash_ref">
-    <img src="img/bash_ref.png" alt="Logo" width="350">
+  <a href="https://github.com/Magnushhoie/FuzzyNotes">
   </a>
 
-  <h3 align="center">bash_ref</h3>
+  <h1 align="center">FuzzyNotes</h3>
 
   <p align="center">
-    Ultra-fast, <a href="https://asciinema.org/a/458105">terminal based</a> note writing and search app powered by <a href="https://github.com/junegunn/fzf">FZF</a> and <a href="https://danielmiessler.com/study/vim/">vim.</a> Click to watch tutorial: 
-  
+    Ultra-fast, <a href="">terminal based</a> note writing and search app powered by <a href="https://github.com/junegunn/fzf">FZF</a> and <a href="https://danielmiessler.com/study/vim/">vim.</a> Click to watch tutorial:
+
   </p>
 </p>
 
@@ -25,20 +24,21 @@
 <img src="img/image.jpg" alt="Logo" width="700">
 </p>
 
+FuzzyNotes solves the problem of losing notes, code or things you want to remember written across multiple files.
+fz interactively fuzzy searches across all your note files - or a specific file - instantly retrieving information wherever its written.
+fze returns you to exactly where you last added text or to any search match, interactively.
+Ideal for code-snippets, things to remember or write notebooks. Works well with Obsidian or any collection of text-only files.
 
-
-bash_ref aims to be your go-to terminal tool for searching and managing code-snippets, notes and references you want to have available with a few keypresses.
 
 ### Features:
-- Interactively search / edit / view text files (powered by FZF)
-- Preview file contents and search match in side-bar
-- Code highlighting, partial search matches
+- Interactively search / edit / view note files in $HOME/FuzzyNotes (powered by FZF)
+- Instantly preview file contents and search match in side-bar
+- Code highlighting
+- Partial search matches
 - Quickly return to last changed location in file
 - First keywords can be filenames or keywords
 - (not implemented) image and markdown support inside the terminal
 
-
-  
 ## Installation
 
 Sets up notes directory and adds aliases to ~/.bash_profile or ~/.zshrc.
@@ -47,28 +47,28 @@ Sets up notes directory and adds aliases to ~/.bash_profile or ~/.zshrc.
 # Requirements
 brew install fzf
 brew install bat
-  
+
 # Install
-git clone https://github.com/Magnushhoie/bash_ref/
-cd bash_ref
+git clone https://github.com/Magnushhoie/FuzzyNotes/
+cd FuzzyNotes
 bash setup.sh
 ```
 
 ## Usage
-- ref: Interactively search across all note files (default in $HOME/_bash_ref/ directory)
-- refe: List available files and their content, open file in vim on default system editor
+- fz: Interactively search across all note files (default in $HOME/_FuzzyNotes/ directory)
+- fze: List available files and their content, open file in vim on default system editor
 
-See [main.txt](_bash_ref/main.txt) for example note file.
+See [main.txt](_FuzzyNotes/main.txt) for example note file.
 
 ## Documentation
 
-Use "**ref --help**" for all arguments.
+Use "**fz --help**" for all arguments.
 
-#### ref - "Reference look-up", search and view
+#### fz - "Fuzzy look-up", search and view
 
 ```text
-ref --help
-usage: ref.sh [file] keywords
+fz --help
+usage: fz [file] keywords
   file: File basename in note folder if existing. Default is main.txt
   keywords: Search terms, space-separated
 
@@ -78,20 +78,20 @@ Optional arguments:
 
 Example usage:
 Interactively search and view files for lines starting with __ or #:
-ref
+fz
 
 Search for keywords "for" "loop"
-ref for loop
+fz for loop
 
 Search python.py in note folder for "list" "comprehension"
-ref python list comprehension
+fz python list comprehension
 ```
 
-#### refe - "References edit", search and edit
+#### fze - "Fuzzy edit", search and edit
 
 ```text
-refe --help
-usage: refe.sh [file] keywords
+fze --help
+usage: fze [file] keywords
   file: File basename in note folder if existing. Default is main.txt
   keywords: Search terms, space-separated
 
@@ -103,13 +103,13 @@ Optional arguments:
 
 Example usage:
 Preview files in notes folder, then open selected file in vim
-refe
+fze
 
 Open and edit python.py at first line with "for loop"
-refe python for loop
+fze python for loop
 
 Create newfile.txt in notes folder
-refe -n newfile.txt
+fze -n newfile.txt
 ```
 
 ## Testing
@@ -119,7 +119,7 @@ bash test/test.sh
 ```
 
 ## Compatibility
-Compatible with zsh. Tested on MacOS Mojave/Big Sur and Ubuntu 21.04. 
+Compatible with zsh. Tested on MacOS Mojave/Big Sur and Ubuntu 21.04.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
@@ -131,13 +131,13 @@ Please make sure to update tests as appropriate.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/Magnushhoie/bash_ref.svg?style=for-the-badge
-[contributors-url]: https://github.com/Magnushhoie/bash_ref/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Magnushhoie/bash_ref.svg?style=for-the-badge
-[forks-url]: https://github.com/Magnushhoie/bash_ref/network/members
-[stars-shield]: https://img.shields.io/github/stars/Magnushhoie/bash_ref.svg?style=for-the-badge
-[stars-url]: https://github.com/Magnushhoie/bash_ref/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Magnushhoie/bash_ref.svg?style=for-the-badge
-[issues-url]: https://github.com/Magnushhoie/bash_ref/issues
+[contributors-shield]: https://img.shields.io/github/contributors/Magnushhoie/FuzzyNotes.svg?style=for-the-badge
+[contributors-url]: https://github.com/Magnushhoie/FuzzyNotes/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Magnushhoie/FuzzyNotes.svg?style=for-the-badge
+[forks-url]: https://github.com/Magnushhoie/FuzzyNotes/network/members
+[stars-shield]: https://img.shields.io/github/stars/Magnushhoie/FuzzyNotes.svg?style=for-the-badge
+[stars-url]: https://github.com/Magnushhoie/FuzzyNotes/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Magnushhoie/FuzzyNotes.svg?style=for-the-badge
+[issues-url]: https://github.com/Magnushhoie/FuzzyNotes/issues
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/Magnushhoie/bash_ref/blob/master/LICENSE.txt
+[license-url]: https://github.com/Magnushhoie/FuzzyNotes/blob/master/LICENSE.txt

@@ -71,7 +71,7 @@ See [notes.txt](_FuzzyNotes/notes.txt) for example note file.
 
 Use "**fz --help**" for all arguments.
 
-#### fz - "Fuzzy look-up", search and view
+#### fz - "Fuzzy" search and view
 
 ```bash
 usage: fz [file] keywords
@@ -92,7 +92,7 @@ fz -f
 fz python list comprehension
 ```
 
-#### fze - "Fuzzy edit", search and edit
+#### fze - "Fuzzy" edit
 
 ```bash
 usage: fze [file] keywords

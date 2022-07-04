@@ -8,6 +8,9 @@
 # Read in notes_folder and primary_note_file. By default ~/_FuzzyNotes/ and main.txt
 #source $main_dir/config.txt
 
+#exclude_files="! -path '*.png' ! -path '*.jp*' ! -path '*.pdf' ! -path '*.ppt*' ! -path '*.doc*' ! -path '*.odt*' ! -path '*.gif'"
+exclude_files="! -path '*.pdf'"
+
 # Check that the default note file exists
 if ! [[ -f "$primary_note_file" ]]
 then
@@ -225,7 +228,7 @@ list_files_open() # List available files in note directory
                         exit ;
                         # ls -tR *.* |
                         # Find files, sort by time, remove leading ./ from find using sed
-                        find . -maxdepth 3 -type f -not -path '.*/.*' -exec ls -t {} + |
+                        find . -maxdepth 3 -type f ! -path '.*/.*' ! -ipath '*.pdf' ! -ipath '*.png' ! -ipath '*.jp*' ! -ipath '*.xl*' ! -ipath '*.doc*' ! -ipath '*.pp*' -exec ls -t {} + |
                         sed 's/^.\///' |
                         fzf -e --preview="bat $notes_folder/{}" --query "${query: }")
 

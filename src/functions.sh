@@ -220,7 +220,14 @@ list_files_open() # List available files in note directory
     query="$@"
     #cd "$folder" || exit ; ls -t *.* | fzf -e --preview="bat $notes_folder/{}" | xargs -I {} less -Riw "$folder"/{}
 
-    export search_match=$(cd "$folder" || exit ; ls -t *.* | fzf -e --preview="bat $notes_folder/{}" --query "${query: }")
+    #export search_match=$(cd "$folder" || exit ; ls -tR *.* | fzf -e --preview="bat $notes_folder/{}" --query "${query: }")
+    export search_match=$(cd "$folder" || 
+                        exit ;
+                        # ls -tR *.* |
+                        # Find files, sort by time, remove leading ./ from find using sed
+                        find . -maxdepth 3 -type f -not -path '.*/.*' -exec ls -t {} + |
+                        sed 's/^.\///' |
+                        fzf -e --preview="bat $notes_folder/{}" --query "${query: }")
 
     if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
         echo "$folder"/"$search_match"

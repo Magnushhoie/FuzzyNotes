@@ -100,19 +100,22 @@ usage: fze [file] keywords
   file: Optional, filename (without extension) in note folder
 
 Example usage:
-# List files in notes folder, select for opening (returns to last edited line)
+# Interactively select file in _FuzzyNotes
 fze
 
-# Search python.py for lines starting with "for loop", open at selected line in vim
+# Open last modified file at last edited location by pressing Enter twice
+fze <enter> <enter>
+
+# Search file python.py (no extension) for keywords "for" and "loop". Opens match in vim.
 fze python for loop
   
-# Open notes folder
+# Open _FuzzyNotes folder
 fze --open
   
-# Open specific file in system editor
+# Open file in system editor
 fze --open notes.txt
 
-# Add new_note.txt
+# Add new file, named new_note.txt
 fze -n new_note.txt
 ```
 

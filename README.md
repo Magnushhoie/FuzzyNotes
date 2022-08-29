@@ -26,7 +26,7 @@
 
 ### What is FuzzyNotes?
 
-FuzzyNotes interactively searches and returns search results in a nested folder of text files. Files are previewed or opened at exact match for copying or editing.
+FuzzyNotes interactively searches and returns text search results from a nested folder of text files. Files are previewed or opened at exact match for copying or editing.
 FuzzyNotes solves the problem of being unable to access text you forgot where you wrote. With FuzzyNotes, any written text will always be found, assuming its there.
 
 ## Usage

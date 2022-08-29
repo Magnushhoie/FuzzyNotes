@@ -26,25 +26,24 @@
 
 ### What is FuzzyNotes?
 
-FuzzyNotes solves the problem of losing notes, code or things you want to remember. Where was it written, which file and is it even there?
+FuzzyNotes interactively searches and returns search results in a nested folder of text files. Files are opened at exact match for copying or editing.
+FuzzyNotes solves the problem of being unable to access text you forgot where you wrote. With FuzzyNotes, any written text will always be found, assuming its there.
 
-**fz** interactively fuzzy searches across all text files in the $HOME/_FuzzyNotes directory. The search terms can be changed with instant results, and results previewed in the sidebar.
+## Usage
+- fz: Interactively and recursively searches across all text files in ~/_FuzzyNotes/ directory. Opens file with less for easy copy-paste or scrolling
+- fze: Lists all files with search match and previews matched text. Opens file in editor.
 
-**fze** is similar, but opens the file exactly where you last edited it, in Vim.
+See [notes.txt](_FuzzyNotes/notes.txt) for example note file.
 
-Typical use-cases are when starting a new project, writing a log-book or noting down code-snippets. FuzzyNotes integrates with any collection of text files, such as with Obsidian or other knowledge management programs.
-
-**The philosophy of FuzzyNotes is accessing all information, with as little effort as possible.**
+Typical use-cases are for project notes or log-books, code-snippets, or on top of knowledge management software like Obsidian or Roam. FuzzyNotes works with any nested collection of text files.
 
 
 ### Features:
-- Interactively search / edit / view note files in ~/_FuzzyNotes/ directory (powered by FZF)
-- Instantly preview file contents and search match in side-bar
+- Interactive search with FZF, partial search matches
+- Preview matches in side-bar
 - Code highlighting
-- Partial search matches
-- Quickly return to last changed location in file
-- First keywords can be filenames or keywords
-- (not implemented) image and markdown support inside the terminal
+- fze always opens file at last edited location
+- Assumes first keyword is either a file, or keywords (e.g. fz python hello world will either search python.txt or across all files)
 
 ## Installation
 
@@ -61,11 +60,6 @@ cd FuzzyNotes
 bash setup.sh
 ```
 
-## Usage
-- fz: Interactively search across all note files (default in ~/_FuzzyNotes/ directory)
-- fze: List available files and their content, open file in vim on default system editor
-
-See [notes.txt](_FuzzyNotes/notes.txt) for example note file.
 
 ## Documentation
 

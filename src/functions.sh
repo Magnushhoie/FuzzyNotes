@@ -1,4 +1,7 @@
 #!/bin/bash
+#set -o pipefail
+IFS=$'\n\t'
+
 # FuzzyNotes helper functions, called from fz.sh or fze.sh
 # https://github.com/Magnushhoie/FuzzyNotes
 
@@ -224,13 +227,15 @@ list_files_open() # List available files in note directory
     #cd "$folder" || exit ; ls -t *.* | fzf -e --preview="bat $notes_folder/{}" | xargs -I {} less -Riw "$folder"/{}
 
     #export search_match=$(cd "$folder" || exit ; ls -tR *.* | fzf -e --preview="bat $notes_folder/{}" --query "${query: }")
+    notes_folder=$(printf %q "$notes_folder")
     export search_match=$(cd "$folder" || 
                         exit ;
                         # ls -tR *.* |
-                        # Find files, sort by time, remove leading ./ from find using sed
-                        find . -maxdepth 3 -type f ! -path '.*/.*' ! -ipath '*.pdf' ! -ipath '*.png' ! -ipath '*.jp*' ! -ipath '*.xl*' ! -ipath '*.doc*' ! -ipath '*.pp*' -exec ls -t {} + |
+                        # Find files, sort by time, search through symlinked
+                        # directories,  remove leading ./ from find using sed
+                        find -L . -maxdepth 5 -type f ! -path '.*/.*' ! -ipath '*.pdf' ! -ipath '*.png' ! -ipath '*.jp*' ! -ipath '*.xl*' ! -ipath '*.doc*' ! -ipath '*.pp*' -exec ls -t {} + |
                         sed 's/^.\///' |
-                        fzf -e --preview="bat $notes_folder/{}" --query "${query: }")
+                        fzf -e --preview="bat {}" --query "${query: }")
 
     if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
         echo "$folder"/"$search_match"

@@ -1,4 +1,6 @@
 #!/bin/bash
+set -eo pipefail
+IFS=$'\n\t'
 # FuzzyNotes function for editing note files
 # https://github.com/Magnushhoie/FuzzyNotes
 

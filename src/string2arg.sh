@@ -1,7 +1,9 @@
 #!/bin/bash
+set -euo pipefail
 string2arg() {
     export arg_filename=$(cut -d":" -f1 <<< "$*");
     export arg_linenum=$(cut -d":" -f2 <<< "$*");
+
     min_offset=25
     let max_offset="min_offset*3"
     min=0

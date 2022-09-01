@@ -83,12 +83,15 @@ function fz()
         exit 0
     fi
 
-    read -r filename filename_found <<<"$(get_notefile "$@")"
+    #read -r filename filename_found <<<"$(get_notefile "$@")"
+    read -r filename <<<"$(return_path_if_file_exists "$@")"
 
-    if [[ $filename_found = "TRUE" ]]; then
+    if [[ $filename ]]; then
         shift
+        echo "$filename"
+        less -R "$filename"
         # Read filename and remaining arguments
-        fzf_search "$filename" "$@"
+        #fzf_search "$filename" "$@"
         #if [[ $# = 1 ]]; then
         #    echo "Searching $filename"
         #    #less -R "$filename"
@@ -112,18 +115,20 @@ function fze() # Search and edit main.txt in vim
         exit 0
     fi
 
-    read -r filename filename_found <<<"$(get_notefile "$@")"
+    read -r filename <<<"$(return_path_if_file_exists "$@")"
 
-    if [[ $filename_found = "TRUE" ]]; then
+    if [[ "$filename" ]]; then
         if [[ $# = 1 ]]; then
-            echo "Editing $filename"
+            echo "$filename"
             vim +":silent! normal g;" +":set nonu" +":set nohlsearch"  "$filename"
+            exit
         else
             echo "Search and editing $filename"
             vim +":silent! normal g;" +":set nonu" +":set hlsearch" +/"$2".*"$3".*"$4".*"$5".*"$6" "$filename"
+            exit
         fi
     else
-        echo "No file found, please enter valid filename (without file extension)"
+        # echo "No file found, please enter valid filename (without file extension)"
         list_files_open "$@"
         exit 0
     fi
@@ -147,7 +152,7 @@ local search_match
 export search_match=$(
             grep -I --exclude-dir="\.git" --color=always -rHn -e "^_" -e "^#" -e '^\\' "$file" \
             | sed "s;$notes_folder/;;" \
-            | fzf -e --preview="source $string2arg_file; string2arg $notes_folder/{}" --query "${query: }"
+            | fzf -e --select-1 --preview="source $string2arg_file; string2arg $notes_folder/{}" --query "${query: }"
             )
 
 if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
@@ -178,7 +183,7 @@ local search_match
 export search_match=$(
             grep -I --exclude-dir="\.git" --color=always -rHn -e "^\S" "$notes_folder" \
             | sed "s;$notes_folder/;;" \
-            | fzf -e --preview="source $string2arg_file; string2arg $notes_folder/{}"
+            | fzf -e --select-1 --preview="source $string2arg_file; string2arg $notes_folder/{}"
             )
 
 if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
@@ -235,7 +240,7 @@ list_files_open() # List available files in note directory
                         # directories,  remove leading ./ from find using sed
                         find -L . -maxdepth 5 -type f ! -path '.*/.*' ! -ipath '*.pdf' ! -ipath '*.png' ! -ipath '*.jp*' ! -ipath '*.xl*' ! -ipath '*.doc*' ! -ipath '*.pp*' -exec ls -t {} + |
                         sed 's/^.\///' |
-                        fzf -e --preview="bat {}" --query "${query: }")
+                        fzf -e --select-1 --preview="bat {}" --query "${query: }")
 
     if [[ "$search_match" =~ [a-zA-Z0-9] ]]; then
         echo "$folder"/"$search_match"
@@ -327,6 +332,25 @@ tutorial() # Opens configuration file in system default editor
 {
     chmod 755 "$script_dir"/tutorial.sh
     "$script_dir"/tutorial.sh
+}
+
+return_path_if_file_exists() # Helper function for fz/fze functions
+{
+    # Check if file exists in notefolder
+    firstword=${1}
+
+    # Search for files in main folder
+    files=("$notes_folder"/*.*)
+
+    # Look for alternative notefiles in folder if matches first argument
+    for file in "${files[@]}"; do
+        file_shorthand=$(basename "${file%%.*}")
+        if [ "$file_shorthand" = "$firstword" ]; then
+            echo $file
+            shift
+            break
+        fi;
+        done
 }
 
 get_notefile() # Helper function for fz/fze functions

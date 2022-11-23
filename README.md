@@ -11,7 +11,8 @@
   <a href="https://github.com/Magnushhoie/FuzzyNotes">
   </a>
 
-  <h1 align="center">FuzzyNotes</h3>
+  <h1 align="center">FuzzyNotes (outdated, please see
+  <a href="https://github.com/Magnushhoie/fuz">Fuz</a>)</h1>
 
   <p align="center">
     Ultra-fast, <a href="">terminal based</a> note searching and editing app powered by <a href="https://github.com/junegunn/fzf">FZF</a> and <a href="https://danielmiessler.com/study/vim/">vim.</a> Click to watch tutorial:
@@ -22,6 +23,7 @@
 <p align="center">
 <img src="img/image.jpg" alt="Logo" width="700">
 </p>
+
 
 
 ### What is FuzzyNotes?
